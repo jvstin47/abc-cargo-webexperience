@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>KV — Freight Services</title>
+  <style>
+    /* Self-hosted Latin fonts with Google Fonts fallbacks */
+    @font-face {
+      font-family: 'Anton';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/anton-latin.woff2') format('woff2'),
+           url('https://fonts.gstatic.com/s/anton/v27/1Ptgg87LROyAm3Kz-C8CSKlv.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'Archivo';
+      font-style: normal;
+      font-weight: 400 600;
+      font-stretch: 100%;
+      font-display: swap;
+      src: url('fonts/archivo-latin.woff2') format('woff2'),
+           url('https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxKsv4Rn.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('fonts/jetbrainsmono-latin.woff2') format('woff2'),
+           url('https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxTOlOVk6OThhvA.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    :root {
+      --u: min(100vw / 1440, 100vh / 960);
+      --edge-px: 50vh;
+      --ph: 0;
+      --cobalt: #2f63ff;
+      --ink: #111111;
+      --giant: #e9e9e9;
+      --white: #ffffff;
+    }
+
+    @media (max-width: 767px), (orientation: portrait) {
+      :root {
+        --u: min(calc(100vw / 430), 1.4px);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #111;
+      font-family: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Track holds the scroll distance */
+    .track {
+      position: relative;
+      width: 100%;
+      background-color: #fff;
+    }
+
+    /* Top Nav scrolls away */
+    .nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: calc(36 * var(--u)) calc(48 * var(--u));
+      z-index: 100;
+      pointer-events: auto;
+    }
+
+    .nav-logo {
+      font-family: 'Archivo', sans-serif;
+      font-weight: 600;
+      font-size: calc(30 * var(--u));
+      letter-spacing: -0.06em;
+      color: #111;
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: calc(32 * var(--u));
+    }
+
+    .nav-link {
+      font-family: 'Archivo', sans-serif;
+      font-weight: 500;
+      font-size: calc(10 * var(--u));
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #111;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .nav-link:hover {
+      opacity: 0.65;
+    }
+
+    .nav-pill {
+      font-family: 'Archivo', sans-serif;
+      font-weight: 500;
+      font-size: calc(10 * var(--u));
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #111;
+      text-decoration: none;
+      border: 1px solid #111;
+      border-radius: 9999px;
+      padding: calc(8 * var(--u)) calc(16 * var(--u));
+      line-height: 1;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .nav-pill:hover {
+      background-color: #111;
+      color: #fff;
+    }
+
+    @media (max-width: 767px), (orientation: portrait) {
+      .nav {
+        padding: 20px 24px;
+      }
+      .nav-logo {
+        font-size: 24px;
+      }
+      .nav-link.nav-follow {
+        display: none;
+      }
+      .nav-right {
+        gap: 16px;
+      }
+      .nav-link, .nav-pill {
+        font-size: 10px;
+        padding: 6px 12px;
+      }
+    }
+
+    /* Scene is sticky in viewport */
+    .scene {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100lvh;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #ffffff var(--edge-px, 50vh), #111111 var(--edge-px, 50vh));
+    }
+
+    /* Layer 1: Video */
+    .hero-video {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+      object-fit: fill;
+      display: block;
+    }
+
+    /* Layer 2: Giant Letters */
+    .giant-letters {
+      position: absolute;
+      bottom: calc(100% - var(--edge-px, 50vh));
+      left: 0;
+      font-family: 'Anton', sans-serif;
+      font-size: calc(330 * var(--u));
+      line-height: 0.8;
+      color: var(--giant);
+      white-space: nowrap;
+      mix-blend-mode: darken;
+      pointer-events: none;
+      user-select: none;
+      z-index: 2;
+      will-change: transform;
+    }
+
+    @media (max-width: 767px), (orientation: portrait) {
+      .giant-letters {
+        font-size: calc(180 * var(--u));
+      }
+    }
+
+    /* Layer 3: Speed Readout */
+    .speed-readout {
+      position: absolute;
+      top: calc(52 * var(--u));
+      left: calc(26 * var(--u));
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 400;
+      font-size: calc(10.5 * var(--u));
+      letter-spacing: 0.05em;
+      color: #111;
+      opacity: var(--ph, 0);
+      transition: opacity 0.3s ease;
+      z-index: 10;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @media (max-width: 767px), (orientation: portrait) {
+      .speed-readout {
+        top: 22px;
+        left: 20px;
+        font-size: 11px;
+      }
+    }
+
+    /* Layer 4: Dark Band */
+    .band {
+      position: absolute;
+      top: var(--edge-px, 50vh);
+      left: 0;
+      width: 100%;
+      bottom: 0;
+      background: transparent;
+      overflow: hidden;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    /* The Strip inside the Band */
+    .strip {
+      position: absolute;
+      top: calc(76 * var(--u));
+      left: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: calc(120 * var(--u));
+      color: #fff;
+      will-change: transform;
+    }
+
+    @media (max-width: 767px), (orientation: portrait) {
+      .strip {
+        top: calc(44 * var(--u));
+        gap: calc(56 * var(--u));
+        padding-left: 22px;
+      }
+    }
+
+    /* Lead Block */
+    .lead-block {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: calc(64 * var(--u));
+      flex-shrink: 0;
+    }
+
+    .lead-headline {
+      margin: 0;
+      font-family: 'Anton', sans-serif;
+      font-size: calc(64 * var(--u));
+      line-height: 0.98;
+      color: #fff;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    .cobalt-text {
+      color: var(--cobalt);
+    }
+
+    .lead-paragraphs {
+      width: calc(250 * var(--u));
+      display: flex;
+      flex-direction: column;
+      gap: calc(16 * var(--u));
+      font-family: 'Archivo', sans-serif;
+      font-size: calc(12 * var(--u));
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.62);
+      flex-shrink: 0;
+    }
+
+    .lead-paragraphs p {
+      margin: 0;
+    }
+
+    @media (max-width: 767px), (orientation: portrait) {
+      .lead-block {
+        flex-direction: column;
+        gap: calc(24 * var(--u));
+      }
+      .lead-headline {
+        font-size: calc(46 * var(--u));
+        white-space: normal;
+      }
+      .lead-paragraphs {
+        width: 300px;
+        font-size: 13px;
+      }
+    }
+
+    /* Five Cards Container */
+    .cards-group {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      flex-shrink: 0;
+    }
+
+    .card {
+      width: calc(270 * var(--u));
+      padding-left: calc(30 * var(--u));
+      padding-right: calc(30 * var(--u));
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    .card:first-child {
+      border-left: none;
+    }
+
+    @media (max-width: 767px), (orientation: portrait) {
+      .card {
+        width: calc(250 * var(--u));
+        padding-left: calc(20 * var(--u));
+        padding-right: calc(20 * var(--u));
+      }
+    }
+
+    .card-icon {
+      width: calc(38 * var(--u));
+      height: calc(38 * var(--u));
+      margin-bottom: calc(24 * var(--u));
+      stroke: #ffffff;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    /* Text reveal via background-clip gradient */
+    .card-title {
+      margin: 0 0 calc(14 * var(--u)) 0;
+      font-family: 'Anton', sans-serif;
+      font-size: calc(26 * var(--u));
+      line-height: 1.05;
+      text-transform: uppercase;
+      background: linear-gradient(
+        90deg,
+        #ffffff calc(var(--s, 100%) - 34%),
+        #2f63ff calc(var(--s, 100%) - 6%),
+        transparent calc(var(--s, 100%) + 26%)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .card-body {
+      margin: 0;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 400;
+      font-size: calc(12.4 * var(--u));
+      line-height: 1.45;
+      background: linear-gradient(
+        90deg,
+        #ffffff calc(var(--s, 100%) - 34%),
+        #2f63ff calc(var(--s, 100%) - 6%),
+        transparent calc(var(--s, 100%) + 26%)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    @media (max-width: 767px), (orientation: portrait) {
+      .card-title {
+        font-size: 26px;
+      }
+      .card-body {
+        font-size: 13px;
+      }
+    }
+
+    /* Outline Pill in the Band */
+    .services-pill {
+      position: absolute;
+      bottom: calc(36 * var(--u));
+      left: 50%;
+      transform: translate(-50%, calc((1 - var(--ph, 0)) * 24px));
+      opacity: var(--ph, 0);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: auto;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 9999px;
+      padding: calc(9 * var(--u)) calc(22 * var(--u));
+      font-family: 'Archivo', sans-serif;
+      font-weight: 500;
+      font-size: calc(10 * var(--u));
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      background: transparent;
+      cursor: pointer;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .services-pill:hover {
+      border-color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+<body>
+  <div class="track" id="track">
+    <!-- Top Nav (scrolls away) -->
+    <header class="nav">
+      <a href="#" class="nav-logo">KV</a>
+      <div class="nav-right">
+        <a href="#menu" class="nav-link">→ Menu</a>
+        <a href="#follow" class="nav-link nav-follow">Follow</a>
+        <a href="#contact" class="nav-pill">Work with us</a>
+      </div>
+    </header>
+
+    <!-- Sticky Scene Viewport -->
+    <main class="scene" id="scene">
+      <!-- 1. Video Layer -->
+      <video
+        id="heroVideo"
+        class="hero-video"
+        playsinline
+        muted
+        preload="auto"
+        poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/2307e4bf-be39-42b4-b579-e168aeccabf0.jpg">
+      </video>
+
+      <!-- 2. Giant Letters Layer (darken mix-blend) -->
+      <div class="giant-letters" id="giantLetters">OUR SERVICES</div>
+
+      <!-- 3. Speed Readout -->
+      <div class="speed-readout" id="speedReadout">00 KM/H</div>
+
+      <!-- 4. Band Layer -->
+      <div class="band" id="band">
+        <div class="strip" id="strip">
+          <!-- Lead Block -->
+          <div class="lead-block">
+            <h1 class="lead-headline">
+              EVERYTHING YOUR<br>
+              FREIGHT NEEDS.<br>
+              <span class="cobalt-text">UNDER ONE GROUP.</span>
+            </h1>
+            <div class="lead-paragraphs">
+              <p>From air to sea, from customs clearance to the last mile, we bring decades of practice to every freight discipline.</p>
+              <p>One integrated network means one partner, one point of contact and full visibility from origin to destination.</p>
+            </div>
+          </div>
+
+          <!-- Five Cards -->
+          <div class="cards-group">
+            <!-- 1. Air freight -->
+            <article class="card">
+              <svg class="card-icon" viewBox="0 0 38 38" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 4L22 15L34 21L34 23.5L22 21L21 29L24.5 32L24.5 34L19 32.5L13.5 34L13.5 32L17 29L16 21L4 23.5L4 21L16 15Z"/>
+              </svg>
+              <h2 class="card-title">Air<br>freight</h2>
+              <p class="card-body">Express, priority and deferred options across global lanes, booked and tracked end to end.</p>
+            </article>
+
+            <!-- 2. Ocean freight -->
+            <article class="card">
+              <svg class="card-icon" viewBox="0 0 38 38" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 23L10 30L28 30L32 23Z"/>
+                <path d="M11 23V15H27V23"/>
+                <path d="M15 15V10H23V15"/>
+                <path d="M19 10V5"/>
+                <path d="M4 33C8 35 12 35 16 33C20 31 24 31 28 33C32 35 34 35 36 33"/>
+                <line x1="16" y1="19" x2="22" y2="19"/>
+              </svg>
+              <h2 class="card-title">Ocean<br>freight</h2>
+              <p class="card-body">FCL and LCL sailings on every major trade lane, with carrier choice based on cost and transit time.</p>
+            </article>
+
+            <!-- 3. Customs brokerage -->
+            <article class="card">
+              <svg class="card-icon" viewBox="0 0 38 38" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 5H23L29 11V22"/>
+                <path d="M23 5V11H29"/>
+                <path d="M9 13H18"/>
+                <path d="M9 18H18"/>
+                <path d="M9 23H15"/>
+                <path d="M9 28H13"/>
+                <circle cx="25" cy="27" r="6"/>
+                <path d="M22.5 27L24.5 29L28 25"/>
+              </svg>
+              <h2 class="card-title">Customs<br>brokerage</h2>
+              <p class="card-body">Licensed in-house brokers for classification, duties and inspections, so goods clear first time.</p>
+            </article>
+
+            <!-- 4. Warehousing and 3PL -->
+            <article class="card">
+              <svg class="card-icon" viewBox="0 0 38 38" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 15L19 7L33 15V31H5Z"/>
+                <path d="M14 31V20H24V31"/>
+                <line x1="14" y1="25.5" x2="24" y2="25.5"/>
+                <line x1="19" y1="20" x2="19" y2="31"/>
+                <circle cx="19" cy="13" r="1.8"/>
+              </svg>
+              <h2 class="card-title">Warehousing<br>and 3PL</h2>
+              <p class="card-body">Bonded and general storage, pick and pack, and distribution that plugs straight into transport.</p>
+            </article>
+
+            <!-- 5. Project cargo -->
+            <article class="card">
+              <svg class="card-icon" viewBox="0 0 38 38" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="4" x2="19" y2="10"/>
+                <path d="M19 10C16 10 14 12 14 15C14 18.5 22 17 22 21C22 24 19 24 17 23"/>
+                <rect x="8" y="25" width="22" height="9" rx="1"/>
+                <line x1="13" y1="25" x2="13" y2="34"/>
+                <line x1="25" y1="25" x2="25" y2="34"/>
+                <line x1="8" y1="29.5" x2="30" y2="29.5"/>
+              </svg>
+              <h2 class="card-title">Project<br>cargo</h2>
+              <p class="card-body">Oversized and heavy-lift moves, engineered, permitted and escorted from factory to foundation.</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Outline Pill -->
+        <button class="services-pill" aria-label="Our services">Our services</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function() {
+      const VIDEO_1080P = "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/409763c0-95f4-49d3-a601-dc564d55072b.mp4";
+      const VIDEO_720P = "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/b3718419-7a0a-478d-bfb0-0ff8bef7f3f7.mp4";
+
+      const trackEl = document.getElementById('track');
+      const video = document.getElementById('heroVideo');
+      const giantLetters = document.getElementById('giantLetters');
+      const speedReadout = document.getElementById('speedReadout');
+      const stripEl = document.getElementById('strip');
+      const cards = Array.from(document.querySelectorAll('.card'));
+
+      const A = 2.4;
+      let B = 2.0; // recalculated dynamically
+      let stripWidth = 0;
+      let lettersWidth = 0;
+
+      // Video state & easing
+      let videoDuration = 4.04;
+      let curTime = 0;
+      let targetTime = 0;
+      let seeking = false;
+
+      // Speed readout calculation
+      let lastScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+      let lastTimestamp = performance.now();
+      let smoothedSpeed = 0;
+
+      // Cubic-bezier solver for recorder mode: cubic-bezier(.4, .05, .55, .95)
+      function solveCubicBezier(x1, y1, x2, y2) {
+        return function(x) {
+          if (x <= 0) return 0;
+          if (x >= 1) return 1;
+          let t = x;
+          for (let i = 0; i < 8; i++) {
+            const currentX = 3 * (1 - t) * (1 - t) * t * x1 + 3 * (1 - t) * t * t * x2 + t * t * t;
+            const dx = 3 * (1 - t) * (1 - t) * x1 + 6 * (1 - t) * t * (x2 - x1) + 3 * t * t * (1 - x2);
+            if (Math.abs(currentX - x) < 1e-5 || Math.abs(dx) < 1e-6) break;
+            t -= (currentX - x) / dx;
+            t = Math.max(0, Math.min(1, t));
+          }
+          return 3 * (1 - t) * (1 - t) * t * y1 + 3 * (1 - t) * t * t * y2 + t * t * t;
+        };
+      }
+      const easeCurve = solveCubicBezier(0.4, 0.05, 0.55, 0.95);
+
+      function bezierDerivative(x1, y1, x2, y2, t) {
+        const dy = 3 * (1 - t) * (1 - t) * y1 + 6 * (1 - t) * t * (y2 - y1) + 3 * t * t * (1 - y2);
+        const dx = 3 * (1 - t) * (1 - t) * x1 + 6 * (1 - t) * t * (x2 - x1) + 3 * t * t * (1 - x2);
+        return dx > 0.0001 ? dy / dx : 0;
+      }
+
+      // Resize and layout metrics
+      function updateLayout() {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const isPortraitOrNarrow = vw < 768 || vw <= vh;
+
+        let videoWidth, videoHeight, videoLeft, videoTop, edgePx;
+
+        if (!isPortraitOrNarrow) {
+          // Wide screens: cover (scale = max(vw/1920, vh/1080), centred)
+          const scale = Math.max(vw / 1920, vh / 1080);
+          videoWidth = 1920 * scale;
+          videoHeight = 1080 * scale;
+          videoLeft = (vw - videoWidth) / 2;
+          videoTop = (vh - videoHeight) / 2;
+          edgePx = videoTop + 0.448 * videoHeight;
+        } else {
+          // Portrait or narrow screens (below 768px, or vw <= vh):
+          // width 155vw, horizontally positioned so 40% of the frame sits at mid-screen,
+          // and vertically so the final band edge lands at 36% of the viewport.
+          videoWidth = 1.55 * vw;
+          videoHeight = videoWidth * (1080 / 1920);
+          videoLeft = (vw * 0.5) - (0.40 * videoWidth);
+          videoTop = (0.36 * vh) - (0.448 * videoHeight);
+          edgePx = 0.36 * vh;
+        }
+
+        video.style.width = `${videoWidth}px`;
+        video.style.height = `${videoHeight}px`;
+        video.style.left = `${videoLeft}px`;
+        video.style.top = `${videoTop}px`;
+
+        document.documentElement.style.setProperty('--edge-px', `${edgePx}px`);
+
+        // Source resolution
+        const desiredSrc = vw <= 900 ? VIDEO_720P : VIDEO_1080P;
+        if (!video.src || !video.src.includes(desiredSrc)) {
+          const prevTime = video.currentTime;
+          video.src = desiredSrc;
+          video.currentTime = prevTime;
+        }
+
+        // Measure strip and letters (use scrollWidth/offsetWidth for intrinsic dimensions)
+        stripWidth = stripEl.scrollWidth || stripEl.offsetWidth || (vw * 3);
+        lettersWidth = giantLetters.scrollWidth || giantLetters.offsetWidth || (vw * 2.5);
+
+        // B = (strip width + 0.45 * vw) / vw * 1.1 viewports
+        B = ((stripWidth + 0.45 * vw) / vw) * 1.1;
+
+        // Track height = (1 + A + B) * viewport
+        const trackHeight = (1 + A + B) * vh;
+        trackEl.style.height = `${trackHeight}px`;
+      }
+
+      // Video Seeking logic
+      function trySeek() {
+        if (!video || video.readyState < 1) return;
+        if (!seeking && Math.abs(video.currentTime - curTime) > (1 / 60)) {
+          seeking = true;
+          try {
+            video.currentTime = curTime;
+          } catch (err) {
+            seeking = false;
+          }
+        }
+      }
+
+      video.addEventListener('seeked', () => {
+        seeking = false;
+        trySeek();
+      });
+
+      video.addEventListener('loadedmetadata', () => {
+        if (video.duration && !isNaN(video.duration)) {
+          videoDuration = video.duration;
+        }
+        updateLayout();
+      });
+
+      video.addEventListener('canplay', () => {
+        trySeek();
+      });
+
+      // Update card reveals based on card.getBoundingClientRect().left
+      function updateCards(vw) {
+        cards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const cardLeft = rect.left;
+          // s = clamp((0.98 − cardLeft/vw) / 0.3, −0.4, 1.6) × 100%
+          const sRaw = (0.98 - cardLeft / vw) / 0.3;
+          const sClamped = Math.max(-0.4, Math.min(1.6, sRaw));
+          const sPercent = sClamped * 100;
+          card.style.setProperty('--s', `${sPercent.toFixed(1)}%`);
+        });
+      }
+
+      // Core update for a given scroll position
+      function updateScene(scrollY, isDirect = false) {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+
+        // 1. Clip progress: q = clamp(scrollY / (A * vh))
+        const q = Math.max(0, Math.min(1, scrollY / (A * vh)));
+        targetTime = q * (videoDuration - (1 / 48));
+
+        if (isDirect) {
+          curTime = targetTime;
+          video.currentTime = curTime;
+        } else {
+          curTime += (targetTime - curTime) * 0.2;
+          trySeek();
+        }
+
+        // Settled flag: q >= 0.94 sets --ph = 1
+        const settled = q >= 0.94 ? 1 : 0;
+        document.documentElement.style.setProperty('--ph', String(settled));
+
+        // 2. Strip progress: r = clamp((scrollY - A * vh) / (B * vh))
+        const r = Math.max(0, Math.min(1, (scrollY - A * vh) / (B * vh)));
+
+        // Strip translateX = vw - r * (stripWidth + 0.45 * vw)
+        const sWidth = stripWidth || (vw * 3);
+        const stripTx = vw - r * (sWidth + 0.45 * vw);
+        stripEl.style.transform = `translate3d(${stripTx.toFixed(2)}px, 0, 0)`;
+
+        // Giant letters translateX = vw - r * (lettersWidth + vw)
+        const lWidth = lettersWidth || (vw * 2.5);
+        const lettersTx = vw - r * (lWidth + vw);
+        giantLetters.style.transform = `translate3d(${lettersTx.toFixed(2)}px, 0, 0)`;
+
+        // Update card gradients
+        updateCards(vw);
+      }
+
+      // rAF animation loop
+      function onFrame(timestamp) {
+        requestAnimationFrame(onFrame);
+
+        if (!window.__recActive) {
+          try {
+            const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+
+            // Speed readout: smoothed scroll speed (|Δy|/Δt ÷ 32, capped at 99, two digits)
+            const dt = Math.max(0.001, (timestamp - lastTimestamp) / 1000); // seconds
+            const dy = Math.abs(scrollY - lastScrollY);
+            const rawSpeed = (dy / dt) / 32;
+
+            smoothedSpeed += (rawSpeed - smoothedSpeed) * 0.16;
+            if (smoothedSpeed < 0.2) smoothedSpeed = 0;
+
+            lastScrollY = scrollY;
+            lastTimestamp = timestamp;
+
+            const speedVal = Math.min(99, Math.round(smoothedSpeed));
+            speedReadout.textContent = `${String(speedVal).padStart(2, '0')} KM/H`;
+
+            updateScene(scrollY, false);
+          } catch (err) {
+            console.error('Frame update error:', err);
+          }
+        }
+      }
+
+      // Also listen to scroll event for instantaneous response
+      window.addEventListener('scroll', () => {
+        if (!window.__recActive) {
+          const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+          updateScene(scrollY, false);
+        }
+      }, { passive: true });
+
+      // Recorder mode implementation: window.__recTime(video, t)
+      window.__recTime = function(vidOrT, maybeT) {
+        let vid = video;
+        let t = 0;
+        if (typeof vidOrT === 'number') {
+          t = vidOrT;
+        } else {
+          vid = vidOrT || video;
+          t = typeof maybeT === 'number' ? maybeT : 0;
+        }
+
+        const normT = t > 1 ? t / 11 : t;
+        let progress = 0;
+        let dProgressDt = 0; // per second
+
+        if (normT < 0.04) {
+          progress = 0;
+          dProgressDt = 0;
+        } else if (normT > 0.96) {
+          progress = 1;
+          dProgressDt = 0;
+        } else {
+          const u = (normT - 0.04) / (0.96 - 0.04);
+          progress = easeCurve(u);
+          const duDt = 1 / (0.92 * 11);
+          dProgressDt = bezierDerivative(0.4, 0.05, 0.55, 0.95, u) * duDt;
+        }
+
+        const vh = window.innerHeight;
+        const maxScroll = (A + B) * vh;
+        const scrollY = progress * maxScroll;
+        window.scrollTo(0, scrollY);
+
+        const scriptedSpeed = Math.min(99, Math.round((Math.abs(dProgressDt) * maxScroll) / 32));
+        speedReadout.textContent = `${String(scriptedSpeed).padStart(2, '0')} KM/H`;
+
+        updateScene(scrollY, true);
+
+        const q = Math.max(0, Math.min(1, scrollY / (A * vh)));
+        const clipTime = q * (videoDuration - (1 / 48));
+        return clipTime;
+      };
+
+      // Auto-drive if ?rec=1 is present
+      if (window.location.search.includes('rec=1')) {
+        window.__recActive = true;
+        let startTime = null;
+        const totalDurationMs = 11000;
+
+        function recLoop(ts) {
+          if (!startTime) startTime = ts;
+          const elapsed = ts - startTime;
+          const tSec = Math.min(11, elapsed / 1000);
+          window.__recTime(video, tSec);
+          if (elapsed < totalDurationMs) {
+            requestAnimationFrame(recLoop);
+          } else {
+            window.__recActive = false;
+          }
+        }
+        requestAnimationFrame(recLoop);
+      }
+
+      // Initial layout and resize listeners
+      window.addEventListener('resize', updateLayout);
+      window.addEventListener('orientationchange', updateLayout);
+
+      updateLayout();
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(updateLayout);
+      }
+
+      requestAnimationFrame(onFrame);
+    })();
+  </script>
+</body>
+</html>
