@@ -1130,10 +1130,12 @@
       color: inherit;
       background: transparent;
       border: none;
-      border-bottom: 2px solid rgba(238, 244, 246, 0.3);
+      border-bottom: 2px solid rgba(238, 244, 246, 0.4);
       outline: none;
-      padding: 0 4px;
+      padding: 0 2px;
       transition: border-color 0.3s ease;
+      field-sizing: content;
+      display: inline-block;
     }
     .brief-input:focus {
       border-bottom-color: var(--cobalt);
@@ -2986,8 +2988,8 @@
       <div class="brief-card" id="brief-card">
         <p class="brief-kicker">COMMERCIAL FREIGHT MANIFEST BUILDER</p>
         <p class="brief-sentence">
-          I'm dispatching <input type="text" id="manifest-cargo" class="brief-input" value="40ft High-Cube Dry Containers" size="23"><br>
-          from <input type="text" id="manifest-origin" class="brief-input" value="Port of Rotterdam" size="14"> to <input type="text" id="manifest-dest" class="brief-input" value="Singapore Pasir Panjang" size="18">, via<br>
+          I'm dispatching <input type="text" id="manifest-cargo" class="brief-input" value="40ft High-Cube Dry Containers" size="29"><br>
+          from <input type="text" id="manifest-origin" class="brief-input" value="Port of Rotterdam" size="17"> to <input type="text" id="manifest-dest" class="brief-input" value="Singapore Pasir Panjang" size="23">, via<br>
           <span class="brief-timeline" role="radiogroup" aria-label="Freight mode & speed">
             <label class="timeline-pill is-checked">
               <input type="radio" name="transit-mode" value="Ocean Express" checked>
