@@ -341,14 +341,11 @@
       position: sticky;
       top: 0;
       left: 0;
-      width: 100%;
+      width: 100vw;
       height: 100vh;
       height: 100lvh;
       overflow: hidden;
-      background: #FFFFFF;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: linear-gradient(to bottom, #ffffff var(--edge-px, 50vh), #111111 var(--edge-px, 50vh));
     }
 
     /* Video Frame in Hero */
@@ -358,7 +355,22 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      z-index: 10;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-poster {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+      object-fit: fill;
+      display: block;
+    }
+    .hero-video {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+      object-fit: fill;
+      display: block;
     }
     .hero-video {
       position: absolute;
@@ -374,17 +386,19 @@
     /* Giant Letters "ABC CARGO / OUR SERVICES" */
     .giant-letters {
       position: absolute;
-      bottom: calc(var(--edge, 44.8) * 1%);
-      left: calc(var(--gl-x, 100) * 1vw);
+      bottom: calc(100% - var(--edge-px, 50vh));
+      left: 0;
+      transform: translate3d(calc(var(--gl-x, 100) * 1vw), 0, 0);
       font-family: var(--font-anton);
       font-size: calc(300 * var(--u));
       line-height: 0.8;
       color: var(--giant-letters);
       white-space: nowrap;
       pointer-events: none;
-      z-index: 5;
+      z-index: 3;
       user-select: none;
-      will-change: transform, left;
+      mix-blend-mode: darken;
+      will-change: transform;
     }
 
     /* Live Telemetry Speedometer HUD */
@@ -430,19 +444,21 @@
     /* Services Band Strip sliding in from right */
     .services-band {
       position: absolute;
-      left: calc(var(--band-x, 100) * 1vw);
+      top: var(--edge-px, 50vh);
+      left: 0;
       bottom: 0;
-      height: calc(100vh - (var(--edge, 44.8) * 1vh));
-      height: calc(100lvh - (var(--edge, 44.8) * 1lvh));
-      background: var(--band-bg);
+      width: 100%;
+      transform: translate3d(calc(var(--band-x, 100) * 1vw), 0, 0);
+      background: transparent;
       color: #FFFFFF;
-      z-index: 25;
+      z-index: 5;
       display: flex;
-      align-items: stretch;
+      align-items: center;
       padding-left: calc(45 * var(--u));
       padding-right: calc(60 * var(--u));
-      gap: calc(30 * var(--u));
-      will-change: left;
+      gap: calc(40 * var(--u));
+      overflow: hidden;
+      will-change: transform;
     }
     .band-intro {
       display: flex;
@@ -2518,6 +2534,45 @@
       }
     }
 
+  
+    /* Navigation High-Contrast Modes */
+    body:not(.is-dark-nav) .site-nav {
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    body:not(.is-dark-nav) .brand-title {
+      color: #0A0E11 !important;
+    }
+    body:not(.is-dark-nav) .brand-tagline {
+      color: #4B5563 !important;
+      border-left-color: #D1D5DB !important;
+    }
+    body:not(.is-dark-nav) .nav-link {
+      color: #1F2937 !important;
+    }
+    body:not(.is-dark-nav) .nav-link:hover,
+    body:not(.is-dark-nav) .nav-link.is-active {
+      color: #000000 !important;
+    }
+    body:not(.is-dark-nav) .nav-track-btn {
+      color: #0A0E11 !important;
+      background: rgba(47, 99, 255, 0.12) !important;
+      border-color: rgba(47, 99, 255, 0.5) !important;
+    }
+    body:not(.is-dark-nav) .nav-track-btn:hover {
+      background: var(--cobalt) !important;
+      color: #FFFFFF !important;
+    }
+    body:not(.is-dark-nav) .nav-sound-btn {
+      color: #1F2937 !important;
+      background: rgba(0, 0, 0, 0.06) !important;
+      border-color: rgba(0, 0, 0, 0.2) !important;
+    }
+    body:not(.is-dark-nav) .nav-sound-btn:hover {
+      background: rgba(0, 0, 0, 0.12) !important;
+      color: #000000 !important;
+    }
+
   </style>
 </head>
 <body>
@@ -2578,9 +2633,9 @@
     <div class="hero-scene" id="hero-scene">
       <!-- Video Element -->
       <div class="hero-video-box">
+        <img id="hero-poster" class="hero-poster" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/2307e4bf-be39-42b4-b579-e168aeccabf0.jpg" alt="KV Cargo Reach-Stacker and Semi-Truck">
         <video class="hero-video" id="handling-video" muted playsinline preload="auto" poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/2307e4bf-be39-42b4-b579-e168aeccabf0.jpg">
-          <source src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/409763c0-95f4-49d3-a601-dc564d55072b.mp4" type="video/mp4" media="(min-width: 901px)">
-          <source src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/b3718419-7a0a-478d-bfb0-0ff8bef7f3f7.mp4" type="video/mp4">
+          <source src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/409763c0-95f4-49d3-a601-dc564d55072b.mp4" type="video/mp4">
         </video>
       </div>
 
@@ -3362,7 +3417,7 @@
       <div class="fleet-modal-layout">
         <div>
           <div class="fleet-modal-media">
-            <video class="fleet-modal-video" id="fleet-modal-video" loop muted playsinline autoplay></video>
+            <img class="fleet-modal-img" id="fleet-modal-img" alt="Fleet vessel preview" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:12px;"><video class="fleet-modal-video" id="fleet-modal-video" loop muted playsinline autoplay style="display:none;"></video>
           </div>
           <p id="fleet-modal-desc" style="font-family: var(--font-archivo); font-size: calc(13.5 * var(--u)); color: var(--ink-soft); line-height: 1.6; margin-top: 14px;">
             Neo-Panamax ultra-large container carrier engineered with dual-fuel LNG/methanol propulsion, bulbous hydrodynamic bow, and automated lash-monitoring systems.
@@ -3512,22 +3567,22 @@
 
     // 16 Fleet Operation Cards
     const SITES = [
-      { num: '01', title: 'Deep-Sea Megavessel', slug: 'ocean-vessel-one', video: 'aaaf/look-circle-hero.mp4', poster: 'hf_20261111_034848_928e6733-ce60-48f4-9a65-14dc76a1d74b', ratio: 1600/900, world: 'maritime' },
-      { num: '02', title: 'Automated Port Cranes', slug: 'port-crane-hub', video: 'aaaf/kolibrie-landing.mp4', poster: 'hf_20261110_232427_5e9a291a-5c3e-4f0e-9506-06fedc0020f4', ratio: 1440/810, world: 'intermodal' },
-      { num: '03', title: 'Intermodal Rail Yard', slug: 'rail-terminal-hub', video: 'aaaf/balloon-drop-hero-edge.mp4', poster: 'hf_20261109_030427_0961b20a-ba6b-4094-8ea2-de5916dfa0b3', ratio: 1600/900, world: 'intermodal' },
-      { num: '04', title: 'Customs Bonded Terminal', slug: 'customs-gate', video: 'aaaf/fox-couture-hero.mp4', poster: 'hf_20261107_154307_13b28214-7ca8-4b2a-b8aa-a2f84e7cfcec', ratio: 1440/900, world: 'maritime' },
-      { num: '05', title: 'Satellite Vessel Radar', slug: 'satellite-radar', video: 'aaaf/laptop-portfolio.mp4', poster: 'hf_20261111_030305_aa366bc0-85e3-4f61-82c1-cbf8ae8217a3', ratio: 1440/810, world: 'dispatch' },
-      { num: '06', title: 'Heavy-Lift Rigging', slug: 'heavy-haul-rig', video: 'aaaf/ink-portfolio.mp4', poster: 'hf_20261111_001348_8bc89068-e31a-4ccf-a6cb-893ff11c134f', ratio: 1440/810, world: 'intermodal' },
-      { num: '07', title: 'Reefer Cold Corridor', slug: 'cold-chain-unit', video: 'aaaf/clothing-rail-hero.mp4', poster: 'hf_20261108_064619_5aab2bf3-3e14-41b3-9421-250f3c9eac47', ratio: 1500/1000, world: 'coldchain' },
-      { num: '08', title: 'Pharma Clean Hub', slug: 'pharma-storage', video: 'aaaf/spin-product-hero.mp4', poster: 'hf_20261107_113531_66f5b631-47f4-45da-8094-29dc04544d61', ratio: 1500/1000, world: 'coldchain' },
-      { num: '09', title: 'Transpacific Air Corridor', slug: 'air-charter-line', video: 'aaaf/sphere-gallery.mp4', poster: 'hf_20261111_011719_6594eb98-1eff-4903-9888-f4617764070d', ratio: 1440/810, world: 'dispatch' },
-      { num: '10', title: 'Berth 42 High-Capacity', slug: 'berth-operations', video: 'aaaf/glaze-motion.mp4', poster: 'hf_20261110_223913_74dc89fd-5948-4da9-8749-3bcd3f40fd8d', ratio: 1440/810, world: 'maritime' },
-      { num: '11', title: 'Automated Agv Carrier', slug: 'agv-carrier-unit', video: 'aaaf/kinestra-card-story-v2.mp4', poster: 'hf_20261108_020030_b8d50a01-c927-44a4-ad51-ab48c283c9d5', ratio: 1440/900, world: 'intermodal' },
-      { num: '12', title: 'Fleet Tracking Command', slug: 'fleet-command', video: 'aaaf/halftone-recap.mp4', poster: 'hf_20261107_001441_a517a376-cfaa-415e-95d8-ea8b61c1727c', ratio: 1440/900, world: 'dispatch' },
-      { num: '13', title: 'LNG Eco-Powered Hull', slug: 'lng-carrier', video: 'aaaf/orbe-future-mode.mp4', poster: 'hf_20261106_084953_1d74b316-6fa3-4558-a532-462e7ae8d559', ratio: 1440/900, world: 'maritime' },
-      { num: '14', title: 'Temperature Core Sensor', slug: 'temp-core-telemetry', video: 'aaaf/vhs-arc-hero.mp4', poster: 'hf_20261105_045553_51e4ba42-a8a4-4702-ad5f-18c0e2a5ba85', ratio: 1600/900, world: 'coldchain' },
-      { num: '15', title: 'Dry Bulk Feeder', slug: 'bulk-feeder-line', video: 'aaaf/mossline-hero.mp4', poster: 'hf_20261106_032528_99eb9a00-a553-40b6-8b97-017e918971c6', ratio: 1600/900, world: 'maritime' },
-      { num: '16', title: 'Dangerous Goods Hazmat', slug: 'hazmat-safety-hub', video: 'aaaf/try-the-look-hero.mp4', poster: 'hf_20261105_051536_4f458170-47a1-440e-a08c-8ed434394ce8', ratio: 1600/900, world: 'intermodal' }
+      { num: '01', title: 'Triple-E Megavessel', slug: 'triple-e-megavessel', img: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'IMO 9632064', flag: 'Denmark', teu: '24,346 TEU', spec: 'Dual-Fuel LNG · 400m LOA · 61.5m Beam', desc: 'Ultra-large flagship container vessel servicing the Asia-North Europe direct mainline with scrubbed emissions.' },
+      { num: '02', title: 'Automated STS Gantry', slug: 'sts-gantry-cranes', img: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80', world: 'intermodal', imo: 'QUAY CRANE #14', flag: 'Netherlands', teu: 'Twin-Lift 65T', spec: 'Electric Automated · 48 moves/hr · 52m outreach', desc: 'High-speed automated ship-to-shore gantry cranes with anti-sway laser positioning and remote control.' },
+      { num: '03', title: 'Double-Stack Rail Hub', slug: 'double-stack-rail', img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80', world: 'intermodal', imo: 'CORRIDOR EX-7', flag: 'Germany', teu: '420 TEU Block', spec: 'Transcontinental Class 1 Rail · Direct Quay Feed', desc: 'Daily express double-stack intermodal rail corridors linking deep-water berths directly into inland European depots.' },
+      { num: '04', title: '45T Yard Reach-Stacker', slug: 'yard-reach-stacker', img: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=1200&q=80', world: 'intermodal', imo: 'STACKER RS-88', flag: 'Sweden', teu: '45 Ton SWL', spec: '5-High Stacking · Hydraulic Spreader · GPS Yard Telemetry', desc: 'Heavy-lift telescopic container handlers staging boxes between quayside, drayage trucks, and rail spurs.' },
+      { num: '05', title: 'Reefer Pharma Hub', slug: 'reefer-pharma-hub', img: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1200&q=80', world: 'coldchain', imo: 'COLD BAY C-4', flag: 'Switzerland', teu: '1,800 Plugs', spec: '-30°C to +15°C · Dual Genset Redundancy · GDP Certified', desc: 'Precision temperature-controlled monitoring hubs with continuous satellite telemetry for biopharma cargo.' },
+      { num: '06', title: 'Widebody 777F Charter', slug: 'widebody-777f-charter', img: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80', world: 'aviation', imo: 'REG N772BC', flag: 'United States', teu: '102.8T Payload', spec: 'Main Deck Tall Cargo · 9,200 km Range · 24/7 AOG Ready', desc: 'High-payload freighter aircraft for urgent automotive JIT components, semiconductor spares, and aerospace engines.' },
+      { num: '07', title: 'Deep-Water Super-Berth', slug: 'deep-water-berth', img: 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'BERTH 42-WEST', flag: 'Singapore', teu: '350k DWT Draft', spec: '21.5m Draft Quay · 1,400m Continuous Berth Line', desc: 'Deep-water quayside facility engineered to berth two 24,000 TEU container ships simultaneously at zero tide delay.' },
+      { num: '08', title: 'Electric Yard AGV Fleet', slug: 'electric-yard-agv', img: 'https://images.unsplash.com/photo-1586528116493-a029325540fa?auto=format&fit=crop&w=1200&q=80', world: 'intermodal', imo: 'AGV-UNIT 204', flag: 'Netherlands', teu: '70 Ton Capacity', spec: 'Autonomous Navigation · Inductive Ground Grid · Zero Emission', desc: 'Battery-electric automated guided vehicles shuttling containers between STS cranes and stack blocks 24/7.' },
+      { num: '09', title: 'Rotterdam Gateway Hub', slug: 'rotterdam-gateway', img: 'https://images.unsplash.com/photo-1605745341112-85968b19335b?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'TERMINAL RTM-1', flag: 'Netherlands', teu: '14.5M TEU/yr', spec: 'Maasvlakte II Deep-Water Intermodal Transshipment', desc: 'Main European logistics pivot point integrating inland barge, electrified rail, and automated truck gates.' },
+      { num: '10', title: 'Pasir Panjang Mega-Port', slug: 'singapore-mega-port', img: 'https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'PSA PASIR PANJANG', flag: 'Singapore', teu: '36.0M TEU/yr', spec: 'Automated Overhead Rail & Gantry Synchronization', desc: 'World premier transshipment hub handling ultra-dense transpacific container exchanges with automated crane lines.' },
+      { num: '11', title: 'High-Bay ASRS Logistics', slug: 'high-bay-asrs', img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&fit=crop&w=1200&q=80', world: 'intermodal', imo: 'WH-BAY 9B', flag: 'Germany', teu: '85,000 Pallets', spec: '38m Automated High-Bay · 1,200 Pallet/hr Sortation', desc: 'Robotic warehouse storage and retrieval facility connected directly to container devanning docks.' },
+      { num: '12', title: 'Breakbulk Heavy Rigging', slug: 'breakbulk-heavy-rigging', img: 'https://images.unsplash.com/photo-1505705694340-019e1e335916?auto=format&fit=crop&w=1200&q=80', world: 'project', imo: 'HLV PACIFIC HEAVY', flag: 'Liberia', teu: '1,800T Lift', spec: 'Twin 900-Ton Mast Cranes · Dynamic Positioning DP2', desc: 'Engineered heavy-lift marine transport for wind turbine blades, nuclear pressure vessels, and offshore modules.' },
+      { num: '13', title: 'Specialized Chemical Tanker', slug: 'chemical-parcel-tanker', img: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'IMO 9874412', flag: 'Panama', teu: '49,000 DWT', spec: 'Stainless Steel MarineLINE Tanks · IMO II/III Certified', desc: 'Dedicated bulk liquid chemical parcel carrier with segregated thermal heating and nitrogen purging systems.' },
+      { num: '14', title: 'Polar Container Icebreaker', slug: 'polar-icebreaker-carrier', img: 'https://images.unsplash.com/photo-1488441770602-aed21fc49bd5?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'IMO 9753118', flag: 'Cyprus', teu: '4,500 TEU Ice', spec: 'Azipod Propulsion · Ice-Breaking up to 2.1m Fast Ice', desc: 'Double-acting ice-class container carrier navigating Arctic northern sea routes to cut Asia-Europe transit by 12 days.' },
+      { num: '15', title: 'Capesize Bulk Ore Carrier', slug: 'capesize-bulk-carrier', img: 'https://images.unsplash.com/photo-1516214104703-d870798883c5?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'IMO 9821102', flag: 'Marshall Islands', teu: '208,000 DWT', spec: '9 Cargo Holds · 300m LOA · 50m Beam · SOx Scrubber', desc: 'Heavy dry-bulk carrier carrying bauxite, iron ore, and grain with automated continuous ship unloader compatibility.' },
+      { num: '16', title: 'Global AIS Fleet Center', slug: 'satellite-fleet-control', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80', world: 'telemetry', imo: 'MOC ROTTERDAM', flag: 'Global', teu: '2,400 Vessels', spec: 'Satellite S-AIS · Micro-Weather Voyage Routing · 24/7 Ops', desc: 'Central maritime operations intelligence center predicting typhoon deviations and optimizing fuel speed curves.' }
     ];
 
     // Petals & Motes Data
@@ -3583,7 +3638,7 @@
       img.onload = img.onerror = () => {
         loadedCount++;
       };
-      img.src = imgProxy(CF + s.poster + '.png', 720);
+      img.src = s.img;
     });
 
     // Odometer animation
@@ -3624,19 +3679,90 @@
     const A_VIEWPORTS = 2.4;
     let B_VIEWPORTS = 2.5;
 
-    function updateTrackHeight() {
+    function updateLayout() {
       const vw = window.innerWidth;
       const vh = window.innerHeight;
+      const isPortraitOrNarrow = vw < 768 || vw <= vh;
+
+      let videoWidth, videoHeight, videoLeft, videoTop, edgePx;
+
+      if (!isPortraitOrNarrow) {
+        // Wide screens: cover (scale = max(vw/1920, vh/1080), centred)
+        const scale = Math.max(vw / 1920, vh / 1080);
+        videoWidth = 1920 * scale;
+        videoHeight = 1080 * scale;
+        videoLeft = (vw - videoWidth) / 2;
+        videoTop = (vh - videoHeight) / 2;
+        edgePx = videoTop + 0.448 * videoHeight;
+      } else {
+        // Portrait or narrow screens (below 768px, or vw <= vh):
+        videoWidth = 1.55 * vw;
+        videoHeight = videoWidth * (1080 / 1920);
+        videoLeft = (vw * 0.5) - (0.40 * videoWidth);
+        videoTop = (0.36 * vh) - (0.448 * videoHeight);
+        edgePx = 0.36 * vh;
+      }
+
+      const wStr = videoWidth + 'px';
+      const hStr = videoHeight + 'px';
+      const lStr = videoLeft + 'px';
+      const tStr = videoTop + 'px';
+
+      const heroPoster = document.getElementById('hero-poster');
+      if (heroPoster) {
+        heroPoster.style.width = wStr;
+        heroPoster.style.height = hStr;
+        heroPoster.style.left = lStr;
+        heroPoster.style.top = tStr;
+      }
+
+      if (handlingVideo) {
+        handlingVideo.style.width = wStr;
+        handlingVideo.style.height = hStr;
+        handlingVideo.style.left = lStr;
+        handlingVideo.style.top = tStr;
+      }
+
+      document.documentElement.style.setProperty('--edge-px', edgePx + 'px');
+
+      // Video source resolution
+      const VIDEO_1080P = "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/409763c0-95f4-49d3-a601-dc564d55072b.mp4";
+      const VIDEO_720P = "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/b3718419-7a0a-478d-bfb0-0ff8bef7f3f7.mp4";
+      const desiredSrc = vw <= 900 ? VIDEO_720P : VIDEO_1080P;
+
+      if (handlingVideo && (!handlingVideo.src || !handlingVideo.src.includes(desiredSrc))) {
+        const prev = handlingVideo.currentTime || 0;
+        handlingVideo.src = desiredSrc;
+        handlingVideo.load();
+        try { handlingVideo.currentTime = prev; } catch(e){}
+      }
+
       const stripWidth = servicesBand.scrollWidth || 1800;
       B_VIEWPORTS = ((stripWidth + 0.45 * vw) / vw) * 1.1;
       const totalH = (1 + A_VIEWPORTS + B_VIEWPORTS) * vh;
       heroTrack.style.height = totalH + 'px';
     }
-    window.addEventListener('resize', updateTrackHeight);
-    window.addEventListener('load', updateTrackHeight);
+    window.addEventListener('resize', updateLayout);
+    window.addEventListener('load', updateLayout);
+
+    // Seeking state for smooth scrub
+    let isSeeking = false;
+    let targetTime = 0;
+
+    if (handlingVideo) {
+      handlingVideo.addEventListener('seeked', () => {
+        isSeeking = false;
+        if (Math.abs(handlingVideo.currentTime - targetTime) > 0.05) {
+          try {
+            isSeeking = true;
+            handlingVideo.currentTime = targetTime;
+          } catch(e) { isSeeking = false; }
+        }
+      });
+    }
 
     // Scroll progress handler
-    let lastScrollY = window.scrollY;
+    let scrollTicking = false;
     function handleScroll() {
       const trackRect = heroTrack.getBoundingClientRect();
       const vh = window.innerHeight;
@@ -3652,27 +3778,20 @@
       // If hero track is active
       const scrolled = Math.max(0, -trackRect.top);
       const totalTrackScroll = heroTrack.offsetHeight - vh;
-      const progress = Math.min(1, Math.max(0, scrolled / totalTrackScroll));
 
       // Phase 1: Video scrub (0 to A_VIEWPORTS)
       const aScroll = A_VIEWPORTS * vh;
       const pClip = Math.min(1, Math.max(0, scrolled / aScroll));
 
-      if (handlingVideo.duration) {
-        const targetTime = pClip * handlingVideo.duration;
-        if (Math.abs(handlingVideo.currentTime - targetTime) > 0.04) {
-          handlingVideo.currentTime = targetTime;
+      if (handlingVideo && handlingVideo.duration) {
+        targetTime = pClip * handlingVideo.duration;
+        if (!isSeeking && Math.abs(handlingVideo.currentTime - targetTime) > 0.04) {
+          isSeeking = true;
+          try {
+            handlingVideo.currentTime = targetTime;
+          } catch(e) { isSeeking = false; }
         }
       }
-
-      // Edge of the ground band in the video:
-      // Sits at 82.9% until 3.1s (~0.76 of clip), rises to 44.8% by 3.75s (~0.93 of clip)
-      let bandEdge = 82.9;
-      if (pClip > 0.76) {
-        const riseP = Math.min(1, (pClip - 0.76) / (0.93 - 0.76));
-        bandEdge = 82.9 - (82.9 - 44.8) * riseP;
-      }
-      heroScene.style.setProperty('--edge', bandEdge);
 
       // Phase 2: Giant letters & Services strip (after A_VIEWPORTS)
       const bScrolled = Math.max(0, scrolled - aScroll);
@@ -3691,11 +3810,20 @@
       const curSpeed = (24.8 + Math.sin(pClip * Math.PI) * 12.4).toFixed(1);
       hudSpeed.textContent = curSpeed;
     }
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    updateTrackHeight();
-    handleScroll();
 
-    // 5. 3D OCEAN RING SETUP
+    window.addEventListener('scroll', () => {
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    }, { passive: true });
+
+    updateLayout();
+    handleScroll();
+// 5. 3D OCEAN RING SETUP
     // Petals & Motes Generation
     function createPetal(d, isBack) {
       const el = document.createElement('span');
@@ -3979,7 +4107,7 @@
           slot.el.style.width = wPx + 'px';
           slot.el.style.left = (-wPx / 2) + 'px';
 
-          slot.poster.src = imgProxy(CF + site.poster + '.png', 720);
+          slot.poster.src = site.img || "";
           slot.chipTxt.textContent = 'No. ' + site.num;
           slot.labelSector.textContent = wInfo.label;
           slot.labelTitle.textContent = site.title;
@@ -4057,7 +4185,7 @@
         previewBlurb.textContent = wInfo.blurb;
 
         const site = SITES.find(s => s.world === world) || SITES[0];
-        previewMedia.style.backgroundImage = 'url(' + imgProxy(CF + site.poster + '.png', 720) + ')';
+        previewMedia.style.backgroundImage = "url(" + (site.img || "") + ")";
         previewVideo.src = R2 + site.video;
         previewVideo.play().then(() => previewVideo.classList.add('is-playing')).catch(() => {});
       });
@@ -4304,6 +4432,14 @@
     function openFleetModal(site) {
       if (document.getElementById('fleet-modal-kicker')) document.getElementById('fleet-modal-kicker').textContent = (site.world || 'MARITIME').toUpperCase() + ' // ASSET CLASS ' + site.num;
       if (document.getElementById('fleet-modal-title')) document.getElementById('fleet-modal-title').textContent = site.title.toUpperCase();
+      const fleetModalImg = document.getElementById('fleet-modal-img');
+      if (fleetModalImg && site.img) {
+        fleetModalImg.src = site.img;
+        fleetModalImg.style.display = 'block';
+      }
+      if (site.desc && document.getElementById('fleet-modal-desc')) {
+        document.getElementById('fleet-modal-desc').textContent = site.desc;
+      }
       if (fleetModalVideo) {
         fleetModalVideo.src = R2 + site.video;
         fleetModalVideo.play().catch(() => {});
@@ -4366,7 +4502,7 @@
         if (slot && slot.el) {
           slot.el.addEventListener('click', (e) => {
             e.preventDefault();
-            const site = SITES[slot.siteIndex] || SITES[0];
+            const site = SITES[slot.currentSiteIndex] || SITES[0];
             openFleetModal(site);
           });
         }
