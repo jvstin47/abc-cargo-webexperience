@@ -1466,7 +1466,7 @@
        COMMERCIAL GRADE ENTERPRISE STYLES & RESPONSIVE POLISH
        ---------------------------------------------------- */
     html, body {
-      overflow-x: hidden;
+      overflow-x: clip;
       width: 100%;
     }
 
@@ -3566,23 +3566,23 @@
     };
 
     // 16 Fleet Operation Cards
-    const SITES = [
-      { num: '01', title: 'Triple-E Megavessel', slug: 'triple-e-megavessel', img: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'IMO 9632064', flag: 'Denmark', teu: '24,346 TEU', spec: 'Dual-Fuel LNG · 400m LOA · 61.5m Beam', desc: 'Ultra-large flagship container vessel servicing the Asia-North Europe direct mainline with scrubbed emissions.' },
-      { num: '02', title: 'Automated STS Gantry', slug: 'sts-gantry-cranes', img: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80', world: 'intermodal', imo: 'QUAY CRANE #14', flag: 'Netherlands', teu: 'Twin-Lift 65T', spec: 'Electric Automated · 48 moves/hr · 52m outreach', desc: 'High-speed automated ship-to-shore gantry cranes with anti-sway laser positioning and remote control.' },
-      { num: '03', title: 'Double-Stack Rail Hub', slug: 'double-stack-rail', img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80', world: 'intermodal', imo: 'CORRIDOR EX-7', flag: 'Germany', teu: '420 TEU Block', spec: 'Transcontinental Class 1 Rail · Direct Quay Feed', desc: 'Daily express double-stack intermodal rail corridors linking deep-water berths directly into inland European depots.' },
-      { num: '04', title: '45T Yard Reach-Stacker', slug: 'yard-reach-stacker', img: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=1200&q=80', world: 'intermodal', imo: 'STACKER RS-88', flag: 'Sweden', teu: '45 Ton SWL', spec: '5-High Stacking · Hydraulic Spreader · GPS Yard Telemetry', desc: 'Heavy-lift telescopic container handlers staging boxes between quayside, drayage trucks, and rail spurs.' },
-      { num: '05', title: 'Reefer Pharma Hub', slug: 'reefer-pharma-hub', img: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1200&q=80', world: 'coldchain', imo: 'COLD BAY C-4', flag: 'Switzerland', teu: '1,800 Plugs', spec: '-30°C to +15°C · Dual Genset Redundancy · GDP Certified', desc: 'Precision temperature-controlled monitoring hubs with continuous satellite telemetry for biopharma cargo.' },
-      { num: '06', title: 'Widebody 777F Charter', slug: 'widebody-777f-charter', img: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80', world: 'aviation', imo: 'REG N772BC', flag: 'United States', teu: '102.8T Payload', spec: 'Main Deck Tall Cargo · 9,200 km Range · 24/7 AOG Ready', desc: 'High-payload freighter aircraft for urgent automotive JIT components, semiconductor spares, and aerospace engines.' },
-      { num: '07', title: 'Deep-Water Super-Berth', slug: 'deep-water-berth', img: 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'BERTH 42-WEST', flag: 'Singapore', teu: '350k DWT Draft', spec: '21.5m Draft Quay · 1,400m Continuous Berth Line', desc: 'Deep-water quayside facility engineered to berth two 24,000 TEU container ships simultaneously at zero tide delay.' },
-      { num: '08', title: 'Electric Yard AGV Fleet', slug: 'electric-yard-agv', img: 'https://images.unsplash.com/photo-1586528116493-a029325540fa?auto=format&fit=crop&w=1200&q=80', world: 'intermodal', imo: 'AGV-UNIT 204', flag: 'Netherlands', teu: '70 Ton Capacity', spec: 'Autonomous Navigation · Inductive Ground Grid · Zero Emission', desc: 'Battery-electric automated guided vehicles shuttling containers between STS cranes and stack blocks 24/7.' },
-      { num: '09', title: 'Rotterdam Gateway Hub', slug: 'rotterdam-gateway', img: 'https://images.unsplash.com/photo-1605745341112-85968b19335b?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'TERMINAL RTM-1', flag: 'Netherlands', teu: '14.5M TEU/yr', spec: 'Maasvlakte II Deep-Water Intermodal Transshipment', desc: 'Main European logistics pivot point integrating inland barge, electrified rail, and automated truck gates.' },
-      { num: '10', title: 'Pasir Panjang Mega-Port', slug: 'singapore-mega-port', img: 'https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'PSA PASIR PANJANG', flag: 'Singapore', teu: '36.0M TEU/yr', spec: 'Automated Overhead Rail & Gantry Synchronization', desc: 'World premier transshipment hub handling ultra-dense transpacific container exchanges with automated crane lines.' },
-      { num: '11', title: 'High-Bay ASRS Logistics', slug: 'high-bay-asrs', img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?auto=format&fit=crop&w=1200&q=80', world: 'intermodal', imo: 'WH-BAY 9B', flag: 'Germany', teu: '85,000 Pallets', spec: '38m Automated High-Bay · 1,200 Pallet/hr Sortation', desc: 'Robotic warehouse storage and retrieval facility connected directly to container devanning docks.' },
-      { num: '12', title: 'Breakbulk Heavy Rigging', slug: 'breakbulk-heavy-rigging', img: 'https://images.unsplash.com/photo-1505705694340-019e1e335916?auto=format&fit=crop&w=1200&q=80', world: 'project', imo: 'HLV PACIFIC HEAVY', flag: 'Liberia', teu: '1,800T Lift', spec: 'Twin 900-Ton Mast Cranes · Dynamic Positioning DP2', desc: 'Engineered heavy-lift marine transport for wind turbine blades, nuclear pressure vessels, and offshore modules.' },
-      { num: '13', title: 'Specialized Chemical Tanker', slug: 'chemical-parcel-tanker', img: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'IMO 9874412', flag: 'Panama', teu: '49,000 DWT', spec: 'Stainless Steel MarineLINE Tanks · IMO II/III Certified', desc: 'Dedicated bulk liquid chemical parcel carrier with segregated thermal heating and nitrogen purging systems.' },
-      { num: '14', title: 'Polar Container Icebreaker', slug: 'polar-icebreaker-carrier', img: 'https://images.unsplash.com/photo-1488441770602-aed21fc49bd5?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'IMO 9753118', flag: 'Cyprus', teu: '4,500 TEU Ice', spec: 'Azipod Propulsion · Ice-Breaking up to 2.1m Fast Ice', desc: 'Double-acting ice-class container carrier navigating Arctic northern sea routes to cut Asia-Europe transit by 12 days.' },
-      { num: '15', title: 'Capesize Bulk Ore Carrier', slug: 'capesize-bulk-carrier', img: 'https://images.unsplash.com/photo-1516214104703-d870798883c5?auto=format&fit=crop&w=1200&q=80', world: 'maritime', imo: 'IMO 9821102', flag: 'Marshall Islands', teu: '208,000 DWT', spec: '9 Cargo Holds · 300m LOA · 50m Beam · SOx Scrubber', desc: 'Heavy dry-bulk carrier carrying bauxite, iron ore, and grain with automated continuous ship unloader compatibility.' },
-      { num: '16', title: 'Global AIS Fleet Center', slug: 'satellite-fleet-control', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80', world: 'telemetry', imo: 'MOC ROTTERDAM', flag: 'Global', teu: '2,400 Vessels', spec: 'Satellite S-AIS · Micro-Weather Voyage Routing · 24/7 Ops', desc: 'Central maritime operations intelligence center predicting typhoon deviations and optimizing fuel speed curves.' }
+    const SITES = window.SITES = [
+      { num: '01', title: 'Triple-E Megavessel', slug: 'triple-e-megavessel', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/MSC_HARMONY_III_%28container_ship%2C_2006%29_in_Port_Koper_%28SIKOP%2C_2024%29.jpg/1280px-MSC_HARMONY_III_%28container_ship%2C_2006%29_in_Port_Koper_%28SIKOP%2C_2024%29.jpg', world: 'maritime', imo: 'IMO 9632064', flag: 'Denmark', teu: '24,346 TEU', spec: 'Dual-Fuel LNG · 400m LOA · 61.5m Beam', desc: 'Ultra-large flagship container vessel servicing the Asia-North Europe direct mainline with scrubbed emissions.' },
+      { num: '02', title: 'Automated STS Gantry', slug: 'sts-gantry-cranes', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/RCT_Sunset.jpg/1280px-RCT_Sunset.jpg', world: 'intermodal', imo: 'QUAY CRANE #14', flag: 'Netherlands', teu: 'Twin-Lift 65T', spec: 'Electric Automated · 48 moves/hr · 52m outreach', desc: 'High-speed automated ship-to-shore gantry cranes with anti-sway laser positioning and remote control.' },
+      { num: '03', title: 'Double-Stack Rail Hub', slug: 'double-stack-rail', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/CSX_Double_Stack_train_in_Worcester.jpg/1280px-CSX_Double_Stack_train_in_Worcester.jpg', world: 'intermodal', imo: 'CORRIDOR EX-7', flag: 'Germany', teu: '420 TEU Block', spec: 'Transcontinental Class 1 Rail · Direct Quay Feed', desc: 'Daily express double-stack intermodal rail corridors linking deep-water berths directly into inland European depots.' },
+      { num: '04', title: '45T Yard Reach-Stacker', slug: 'yard-reach-stacker', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Kalmar_DRG450_Containerstapler_in_Bremen_%282024%29.jpg/1280px-Kalmar_DRG450_Containerstapler_in_Bremen_%282024%29.jpg', world: 'intermodal', imo: 'STACKER RS-88', flag: 'Sweden', teu: '45 Ton SWL', spec: '5-High Stacking · Hydraulic Spreader · GPS Yard Telemetry', desc: 'Heavy-lift telescopic container handlers staging boxes between quayside, drayage trucks, and rail spurs.' },
+      { num: '05', title: 'Reefer Cold-Chain Unit', slug: 'reefer-pharma-hub', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Reefer_on_container_chassis.jpg/1280px-Reefer_on_container_chassis.jpg', world: 'coldchain', imo: 'COLD BAY C-4', flag: 'Switzerland', teu: '1,800 Plugs', spec: '-30°C to +15°C · Dual Genset Redundancy · GDP Certified', desc: 'Precision temperature-controlled monitoring hubs with continuous satellite telemetry for biopharma cargo.' },
+      { num: '06', title: 'Widebody 777F Charter', slug: 'widebody-777f-charter', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Turkish_Cargo_Boeing_777F_%28Aircraft-TC-LJR%2911.jpg/1280px-Turkish_Cargo_Boeing_777F_%28Aircraft-TC-LJR%2911.jpg', world: 'aviation', imo: 'REG N772BC', flag: 'United States', teu: '102.8T Payload', spec: 'Main Deck Tall Cargo · 9,200 km Range · 24/7 AOG Ready', desc: 'High-payload freighter aircraft for urgent automotive JIT components, semiconductor spares, and aerospace engines.' },
+      { num: '07', title: 'Deep-Water Super-Berth', slug: 'deep-water-berth', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/The_port_of_Singapore.jpg/1280px-The_port_of_Singapore.jpg', world: 'maritime', imo: 'BERTH 42-WEST', flag: 'Singapore', teu: '350k DWT Draft', spec: '21.5m Draft Quay · 1,400m Continuous Berth Line', desc: 'Deep-water quayside facility engineered to berth two 24,000 TEU container ships simultaneously at zero tide delay.' },
+      { num: '08', title: 'Electric Yard AGV Fleet', slug: 'electric-yard-agv', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Automated_guided_vehicle_container_mover_at_Port_of_Rotterdam.JPG/1280px-Automated_guided_vehicle_container_mover_at_Port_of_Rotterdam.JPG', world: 'intermodal', imo: 'AGV-UNIT 204', flag: 'Netherlands', teu: '70 Ton Capacity', spec: 'Autonomous Navigation · Inductive Ground Grid · Zero Emission', desc: 'Battery-electric automated guided vehicles shuttling containers between STS cranes and stack blocks 24/7.' },
+      { num: '09', title: 'Rotterdam Gateway Hub', slug: 'rotterdam-gateway', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/RCT_Sunset.jpg/1280px-RCT_Sunset.jpg', world: 'maritime', imo: 'TERMINAL RTM-1', flag: 'Netherlands', teu: '14.5M TEU/yr', spec: 'Maasvlakte II Deep-Water Intermodal Transshipment', desc: 'Main European logistics pivot point integrating inland barge, electrified rail, and automated truck gates.' },
+      { num: '10', title: 'Pasir Panjang Mega-Port', slug: 'singapore-mega-port', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Singapore_%28SG%29%2C_Tanjong_Pagar_Terminal_--_2019_--_4728.jpg/1280px-Singapore_%28SG%29%2C_Tanjong_Pagar_Terminal_--_2019_--_4728.jpg', world: 'maritime', imo: 'PSA PASIR PANJANG', flag: 'Singapore', teu: '36.0M TEU/yr', spec: 'Automated Overhead Rail & Gantry Synchronization', desc: 'World premier transshipment hub handling ultra-dense transpacific container exchanges with automated crane lines.' },
+      { num: '11', title: 'High-Bay ASRS Logistics', slug: 'high-bay-asrs', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Automated_Storage_and_Retrieval_System.jpg/1280px-Automated_Storage_and_Retrieval_System.jpg', world: 'intermodal', imo: 'WH-BAY 9B', flag: 'Germany', teu: '85,000 Pallets', spec: '38m Automated High-Bay · 1,200 Pallet/hr Sortation', desc: 'Robotic warehouse storage and retrieval facility connected directly to container devanning docks.' },
+      { num: '12', title: 'Breakbulk Heavy Rigging', slug: 'breakbulk-heavy-rigging', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Navire_GEORGIOS_ALEXIOS_au_port.jpg/1280px-Navire_GEORGIOS_ALEXIOS_au_port.jpg', world: 'project', imo: 'HLV PACIFIC HEAVY', flag: 'Liberia', teu: '1,800T Lift', spec: 'Twin 900-Ton Mast Cranes · Dynamic Positioning DP2', desc: 'Engineered heavy-lift marine transport for wind turbine blades, nuclear pressure vessels, and offshore modules.' },
+      { num: '13', title: 'Specialized Chemical Tanker', slug: 'chemical-parcel-tanker', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Hafnia_Taurus_%28ship%2C_2011%29%2C_S%C3%A8te_2018.jpg/1280px-Hafnia_Taurus_%28ship%2C_2011%29%2C_S%C3%A8te_2018.jpg', world: 'maritime', imo: 'IMO 9874412', flag: 'Panama', teu: '49,000 DWT', spec: 'Stainless Steel MarineLINE Tanks · IMO II/III Certified', desc: 'Dedicated bulk liquid chemical parcel carrier with segregated thermal heating and nitrogen purging systems.' },
+      { num: '14', title: 'Polar Container Icebreaker', slug: 'polar-icebreaker-carrier', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Icebreaker_Aurora_on_drift_ice_at_Sea_of_Okhost.jpg/1280px-Icebreaker_Aurora_on_drift_ice_at_Sea_of_Okhost.jpg', world: 'maritime', imo: 'IMO 9753118', flag: 'Cyprus', teu: '4,500 TEU Ice', spec: 'Azipod Propulsion · Ice-Breaking up to 2.1m Fast Ice', desc: 'Double-acting ice-class container carrier navigating Arctic northern sea routes to cut Asia-Europe transit by 12 days.' },
+      { num: '15', title: 'Capesize Bulk Ore Carrier', slug: 'capesize-bulk-carrier', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/General_cargo_ship_%27Seven_Sky%27_in_the_port_of_Haifa%2C_Israel_-_2023-03-11.jpg_%28DSC1194%29.jpg', world: 'maritime', imo: 'IMO 9821102', flag: 'Marshall Islands', teu: '208,000 DWT', spec: '9 Cargo Holds · 300m LOA · 50m Beam · SOx Scrubber', desc: 'Heavy dry-bulk carrier carrying bauxite, iron ore, and grain with automated continuous ship unloader compatibility.' },
+      { num: '16', title: 'Global AIS Fleet Center', slug: 'satellite-fleet-control', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/MSC_HARMONY_III_%28container_ship%2C_2006%29_in_Port_Koper_%28SIKOP%2C_2024%29.jpg/1280px-MSC_HARMONY_III_%28container_ship%2C_2006%29_in_Port_Koper_%28SIKOP%2C_2024%29.jpg', world: 'telemetry', imo: 'MOC ROTTERDAM', flag: 'Global', teu: '2,400 Vessels', spec: 'Satellite S-AIS · Micro-Weather Voyage Routing · 24/7 Ops', desc: 'Central maritime operations intelligence center predicting typhoon deviations and optimizing fuel speed curves.' }
     ];
 
     // Petals & Motes Data
@@ -4382,7 +4382,7 @@
       if (trackingBackdrop) trackingBackdrop.classList.add('is-open');
     }
 
-    function closeTrackingDrawer() {
+    window.closeTrackingDrawer = function closeTrackingDrawer() {
       if (trackingDrawer) trackingDrawer.classList.remove('is-open');
       if (trackingBackdrop) trackingBackdrop.classList.remove('is-open');
     }
@@ -4429,36 +4429,37 @@
     const fleetModalVideo = document.getElementById('fleet-modal-video');
     const btnBookFleetSlot = document.getElementById('btn-book-fleet-slot');
 
-    function openFleetModal(site) {
+    window.openFleetModal = function openFleetModal(site) {
       if (document.getElementById('fleet-modal-kicker')) document.getElementById('fleet-modal-kicker').textContent = (site.world || 'MARITIME').toUpperCase() + ' // ASSET CLASS ' + site.num;
       if (document.getElementById('fleet-modal-title')) document.getElementById('fleet-modal-title').textContent = site.title.toUpperCase();
+
+      // Set fleet modal image from site.img (reliable Unsplash CDN)
       const fleetModalImg = document.getElementById('fleet-modal-img');
-      if (fleetModalImg && site.img) {
-        fleetModalImg.src = site.img;
-        fleetModalImg.style.display = 'block';
+      if (fleetModalImg) {
+        fleetModalImg.src = site.img || '';
+        fleetModalImg.alt = site.title + ' - ABC Cargo Fleet Asset';
+        fleetModalImg.style.display = site.img ? 'block' : 'none';
       }
+      // Hide video since R2 sources are unavailable
+      const fleetModalVideo = document.getElementById('fleet-modal-video');
+      if (fleetModalVideo) {
+        fleetModalVideo.style.display = 'none';
+        fleetModalVideo.src = '';
+      }
+
+      // Description
       if (site.desc && document.getElementById('fleet-modal-desc')) {
         document.getElementById('fleet-modal-desc').textContent = site.desc;
       }
-      if (fleetModalVideo) {
-        fleetModalVideo.src = R2 + site.video;
-        fleetModalVideo.play().catch(() => {});
-      }
 
-      const specs = {
-        '01': { class: 'Neo-Panamax ULCS', cap: '24,346 TEU (2,000 Reefer)', engine: 'Dual-Fuel Methanol & LNG', dim: '399.9m LOA × 61.3m Beam', draft: '16.5 Meters', speed: '22.4 Knots (ECO 18.2 kts)', corridor: 'Silk Sea: Shanghai ⇄ Rotterdam', cii: 'GRADE A (IMO EEDI Tier III)' },
-        '02': { class: 'Automated STS Gantry', cap: 'Dual-Trolley 65T Lift', engine: '100% Electric Regenerative', dim: '72m Outreach (24 Rows)', draft: 'Quayside Track 30m', speed: '48 Moves / Hour', corridor: 'Rotterdam Berth 42 Deepwater', cii: 'ZERO EMISSION SHORE POWER' },
-        '03': { class: 'Direct Rail Intermodal', cap: '84 Double-Stack Cars (168 TEU)', engine: 'Tier 4 Low-Emission Diesel', dim: '2,200m Block Train', draft: 'Standard Gauge Rail', speed: '90 KM/H Express', corridor: 'Rotterdam ⇄ Duisburg ⇄ Basel', cii: '-68% CO2 vs Road Freight' },
-        '07': { class: 'Active Cryo-Reefer 40HC', cap: '32 Pallets (-30°C to +30°C)', engine: 'Carrier Vector Dual-Genset', dim: '12.19m × 2.44m × 2.89m', draft: 'Air-Vent Micro-Filter', speed: 'Real-time Sat-AIS Telemetry', corridor: 'Global Lifesciences Cold Arc', cii: 'R-452A Eco Refrigerant' }
-      };
-
-      const curSpec = specs[site.num] || {
-        class: 'Intermodal Fleet Unit',
-        cap: 'Commercial Freight Payload',
-        engine: 'Low-Emission Hybrid Drive',
-        dim: 'ISO Certified Standard',
-        draft: 'Standard Terminal Cleared',
-        speed: 'Optimized Line-Haul Speed',
+      // Build spec table from SITES data
+      const curSpec = {
+        class: site.spec ? site.spec.split(' · ')[0] : 'Intermodal Fleet Unit',
+        cap: site.teu || 'Commercial Freight Payload',
+        engine: site.spec ? (site.spec.split(' · ')[1] || 'Low-Emission Hybrid Drive') : 'Low-Emission Hybrid Drive',
+        dim: site.spec ? (site.spec.split(' · ')[2] || 'ISO Certified Standard') : 'ISO Certified Standard',
+        draft: site.imo || 'Standard Terminal Cleared',
+        speed: site.flag ? 'Flag: ' + site.flag : 'Optimized Line-Haul Speed',
         corridor: 'Transpacific & European Arcs',
         cii: 'GRADE A IMO COMPLIANT'
       };
@@ -4475,7 +4476,7 @@
       if (fleetModalBackdrop) fleetModalBackdrop.classList.add('is-open');
     }
 
-    function closeFleetModal() {
+    window.closeFleetModal = function closeFleetModal() {
       if (fleetModalBackdrop) fleetModalBackdrop.classList.remove('is-open');
       if (fleetModalVideo) fleetModalVideo.pause();
     }
