@@ -94,8 +94,11 @@
       overflow-x: clip;
       max-width: 100%;
       font-family: var(--font-archivo);
+      text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+      letter-spacing: 0.005em;
       background: var(--bg);
     }
 
@@ -247,8 +250,8 @@
     }
     .nav-logo {
       font-family: var(--font-anton);
-      font-size: calc(36 * var(--u));
-      letter-spacing: 0.01em;
+      font-size: calc(35 * var(--u));
+      letter-spacing: 0.03em;
       line-height: 1;
       text-transform: uppercase;
       display: flex;
@@ -260,9 +263,11 @@
     }
     .nav-tagline {
       font-family: var(--font-mono);
-      font-size: calc(10 * var(--u));
-      letter-spacing: 0.12em;
+      font-size: calc(10.5 * var(--u));
+      font-weight: 500;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
+      line-height: 1.35;
       color: var(--ink-muted);
       border-left: 1px solid rgba(0, 0, 0, 0.15);
       padding-left: calc(14 * var(--u));
@@ -275,18 +280,18 @@
     .nav-items {
       display: flex;
       align-items: center;
-      gap: calc(24 * var(--u));
+      gap: calc(26 * var(--u));
     }
     .nav-link {
       font-family: var(--font-archivo);
       font-weight: 600;
       font-size: calc(12 * var(--u));
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--ink);
       position: relative;
-      padding: 6px 0;
+      padding: 8px 0;
       transition: color 0.3s ease;
     }
     body.is-dark-nav .nav-link {
@@ -310,6 +315,7 @@
     .nav-cta {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 6px;
       height: calc(38 * var(--u));
       border-radius: 20px;
@@ -317,9 +323,9 @@
       background: var(--cobalt);
       color: #FFFFFF;
       font-family: var(--font-archivo);
-      font-weight: 600;
+      font-weight: 700;
       font-size: calc(12 * var(--u));
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       text-decoration: none;
       transition: background 0.3s ease, transform 0.2s ease;
@@ -373,8 +379,9 @@
       left: 0;
       transform: translate3d(calc(var(--gl-x, 100) * 1vw), 0, 0);
       font-family: var(--font-anton);
-      font-size: calc(300 * var(--u));
-      line-height: 0.8;
+      font-size: calc(290 * var(--u));
+      letter-spacing: 0.02em;
+      line-height: 0.85;
       color: var(--giant-letters);
       white-space: nowrap;
       pointer-events: none;
@@ -392,15 +399,17 @@
       z-index: 30;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 5px;
       font-family: var(--font-mono);
       pointer-events: none;
     }
     .hud-title {
-      font-size: calc(10 * var(--u));
-      letter-spacing: 0.16em;
+      font-size: calc(10.5 * var(--u));
+      font-weight: 500;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--ink-soft);
+      line-height: 1;
     }
     .hud-readout {
       display: flex;
@@ -408,19 +417,27 @@
       gap: 8px;
     }
     .hud-speed {
-      font-size: calc(34 * var(--u));
+      font-family: var(--font-archivo);
+      font-size: calc(36 * var(--u));
       font-weight: 700;
       line-height: 1;
+      letter-spacing: -0.02em;
       color: #FFFFFF;
       font-variant-numeric: tabular-nums;
     }
     .hud-unit {
-      font-size: calc(12 * var(--u));
+      font-family: var(--font-mono);
+      font-size: calc(11.5 * var(--u));
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       color: var(--cobalt);
     }
     .hud-coords {
-      font-size: calc(11 * var(--u));
-      color: rgba(255, 255, 255, 0.6);
+      font-family: var(--font-mono);
+      font-size: calc(10.5 * var(--u));
+      letter-spacing: 0.14em;
+      color: rgba(255, 255, 255, 0.65);
       margin-top: 2px;
     }
 
@@ -455,23 +472,27 @@
     .band-kicker {
       font-family: var(--font-mono);
       font-size: calc(11 * var(--u));
-      letter-spacing: 0.18em;
+      font-weight: 600;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--cobalt);
       margin-bottom: calc(12 * var(--u));
+      line-height: 1.3;
     }
     .band-headline {
       font-family: var(--font-anton);
-      font-size: calc(52 * var(--u));
-      line-height: 1;
+      font-size: calc(54 * var(--u));
+      letter-spacing: 0.03em;
+      line-height: 1.02;
       text-transform: uppercase;
       margin: 0 0 calc(16 * var(--u)) 0;
       color: #FFFFFF;
     }
     .band-desc {
       font-family: var(--font-archivo);
-      font-size: calc(14 * var(--u));
-      line-height: 1.5;
+      font-size: calc(14.5 * var(--u));
+      line-height: 1.6;
+      letter-spacing: 0.01em;
       color: var(--ink-soft);
       margin: 0;
     }
@@ -502,8 +523,9 @@
     }
     .service-num {
       font-family: var(--font-mono);
-      font-size: calc(12 * var(--u));
-      letter-spacing: 0.14em;
+      font-size: calc(11.5 * var(--u));
+      font-weight: 600;
+      letter-spacing: 0.16em;
       color: var(--cobalt);
     }
     .service-icon {
@@ -515,16 +537,18 @@
     }
     .service-title {
       font-family: var(--font-anton);
-      font-size: calc(28 * var(--u));
-      line-height: 1.1;
+      font-size: calc(26 * var(--u));
+      letter-spacing: 0.03em;
+      line-height: 1.15;
       text-transform: uppercase;
       color: #FFFFFF;
       margin: 0 0 calc(10 * var(--u)) 0;
     }
     .service-info {
       font-family: var(--font-archivo);
-      font-size: calc(13 * var(--u));
-      line-height: 1.45;
+      font-size: calc(13.5 * var(--u));
+      line-height: 1.55;
+      letter-spacing: 0.01em;
       color: var(--ink-soft);
       margin: 0;
     }
@@ -541,6 +565,14 @@
     }
 
     /* SECTION 2: 3D CYLINDRICAL OCEAN FLEET RING */
+    .fleet-section,
+    .services-band,
+    .solutions-section,
+    .dispatch-section,
+    .terminals-section,
+    .cert-section {
+      scroll-margin-top: calc(80 * var(--u));
+    }
     .fleet-section {
       position: relative;
       width: 100%;
@@ -563,17 +595,18 @@
     }
     .fleet-sentence {
       font-family: var(--font-serif);
-      font-size: calc(42 * var(--u));
+      font-size: calc(44 * var(--u));
       font-weight: 400;
-      line-height: calc(48 * var(--u));
-      letter-spacing: -0.005em;
-      max-width: calc(850 * var(--u));
+      line-height: 1.36;
+      letter-spacing: -0.018em;
+      word-spacing: 0.035em;
+      max-width: calc(960 * var(--u));
       margin: 0;
       color: var(--ink-light);
+      text-wrap: balance;
     }
     .fleet-sentence .choice {
       display: inline;
-      white-space: nowrap;
       position: relative;
       text-decoration: none;
       color: inherit;
@@ -581,11 +614,11 @@
     }
     .fleet-sentence .choice-marker {
       position: absolute;
-      inset: 0.1em -0.12em -0.02em;
+      inset: 0.08em -0.14em -0.04em;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.5s var(--main-ease);
-      border-radius: 2px;
+      border-radius: 3px;
       z-index: -1;
     }
     .choice[data-world="maritime"] .choice-marker { background: #2F63FF; }
@@ -596,7 +629,7 @@
     .choice-bar {
       position: absolute;
       left: 0;
-      bottom: 0.02em;
+      bottom: -0.04em;
       width: 100%;
       height: max(2px, 0.05em);
       background: var(--cobalt);
@@ -604,11 +637,15 @@
       transform-origin: left;
     }
     .choice-sup {
-      font-family: var(--font-serif);
-      font-size: max(10px, 0.34em);
-      vertical-align: top;
-      margin-top: -0.05em;
-      color: var(--ink-light);
+      font-family: var(--font-mono);
+      font-size: max(10px, 0.32em);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      vertical-align: super;
+      position: relative;
+      top: -0.28em;
+      margin-left: 2px;
+      color: var(--ink-soft);
     }
 
     .fleet-sentence.is-hovering .word-inner {
@@ -641,16 +678,19 @@
     }
     .fleet-stat-num {
       font-family: var(--font-serif);
-      font-size: calc(36 * var(--u));
-      line-height: 1;
+      font-size: calc(40 * var(--u));
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
       color: var(--ink-light);
       font-variant-numeric: tabular-nums;
     }
     .fleet-stat-lbl {
-      margin: calc(12 * var(--u)) 0 0 0;
+      margin: calc(10 * var(--u)) 0 0 0;
       font-family: var(--font-mono);
-      font-size: calc(11 * var(--u));
-      letter-spacing: 0.14em;
+      font-size: calc(10.5 * var(--u));
+      font-weight: 600;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--ink-soft);
     }
@@ -845,16 +885,20 @@
       position: absolute;
       bottom: 12px;
       left: 12px;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(4px);
+      background: rgba(10, 14, 17, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 20px;
-      padding: 4px 10px;
+      padding: 5px 12px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       font-family: var(--font-mono);
       font-size: 11px;
-      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: #FFFFFF;
       z-index: 3;
       transition: opacity 0.3s ease;
       pointer-events: none;
@@ -891,18 +935,23 @@
     .label-left {
       display: flex;
       flex-direction: column;
+      gap: 2px;
       overflow: hidden;
     }
     .label-sector {
       font-family: var(--font-mono);
       font-weight: 700;
-      font-size: 10px;
-      letter-spacing: 0.14em;
+      font-size: 9.5px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      line-height: 1.2;
+      opacity: 0.9;
     }
     .label-title {
       font-family: var(--font-anton);
-      font-size: 18px;
+      font-size: 19px;
+      letter-spacing: 0.03em;
+      line-height: 1.1;
       text-transform: uppercase;
       white-space: nowrap;
       overflow: hidden;
@@ -1019,7 +1068,8 @@
     .dispatch-headline {
       font-family: var(--font-anton);
       font-size: calc(82 * var(--u));
-      line-height: 0.95;
+      letter-spacing: 0.03em;
+      line-height: 0.98;
       text-transform: uppercase;
       text-align: center;
       color: #FFFFFF;
@@ -1029,11 +1079,14 @@
     .dispatch-subtitle {
       font-family: var(--font-archivo);
       font-size: calc(18 * var(--u));
+      line-height: 1.6;
+      letter-spacing: 0.01em;
       color: var(--ink-soft);
-      max-width: calc(640 * var(--u));
+      max-width: calc(660 * var(--u));
       text-align: center;
       margin: 0 0 calc(45 * var(--u)) 0;
       z-index: 5;
+      text-wrap: balance;
     }
 
     /* Brief Builder Card */
@@ -1055,15 +1108,19 @@
     .brief-kicker {
       font-family: var(--font-mono);
       font-size: calc(11 * var(--u));
-      letter-spacing: 0.16em;
+      font-weight: 600;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
       margin: 0;
+      line-height: 1.3;
     }
     .brief-sentence {
       font-family: var(--font-serif);
       font-size: calc(26 * var(--u));
       line-height: calc(44 * var(--u));
+      letter-spacing: -0.01em;
+      word-spacing: 0.02em;
       color: var(--ink-light);
       margin: 0;
     }
@@ -1333,18 +1390,21 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       font-family: var(--font-archivo);
-      font-size: calc(12 * var(--u));
+      font-size: calc(12.5 * var(--u));
+      line-height: 1.6;
+      letter-spacing: 0.01em;
     }
     .footer-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 18px;
     }
     .footer-brand {
       font-family: var(--font-anton);
-      font-size: calc(22 * var(--u));
+      font-size: calc(24 * var(--u));
+      letter-spacing: 0.04em;
       color: #FFFFFF;
     }
     .footer-right {
@@ -1353,6 +1413,11 @@
     }
     .footer-link {
       color: var(--ink-soft);
+      font-family: var(--font-archivo);
+      font-weight: 600;
+      font-size: calc(11.5 * var(--u));
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       text-decoration: none;
       transition: color 0.2s ease;
     }
@@ -1406,7 +1471,8 @@
       }
       .fleet-sentence {
         font-size: 26px;
-        line-height: 1.2;
+        line-height: 1.36;
+        letter-spacing: -0.015em;
       }
       .fleet-stats {
         border-left: none;
@@ -1543,23 +1609,27 @@
     .solutions-kicker {
       font-family: var(--font-mono);
       font-size: calc(11 * var(--u));
-      letter-spacing: 0.2em;
+      font-weight: 600;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--cobalt);
       margin-bottom: calc(14 * var(--u));
+      line-height: 1.3;
     }
     .solutions-title {
       font-family: var(--font-anton);
       font-size: calc(64 * var(--u));
-      line-height: 0.96;
+      letter-spacing: 0.03em;
+      line-height: 1.02;
       text-transform: uppercase;
       margin: 0 0 calc(20 * var(--u)) 0;
       color: #FFFFFF;
     }
     .solutions-desc {
       font-family: var(--font-archivo);
-      font-size: calc(15 * var(--u));
-      line-height: 1.6;
+      font-size: calc(15.5 * var(--u));
+      line-height: 1.65;
+      letter-spacing: 0.01em;
       color: var(--ink-soft);
       max-width: calc(720 * var(--u));
       margin: 0;
@@ -1598,26 +1668,29 @@
       display: inline-block;
       align-self: flex-start;
       font-family: var(--font-mono);
-      font-size: calc(10 * var(--u));
+      font-size: calc(9.5 * var(--u));
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
+      line-height: 1;
       color: var(--cobalt);
       background: rgba(47, 99, 255, 0.12);
       border: 1px solid rgba(47, 99, 255, 0.3);
       border-radius: 9999px;
-      padding: calc(4 * var(--u)) calc(12 * var(--u));
+      padding: calc(5 * var(--u)) calc(12 * var(--u));
     }
     .solution-metric {
       font-family: var(--font-mono);
-      font-size: calc(18 * var(--u));
+      font-size: calc(17 * var(--u));
       font-weight: 700;
       color: #FFFFFF;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
+      line-height: 1.25;
     }
     .solution-name {
       font-family: var(--font-anton);
-      font-size: calc(30 * var(--u));
-      line-height: 1.05;
+      font-size: calc(28 * var(--u));
+      letter-spacing: 0.03em;
+      line-height: 1.1;
       text-transform: uppercase;
       color: #FFFFFF;
       margin: 0;
@@ -1625,9 +1698,10 @@
     .solution-body {
       font-family: var(--font-archivo);
       font-size: calc(13.5 * var(--u));
-      line-height: 1.55;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
       color: var(--ink-soft);
-      margin-top: calc(16 * var(--u));
+      margin-top: calc(14 * var(--u));
     }
     .solution-specs {
       margin-top: calc(24 * var(--u));
@@ -1635,9 +1709,11 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       flex-direction: column;
-      gap: calc(8 * var(--u));
+      gap: calc(9 * var(--u));
       font-family: var(--font-mono);
       font-size: calc(11 * var(--u));
+      letter-spacing: 0.12em;
+      line-height: 1.5;
       color: rgba(255, 255, 255, 0.7);
     }
     .solution-spec-row {
@@ -1669,23 +1745,27 @@
     .calc-field-group {
       display: flex;
       flex-direction: column;
-      gap: calc(6 * var(--u));
+      gap: calc(7 * var(--u));
     }
     .calc-label {
       font-family: var(--font-mono);
       font-size: calc(10.5 * var(--u));
-      letter-spacing: 0.14em;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--ink-soft);
+      line-height: 1.3;
     }
     .calc-select, .calc-range {
       background: #17202A;
       color: #FFFFFF;
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: calc(8 * var(--u));
-      padding: calc(10 * var(--u)) calc(14 * var(--u));
+      padding: calc(11 * var(--u)) calc(14 * var(--u));
       font-family: var(--font-archivo);
       font-size: calc(13.5 * var(--u));
+      letter-spacing: 0.01em;
+      line-height: 1.4;
       outline: none;
       transition: border-color 0.2s ease;
       width: 100%;
@@ -1716,18 +1796,23 @@
     .calc-readout-title {
       font-family: var(--font-mono);
       font-size: calc(11 * var(--u));
-      letter-spacing: 0.16em;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       color: var(--cobalt);
       text-transform: uppercase;
+      line-height: 1.3;
     }
     .calc-transit-pill {
       font-family: var(--font-mono);
       font-size: calc(11 * var(--u));
+      font-weight: 600;
+      letter-spacing: 0.12em;
       background: rgba(0, 230, 118, 0.12);
       border: 1px solid rgba(0, 230, 118, 0.35);
       color: #00E676;
       border-radius: 9999px;
       padding: calc(3 * var(--u)) calc(10 * var(--u));
+      line-height: 1.2;
     }
     .calc-breakdown-list {
       display: flex;
@@ -1735,6 +1820,8 @@
       gap: calc(10 * var(--u));
       font-family: var(--font-mono);
       font-size: calc(12 * var(--u));
+      letter-spacing: 0.06em;
+      line-height: 1.6;
       color: var(--ink-soft);
     }
     .calc-breakdown-row {
@@ -1751,19 +1838,22 @@
     }
     .calc-total-label {
       font-family: var(--font-anton);
-      font-size: calc(18 * var(--u));
+      font-size: calc(19 * var(--u));
       color: #FFFFFF;
       letter-spacing: 0.05em;
     }
     .calc-total-price {
       font-family: var(--font-mono);
-      font-size: calc(28 * var(--u));
+      font-size: calc(30 * var(--u));
       font-weight: 700;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
       color: #FFFFFF;
     }
     .calc-esg-notice {
       font-family: var(--font-mono);
       font-size: calc(10.5 * var(--u));
+      letter-spacing: 0.08em;
       color: #4CAF50;
       margin-top: calc(10 * var(--u));
       display: flex;
@@ -1780,8 +1870,8 @@
       padding: calc(14 * var(--u));
       font-family: var(--font-archivo);
       font-size: calc(13 * var(--u));
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       cursor: pointer;
       transition: all 0.25s ease;
@@ -1946,15 +2036,18 @@
     }
     .drawer-kicker {
       font-family: var(--font-mono);
-      font-size: calc(10 * var(--u));
-      letter-spacing: 0.18em;
+      font-size: calc(10.5 * var(--u));
+      font-weight: 600;
+      letter-spacing: 0.22em;
       color: var(--cobalt);
       text-transform: uppercase;
+      line-height: 1.3;
     }
     .drawer-title {
       font-family: var(--font-anton);
-      font-size: calc(28 * var(--u));
-      letter-spacing: 0.04em;
+      font-size: calc(26 * var(--u));
+      letter-spacing: 0.03em;
+      line-height: 1.05;
       color: #FFFFFF;
       margin: 0;
     }
@@ -1994,7 +2087,8 @@
       font-family: var(--font-mono);
       font-size: calc(13 * var(--u));
       color: #FFFFFF;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
+      line-height: 1.4;
       outline: none;
       transition: border-color 0.2s ease;
       min-width: 0;
@@ -2009,9 +2103,10 @@
       border-radius: calc(8 * var(--u));
       padding: 0 calc(20 * var(--u));
       font-family: var(--font-archivo);
-      font-weight: 600;
+      font-weight: 700;
       font-size: calc(12.5 * var(--u));
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       cursor: pointer;
       transition: background-color 0.2s ease;
       white-space: nowrap;
@@ -2028,6 +2123,8 @@
     .preset-pill {
       font-family: var(--font-mono);
       font-size: calc(10 * var(--u));
+      font-weight: 500;
+      letter-spacing: 0.1em;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: var(--ink-soft);
@@ -2066,12 +2163,16 @@
     .tracking-vessel-title {
       font-family: var(--font-anton);
       font-size: calc(22 * var(--u));
+      letter-spacing: 0.03em;
+      line-height: 1.1;
       color: #FFFFFF;
       margin: 0;
     }
     .tracking-vessel-sub {
       font-family: var(--font-mono);
       font-size: calc(11 * var(--u));
+      font-weight: 500;
+      letter-spacing: 0.1em;
       color: var(--ink-soft);
       margin-top: 4px;
     }
@@ -2087,6 +2188,7 @@
       font-family: var(--font-mono);
       font-size: calc(10.5 * var(--u));
       font-weight: 600;
+      letter-spacing: 0.14em;
     }
 
     .tracking-route-bar {
@@ -2106,17 +2208,21 @@
     .port-label {
       font-family: var(--font-mono);
       font-size: calc(10 * var(--u));
+      font-weight: 600;
+      letter-spacing: 0.16em;
       color: var(--ink-soft);
       text-transform: uppercase;
     }
     .port-name-val {
       font-family: var(--font-anton);
-      font-size: calc(17 * var(--u));
+      font-size: calc(18 * var(--u));
+      letter-spacing: 0.04em;
       color: #FFFFFF;
     }
     .port-time-val {
       font-family: var(--font-mono);
       font-size: calc(10.5 * var(--u));
+      letter-spacing: 0.08em;
       color: var(--cobalt);
     }
     .route-arrow-icon {
@@ -2144,7 +2250,8 @@
     .sensor-label {
       font-family: var(--font-mono);
       font-size: calc(9.5 * var(--u));
-      letter-spacing: 0.12em;
+      font-weight: 600;
+      letter-spacing: 0.16em;
       color: var(--ink-soft);
       text-transform: uppercase;
     }
@@ -2152,6 +2259,8 @@
       font-family: var(--font-mono);
       font-size: calc(15 * var(--u));
       font-weight: 700;
+      letter-spacing: 0.04em;
+      font-variant-numeric: tabular-nums;
       color: #FFFFFF;
     }
 
@@ -2192,13 +2301,15 @@
     }
     .milestone-name {
       font-family: var(--font-archivo);
-      font-size: calc(13 * var(--u));
+      font-size: calc(13.5 * var(--u));
       font-weight: 600;
+      letter-spacing: 0.01em;
       color: #FFFFFF;
     }
     .milestone-time {
       font-family: var(--font-mono);
       font-size: calc(10.5 * var(--u));
+      letter-spacing: 0.08em;
       color: var(--ink-soft);
     }
 
@@ -2218,6 +2329,9 @@
       padding: calc(10 * var(--u));
       font-family: var(--font-mono);
       font-size: calc(11 * var(--u));
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       cursor: pointer;
       transition: all 0.2s ease;
       box-sizing: border-box;
@@ -2286,17 +2400,21 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .fleet-specs-table td {
-      padding: calc(10 * var(--u)) 0;
+      padding: calc(12 * var(--u)) 0;
+      line-height: 1.4;
     }
     .fleet-specs-table td.label-cell {
       color: var(--ink-soft);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.16em;
+      font-weight: 500;
     }
     .fleet-specs-table td.val-cell {
       color: #FFFFFF;
       text-align: right;
       font-weight: 600;
+      letter-spacing: 0.04em;
+      font-variant-numeric: tabular-nums;
     }
 
     /* OFFICIAL BILL OF LADING / BOOKING MODAL */
@@ -2811,10 +2929,10 @@
   <section class="fleet-section" id="fleet">
     <div class="fleet-header">
       <h2 class="fleet-sentence" id="fleet-sentence">
-        We orchestrate freight for <a class="choice" data-world="maritime"><span class="choice-marker"></span><span class="word-inner"><strong>global enterprises</strong></span><span class="choice-bar"></span><sup class="choice-sup">01</sup></a>,
-        route ultra-vessels across <a class="choice" data-world="intermodal"><span class="choice-marker"></span><span class="word-inner"><strong>deep-sea corridors</strong></span><span class="choice-bar"></span><sup class="choice-sup">02</sup></a>,
-        and engineer cold chains for <a class="choice" data-world="coldchain"><span class="choice-marker"></span><span class="word-inner"><strong>lifesciences</strong></span><span class="choice-bar"></span><sup class="choice-sup">03</sup></a>.
-        Or dispatch with <a class="choice" data-world="dispatch"><span class="choice-marker"></span><span class="word-inner"><strong>ABC Cargo AI</strong></span><span class="choice-bar"></span><sup class="choice-sup">04</sup></a>.
+        We orchestrate freight for <a class="choice" data-world="maritime"><span class="choice-marker"></span><span class="word-inner"><strong>global enterprises</strong></span><span class="choice-bar"></span></a>,
+        route ultra-vessels across <a class="choice" data-world="intermodal"><span class="choice-marker"></span><span class="word-inner"><strong>deep-sea corridors</strong></span><span class="choice-bar"></span></a>,
+        and engineer cold chains for <a class="choice" data-world="coldchain"><span class="choice-marker"></span><span class="word-inner"><strong>lifesciences</strong></span><span class="choice-bar"></span></a>.
+        Or dispatch with <a class="choice" data-world="dispatch"><span class="choice-marker"></span><span class="word-inner"><strong>ABC Cargo AI</strong></span><span class="choice-bar"></span></a>.
       </h2>
 
       <dl class="fleet-stats">
@@ -2836,7 +2954,7 @@
     <!-- The 3D Cylindrical Ocean Stage -->
     <div class="ocean-stage-wrap" id="ocean-stage">
       <div class="ocean-scene-layer" id="ocean-scene-layer">
-        <img class="ocean-img" src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261111_224417_17e8d78c-9384-4a50-93b4-92510f1957db.png&w=2048&q=85" alt="Deep sea ocean background" loading="eager">
+        <img class="ocean-img" src="ocean_bg.jpg" onerror="this.onerror=null; this.src='https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261111_224417_17e8d78c-9384-4a50-93b4-92510f1957db.png&w=2048&q=85'" alt="Deep sea ocean background" loading="eager">
         <video class="ocean-video" id="ocean-video" loop muted playsinline preload="auto">
           <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261111_232613_bf108dd9-dc98-4729-9163-748475f20b61.mp4" type="video/mp4">
         </video>
@@ -2860,7 +2978,7 @@
   <!-- SECTION 3: COMMERCIAL DISPATCH & INSTANT QUOTE BUILDER -->
   <section class="dispatch-section" id="dispatch">
     <div class="dispatch-panel">
-      <img class="dispatch-panel-bg" src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261111_224417_17e8d78c-9384-4a50-93b4-92510f1957db.png&w=2048&q=85" alt="Ocean plate">
+      <img class="dispatch-panel-bg" src="ocean_bg.jpg" onerror="this.onerror=null; this.src='https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261111_224417_17e8d78c-9384-4a50-93b4-92510f1957db.png&w=2048&q=85'" alt="Ocean plate">
       
       <h2 class="dispatch-headline">FROM BERTH TO BUYER.</h2>
       <p class="dispatch-subtitle">Configure your commercial manifest below for immediate slot reservation, vessel tracking, and direct routing rates.</p>
@@ -3550,7 +3668,7 @@
       { num: '01', title: 'Triple-E Megavessel', slug: 'triple-e-megavessel', ratio: 16 / 9, img: 'https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=800&q=80', world: 'maritime', imo: 'IMO 9632064', flag: 'Denmark', teu: '24,346 TEU', spec: 'Dual-Fuel LNG · 400m LOA · 61.5m Beam', desc: 'Ultra-large flagship container vessel servicing the Asia-North Europe direct mainline with scrubbed emissions.' },
       { num: '02', title: 'Automated STS Gantry', slug: 'sts-gantry-cranes', ratio: 16 / 9, img: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80', world: 'intermodal', imo: 'QUAY CRANE #14', flag: 'Netherlands', teu: 'Twin-Lift 65T', spec: 'Electric Automated · 48 moves/hr · 52m outreach', desc: 'High-speed automated ship-to-shore gantry cranes with anti-sway laser positioning and remote control.' },
       { num: '03', title: 'Double-Stack Rail Hub', slug: 'double-stack-rail', ratio: 16 / 9, img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80', world: 'intermodal', imo: 'CORRIDOR EX-7', flag: 'Germany', teu: '420 TEU Block', spec: 'Transcontinental Class 1 Rail · Direct Quay Feed', desc: 'Daily express double-stack intermodal rail corridors linking deep-water berths directly into inland European depots.' },
-      { num: '04', title: '45T Yard Reach-Stacker', slug: 'yard-reach-stacker', ratio: 16 / 9, img: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80', world: 'intermodal', imo: 'STACKER RS-88', flag: 'Sweden', teu: '45 Ton SWL', spec: '5-High Stacking · Hydraulic Spreader · GPS Yard Telemetry', desc: 'Heavy-lift telescopic container handlers staging boxes between quayside, drayage trucks, and rail spurs.' },
+      { num: '04', title: '45T Yard Reach-Stacker', slug: 'yard-reach-stacker', ratio: 16 / 9, img: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80', world: 'intermodal', imo: 'STACKER RS-88', flag: 'Sweden', teu: '45 Ton SWL', spec: '5-High Stacking · Hydraulic Spreader · GPS Yard Telemetry', desc: 'Heavy-lift telescopic container handlers staging boxes between quayside, drayage trucks, and rail spurs.' },
       { num: '05', title: 'Reefer Cold-Chain Unit', slug: 'reefer-pharma-hub', ratio: 16 / 9, img: 'https://images.unsplash.com/photo-1586528116493-a029325540fa?auto=format&fit=crop&w=800&q=80', world: 'coldchain', imo: 'COLD BAY C-4', flag: 'Switzerland', teu: '1,800 Plugs', spec: '-30°C to +15°C · Dual Genset Redundancy · GDP Certified', desc: 'Precision temperature-controlled monitoring hubs with continuous satellite telemetry for biopharma cargo.' },
       { num: '06', title: 'Widebody 777F Charter', slug: 'widebody-777f-charter', ratio: 16 / 9, img: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80', world: 'aviation', imo: 'REG N772BC', flag: 'United States', teu: '102.8T Payload', spec: 'Main Deck Tall Cargo · 9,200 km Range · 24/7 AOG Ready', desc: 'High-payload freighter aircraft for urgent automotive JIT components, semiconductor spares, and aerospace engines.' },
       { num: '07', title: 'Deep-Water Super-Berth', slug: 'deep-water-berth', ratio: 16 / 9, img: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=800&q=80', world: 'maritime', imo: 'BERTH 42-WEST', flag: 'Singapore', teu: '350k DWT Draft', spec: '21.5m Draft Quay · 1,400m Continuous Berth Line', desc: 'Deep-water quayside facility engineered to berth two 24,000 TEU container ships simultaneously at zero tide delay.' },
