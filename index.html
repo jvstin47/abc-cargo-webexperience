@@ -47,7 +47,12 @@
       --ink-soft: #9FB4BF;
       --ink-muted: #647C8A;
       --line: rgba(238, 244, 246, 0.14);
-      --cobalt: #2F63FF;
+      --cobalt: var(--dev-cobalt, #2F63FF);
+      --dev-font-heading: "Archivo", system-ui, sans-serif;
+      --dev-card-radius: 16px;
+      --dev-card-bg: #0E141B;
+      --dev-card-blur: 16px;
+      --dev-reflection-op: 0.65;
       --cobalt-dark: #1E4ED8;
       --accent: #3AA8D0;
       --aqua: #9ED8E4;
@@ -2735,6 +2740,398 @@
       color: #000000 !important;
     }
 
+  
+    /* ====================================================
+       EXPERIMENTAL DEV CONTROLS STUDIO HUD
+       ==================================================== */
+    .dev-trigger-pill {
+      position: fixed;
+      top: calc(88 * var(--u));
+      right: calc(24 * var(--u));
+      z-index: 99990;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(14, 20, 27, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 12px rgba(56, 189, 248, 0.2);
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+    .dev-trigger-pill:hover {
+      background: rgba(24, 32, 44, 0.96);
+      border-color: #38BDF8;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5), 0 0 16px rgba(56, 189, 248, 0.35);
+    }
+    .dev-dot-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 8px #10B981;
+      animation: devPulse 2s infinite ease-in-out;
+    }
+    @keyframes devPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .dev-studio-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 390px;
+      max-width: 96vw;
+      height: 100vh;
+      height: 100lvh;
+      background: rgba(10, 14, 18, 0.96);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 99995;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -16px 0 48px rgba(0, 0, 0, 0.7);
+      color: #EEF4F6;
+      font-family: var(--font-archivo);
+    }
+    .dev-studio-panel.is-open {
+      transform: translateX(0);
+    }
+    .dev-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(16, 22, 28, 0.6);
+    }
+    .dev-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dev-title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #38BDF8;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .dev-branch-badge {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #10B981;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+    .dev-close-btn {
+      background: transparent;
+      border: none;
+      color: #94A3B8;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .dev-close-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .dev-tabs {
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(12, 17, 22, 0.8);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .dev-tab-btn {
+      padding: 12px 14px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: transparent;
+      border: none;
+      color: #64748B;
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    .dev-tab-btn:hover {
+      color: #E2E8F0;
+    }
+    .dev-tab-btn.is-active {
+      color: #38BDF8;
+    }
+    .dev-tab-btn.is-active::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      background: #38BDF8;
+      border-radius: 2px;
+    }
+
+    .dev-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .dev-section-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .dev-section-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #64748B;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 6px;
+      margin: 0;
+    }
+
+    .dev-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .dev-field-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #94A3B8;
+    }
+    .dev-val-readout {
+      color: #38BDF8;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .dev-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.12);
+      outline: none;
+      transition: background 0.2s;
+    }
+    .dev-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #38BDF8;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+      transition: transform 0.15s;
+    }
+    .dev-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .dev-input-text {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      padding: 8px 10px;
+      color: #FFFFFF;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    .dev-input-text:focus {
+      border-color: #38BDF8;
+    }
+
+    .dev-select {
+      width: 100%;
+      background: #141C24;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 6px;
+      padding: 8px 10px;
+      color: #FFFFFF;
+      font-family: var(--font-archivo);
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .dev-swatches {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .dev-swatch {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .dev-swatch:hover, .dev-swatch.is-active {
+      transform: scale(1.15);
+      border-color: #FFFFFF;
+    }
+    .dev-color-native {
+      width: 32px;
+      height: 28px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .dev-toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #CBD5E1;
+      padding: 4px 0;
+    }
+    .dev-toggle-btn {
+      width: 40px;
+      height: 22px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.15);
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+      border: none;
+      padding: 0;
+    }
+    .dev-toggle-btn.is-active {
+      background: #38BDF8;
+    }
+    .dev-toggle-knob {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s;
+    }
+    .dev-toggle-btn.is-active .dev-toggle-knob {
+      transform: translateX(18px);
+    }
+
+    .dev-preset-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .dev-preset-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.25s;
+    }
+    .dev-preset-card:hover {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: #38BDF8;
+      transform: translateY(-2px);
+    }
+    .dev-preset-title {
+      font-family: var(--font-archivo);
+      font-weight: 700;
+      font-size: 12px;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+    .dev-preset-desc {
+      font-size: 10.5px;
+      color: #94A3B8;
+      line-height: 1.35;
+    }
+
+    .dev-footer {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      gap: 10px;
+      background: rgba(12, 17, 22, 0.8);
+    }
+    .dev-action-btn {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .dev-btn-export {
+      background: #38BDF8;
+      color: #04121A;
+    }
+    .dev-btn-export:hover {
+      background: #7DD3FC;
+    }
+    .dev-btn-reset {
+      background: rgba(255, 255, 255, 0.08);
+      color: #94A3B8;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .dev-btn-reset:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
   </style>
 </head>
 <body>
@@ -3688,7 +4085,279 @@
   </nav>
 
 
-<script>
+
+  <!-- ====================================================
+       DEV CONTROLS STUDIO TRIGGER & DRAWER [DEV BRANCH]
+       ==================================================== -->
+  <div class="dev-trigger-pill" id="dev-trigger-pill" title="Toggle Experimental Dev Studio (Shortcut: ~)">
+    <span class="dev-dot-pulse"></span>
+    <span>DEV STUDIO</span>
+    <span class="dev-branch-badge">DEV</span>
+  </div>
+
+  <aside class="dev-studio-panel" id="dev-studio-panel" aria-label="Experimental Developer Controls">
+    <div class="dev-header">
+      <div class="dev-title-wrap">
+        <span class="dev-dot-pulse"></span>
+        <h3 class="dev-title">Dev Studio</h3>
+        <span class="dev-branch-badge">EXPERIMENTAL</span>
+      </div>
+      <button class="dev-close-btn" id="dev-close-btn" aria-label="Close Dev Studio">✕</button>
+    </div>
+
+    <nav class="dev-tabs">
+      <button class="dev-tab-btn is-active" data-tab="tab-ring">3D Ring</button>
+      <button class="dev-tab-btn" data-tab="tab-hero">Hero Scrub</button>
+      <button class="dev-tab-btn" data-tab="tab-typo">Typography</button>
+      <button class="dev-tab-btn" data-tab="tab-theme">Atmosphere</button>
+      <button class="dev-tab-btn" data-tab="tab-presets">Presets</button>
+    </nav>
+
+    <div class="dev-body">
+      <!-- TAB 1: 3D CYLINDRICAL RING -->
+      <div class="dev-tab-content" id="tab-ring">
+        <div class="dev-section-group">
+          <p class="dev-section-title">Cylindrical Ring Optics</p>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Ring Radius</span>
+              <span class="dev-val-readout" id="val-ring-radius">1800px</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-ring-radius" min="900" max="2800" step="20" value="1800">
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Perspective Depth</span>
+              <span class="dev-val-readout" id="val-perspective">760px</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-perspective" min="400" max="1600" step="10" value="760">
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Card Scale</span>
+              <span class="dev-val-readout" id="val-card-scale">1.0x</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-card-scale" min="0.6" max="1.8" step="0.05" value="1.0">
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Card Tilt Multiplier</span>
+              <span class="dev-val-readout" id="val-card-tilt">1.0x</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-card-tilt" min="0.0" max="2.5" step="0.1" value="1.0">
+          </div>
+        </div>
+
+        <div class="dev-section-group" style="margin-top: 16px;">
+          <p class="dev-section-title">Spring Physics & Motion</p>
+          <div class="dev-toggle-row">
+            <span>Continuous Auto-Rotate</span>
+            <button class="dev-toggle-btn" id="ctrl-auto-rotate"><span class="dev-toggle-knob"></span></button>
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Auto-Rotate Velocity</span>
+              <span class="dev-val-readout" id="val-auto-speed">0.25</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-auto-speed" min="-2.0" max="2.0" step="0.05" value="0.25">
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Spring Stiffness</span>
+              <span class="dev-val-readout" id="val-stiffness">180</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-stiffness" min="40" max="400" step="5" value="180">
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Spring Damping</span>
+              <span class="dev-val-readout" id="val-damping">32</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-damping" min="10" max="70" step="2" value="32">
+          </div>
+        </div>
+
+        <div class="dev-section-group" style="margin-top: 16px;">
+          <p class="dev-section-title">Ocean Water & FX</p>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Water Reflections Opacity</span>
+              <span class="dev-val-readout" id="val-reflection">65%</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-reflection" min="0" max="100" step="5" value="65">
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Sea Plate Brightness</span>
+              <span class="dev-val-readout" id="val-sea-bright">100%</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-sea-bright" min="50" max="150" step="5" value="100">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: HERO & SCROLL SCRUB -->
+      <div class="dev-tab-content" id="tab-hero" style="display: none;">
+        <div class="dev-section-group">
+          <p class="dev-section-title">Live Interactive Scrub Tester</p>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Manual Scrub Override</span>
+              <span class="dev-val-readout" id="val-manual-scrub">OFF (Scroll-Driven)</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-manual-scrub" min="-1" max="100" step="1" value="-1">
+            <small style="font-size: 10px; color: #64748B;">Drag above -1 to test hero scrub anywhere on page!</small>
+          </div>
+        </div>
+
+        <div class="dev-section-group" style="margin-top: 16px;">
+          <p class="dev-section-title">Timeline Travel Metrics</p>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Truck Drive Length (A_VIEWPORTS)</span>
+              <span class="dev-val-readout" id="val-a-vp">2.4 vh</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-a-vp" min="1.0" max="4.5" step="0.1" value="2.4">
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Services Glide Multiplier</span>
+              <span class="dev-val-readout" id="val-b-vp">1.35x</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-b-vp" min="1.0" max="3.0" step="0.05" value="1.35">
+          </div>
+        </div>
+
+        <div class="dev-section-group" style="margin-top: 16px;">
+          <p class="dev-section-title">Giant Headline Text</p>
+          <div class="dev-field">
+            <label class="dev-field-header" for="ctrl-giant-text">Custom Letters Text</label>
+            <input type="text" class="dev-input-text" id="ctrl-giant-text" value="ABC CARGO · GLOBAL INTERMODAL">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: TYPOGRAPHY STUDIO -->
+      <div class="dev-tab-content" id="tab-typo" style="display: none;">
+        <div class="dev-section-group">
+          <p class="dev-section-title">Headings Font & Scale</p>
+          <div class="dev-field">
+            <label class="dev-field-header" for="ctrl-heading-font">Card & Section Heading Font</label>
+            <select class="dev-select" id="ctrl-heading-font">
+              <option value="'Archivo', system-ui, sans-serif" selected>Archivo (Industrial Grotesk)</option>
+              <option value="'Anton', Impact, sans-serif">Anton (Condensed Bold Poster)</option>
+              <option value="'Newsreader', Georgia, serif">Newsreader (Executive Editorial Serif)</option>
+              <option value="'JetBrains Mono', monospace">JetBrains Mono (Technical Monospace)</option>
+              <option value="'Geist', system-ui, sans-serif">Geist (Modern High-Tech)</option>
+            </select>
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Headings Scale</span>
+              <span class="dev-val-readout" id="val-head-scale">1.0x</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-head-scale" min="0.8" max="1.4" step="0.05" value="1.0">
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Tracking / Letter-Spacing</span>
+              <span class="dev-val-readout" id="val-tracking">0.00em</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-tracking" min="-0.04" max="0.15" step="0.01" value="0.0">
+          </div>
+        </div>
+
+        <div class="dev-section-group" style="margin-top: 16px;">
+          <p class="dev-section-title">Body Text Scale & Leading</p>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Body Font Size Scale</span>
+              <span class="dev-val-readout" id="val-body-scale">1.0x</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-body-scale" min="0.8" max="1.3" step="0.05" value="1.0">
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Line Height (Leading)</span>
+              <span class="dev-val-readout" id="val-leading">1.60</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-leading" min="1.3" max="2.0" step="0.05" value="1.6">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: ATMOSPHERE & THEME FX -->
+      <div class="dev-tab-content" id="tab-theme" style="display: none;">
+        <div class="dev-section-group">
+          <p class="dev-section-title">Brand Accent Color</p>
+          <div class="dev-field">
+            <div class="dev-swatches">
+              <span class="dev-swatch is-active" data-color="#2F63FF" style="background: #2F63FF;" title="Cobalt Core"></span>
+              <span class="dev-swatch" data-color="#38BDF8" style="background: #38BDF8;" title="Electric Ocean"></span>
+              <span class="dev-swatch" data-color="#F59E0B" style="background: #F59E0B;" title="Safety High-Vis Amber"></span>
+              <span class="dev-swatch" data-color="#10B981" style="background: #10B981;" title="Cyber Emerald"></span>
+              <span class="dev-swatch" data-color="#A855F7" style="background: #A855F7;" title="Neon Violet"></span>
+              <input type="color" class="dev-color-native" id="ctrl-color-native" value="#2F63FF" title="Custom Color Picker">
+            </div>
+          </div>
+        </div>
+
+        <div class="dev-section-group" style="margin-top: 16px;">
+          <p class="dev-section-title">Card Surface & Styling</p>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Corner Border-Radius</span>
+              <span class="dev-val-readout" id="val-card-radius">16px</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-card-radius" min="0" max="32" step="2" value="16">
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Card Glassmorphism Blur</span>
+              <span class="dev-val-readout" id="val-card-blur">16px</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-card-blur" min="0" max="32" step="2" value="16">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: PRESETS & EXPORT -->
+      <div class="dev-tab-content" id="tab-presets" style="display: none;">
+        <div class="dev-section-group">
+          <p class="dev-section-title">One-Click Design Personas</p>
+          <div class="dev-preset-grid">
+            <div class="dev-preset-card" data-preset="cyber">
+              <div class="dev-preset-title">⚡ Cyber Maritime</div>
+              <div class="dev-preset-desc">Electric Cyan, Archivo headers, fast auto-rotate, glowing cards</div>
+            </div>
+            <div class="dev-preset-card" data-preset="industrial">
+              <div class="dev-preset-title">🏗️ High-Vis Heavy</div>
+              <div class="dev-preset-desc">Safety Amber, Anton headers, 0px sharp corners, rugged look</div>
+            </div>
+            <div class="dev-preset-card" data-preset="swiss">
+              <div class="dev-preset-title">📖 Swiss Editorial</div>
+              <div class="dev-preset-desc">Newsreader serif & Archivo, airy line height, platinum monochrome</div>
+            </div>
+            <div class="dev-preset-card" data-preset="hyperspeed">
+              <div class="dev-preset-title">🚀 Hyper-Speed</div>
+              <div class="dev-preset-desc">Wide 2400px ring radius, 3D card tilt, high spring response</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dev-footer">
+      <button class="dev-action-btn dev-btn-export" id="btn-export-config">
+        <span>📋 Copy CSS / Config</span>
+      </button>
+      <button class="dev-action-btn dev-btn-reset" id="btn-reset-defaults">
+        <span>↺ Reset</span>
+      </button>
+    </div>
+  </aside>
+
+  <script>
   (function() {
     'use strict';
 
@@ -3841,7 +4510,7 @@
     });
 
     // 4. SCROLL ENGINE FOR HANDLING HERO
-    const A_VIEWPORTS = 2.4;
+    let A_VIEWPORTS = 2.4;
     let B_VIEWPORTS = 2.5;
 
     function updateLayout() {
@@ -3893,8 +4562,12 @@
         handlingVideo.src = desiredSrc;
       }
 
+      if (window.DEV_CONFIG) {
+        A_VIEWPORTS = DEV_CONFIG.aViewports;
+      }
       const stripWidth = servicesBand ? (servicesBand.scrollWidth || 1900) : 1900;
-      B_VIEWPORTS = Math.max(2.6, ((stripWidth + 0.25 * vw) / vw) * 1.35);
+      const bMult = (window.DEV_CONFIG ? DEV_CONFIG.bViewportsMult : 1.35);
+      B_VIEWPORTS = Math.max(2.6, ((stripWidth + 0.25 * vw) / vw) * bMult);
       const totalH = (1 + A_VIEWPORTS + B_VIEWPORTS) * vh;
       heroTrack.style.height = totalH + 'px';
     }
@@ -4215,13 +4888,16 @@
       const dtSec = dt / 1000;
       const k = Math.min(3, dt / 16.67);
 
-      // Auto-spin logic
+      // Auto-spin logic with DEV_CONFIG
       if (!isDragging) {
-        targetRot += 0.25 * easingFactor * k;
+        const autoSpeed = (window.DEV_CONFIG && DEV_CONFIG.autoRotate) ? (DEV_CONFIG.autoRotateSpeed || 0.25) : (window.DEV_CONFIG && !DEV_CONFIG.autoRotate ? 0 : 0.25);
+        targetRot += autoSpeed * easingFactor * k;
       }
 
-      // Spring physics on rotation
-      const [nextDisp, nextVel] = stepSpring(dispRot, targetRot, rotVel, 150, 27, 1, dtSec);
+      // Spring physics on rotation with DEV_CONFIG
+      const kStiff = (window.DEV_CONFIG ? DEV_CONFIG.springStiffness : 150);
+      const kDamp = (window.DEV_CONFIG ? DEV_CONFIG.springDamping : 27);
+      const [nextDisp, nextVel] = stepSpring(dispRot, targetRot, rotVel, kStiff, kDamp, 1, dtSec);
       dispRot = nextDisp;
       rotVel = nextVel;
 
@@ -4237,12 +4913,12 @@
       document.getElementById('motes-layer').style.transform = `translate3d(${sX * 36}px, ${sY * 36}px, 0)`;
       document.getElementById('petals-front').style.transform = `translate3d(${sX * 46}px, ${sY * 46}px, 0)`;
 
-      // Geometry calculation
+      // Geometry calculation with DEV_CONFIG
       const tilt = 0;
-      const radius = 1800; // Fully expanded majestic ring
-      const perspective = 760;
+      const radius = (window.DEV_CONFIG ? DEV_CONFIG.ringRadius : 1800);
+      const perspective = (window.DEV_CONFIG ? DEV_CONFIG.perspective : 760);
       const roll = 0;
-      const cardScale = 2.3;
+      const cardScale = 2.3 * (window.DEV_CONFIG ? DEV_CONFIG.cardScale : 1.0);
 
       let wallScale = window.innerWidth <= 820 ? 0.8 : 1.1;
       const fit = Math.min(1.05, (window.innerWidth - 32) / 1240, 0.66 * window.innerHeight / 800) / wallScale;
@@ -4327,9 +5003,10 @@
           }
         }
 
-        // Tilt springs
-        const [tX, vX] = stepSpring(slot.tiltX, slot.targetTiltX, slot.tiltVx, 180, 24, 1, dtSec);
-        const [tY, vY] = stepSpring(slot.tiltY, slot.targetTiltY, slot.tiltVy, 180, 24, 1, dtSec);
+        // Tilt springs with DEV_CONFIG
+        const devTiltMult = (window.DEV_CONFIG ? DEV_CONFIG.cardTilt : 1.0);
+        const [tX, vX] = stepSpring(slot.tiltX, slot.targetTiltX * devTiltMult, slot.tiltVx, 180, 24, 1, dtSec);
+        const [tY, vY] = stepSpring(slot.tiltY, slot.targetTiltY * devTiltMult, slot.tiltVy, 180, 24, 1, dtSec);
         const [tZ, vZ] = stepSpring(slot.tiltZ, slot.targetTiltZ, slot.tiltVz, 180, 24, 1, dtSec);
         slot.tiltX = tX; slot.tiltVx = vX;
         slot.tiltY = tY; slot.tiltVy = vY;
@@ -4891,6 +5568,478 @@
         if (bolModalBackdrop) bolModalBackdrop.classList.remove('is-open');
       }
     });
+
+  
+    // ====================================================
+    // DEV CONTROLS ENGINE & REAL-TIME BINDING [DEV BRANCH]
+    // ====================================================
+    window.DEV_CONFIG = {
+      // 3D Ring
+      ringRadius: 1800,
+      perspective: 760,
+      cardScale: 1.0,
+      cardTilt: 1.0,
+      autoRotate: false,
+      autoRotateSpeed: 0.25,
+      springStiffness: 180,
+      springDamping: 32,
+      reflectionOpacity: 65,
+      seaBrightness: 100,
+
+      // Hero
+      manualScrub: -1,
+      aViewports: 2.4,
+      bViewportsMult: 1.35,
+      giantText: "ABC CARGO · GLOBAL INTERMODAL",
+
+      // Typography
+      headingFont: "'Archivo', system-ui, sans-serif",
+      headingScale: 1.0,
+      tracking: 0.0,
+      bodyScale: 1.0,
+      leading: 1.6,
+
+      // Theme
+      accentColor: "#2F63FF",
+      cardRadius: 16,
+      cardBlur: 16
+    };
+
+    // DOM Elements
+    const devTriggerPill = document.getElementById('dev-trigger-pill');
+    const devStudioPanel = document.getElementById('dev-studio-panel');
+    const devCloseBtn = document.getElementById('dev-close-btn');
+
+    function toggleDevStudio(open) {
+      const willOpen = open !== undefined ? open : !devStudioPanel.classList.contains('is-open');
+      devStudioPanel.classList.toggle('is-open', willOpen);
+      if (willOpen) devTriggerPill.style.display = 'none';
+      else devTriggerPill.style.display = 'inline-flex';
+    }
+    window.toggleDevStudio = toggleDevStudio;
+
+    if (devTriggerPill) devTriggerPill.addEventListener('click', () => toggleDevStudio(true));
+    if (devCloseBtn) devCloseBtn.addEventListener('click', () => toggleDevStudio(false));
+
+    // Keyboard shortcut ~ or \ to toggle Dev Studio
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '`' || e.key === '~' || e.key === '\\') {
+        toggleDevStudio();
+      }
+    });
+
+    // Tab Switcher
+    const devTabs = document.querySelectorAll('.dev-tab-btn');
+    const devContents = document.querySelectorAll('.dev-tab-content');
+    devTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        devTabs.forEach(t => t.classList.remove('is-active'));
+        devContents.forEach(c => c.style.display = 'none');
+        tab.classList.add('is-active');
+        const targetId = tab.getAttribute('data-tab');
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) targetContent.style.display = 'block';
+      });
+    });
+
+    // Ring Radius
+    const ctrlRingRadius = document.getElementById('ctrl-ring-radius');
+    const valRingRadius = document.getElementById('val-ring-radius');
+    if (ctrlRingRadius) {
+      ctrlRingRadius.addEventListener('input', e => {
+        DEV_CONFIG.ringRadius = parseInt(e.target.value, 10);
+        valRingRadius.textContent = e.target.value + 'px';
+      });
+    }
+
+    // Perspective
+    const ctrlPerspective = document.getElementById('ctrl-perspective');
+    const valPerspective = document.getElementById('val-perspective');
+    if (ctrlPerspective) {
+      ctrlPerspective.addEventListener('input', e => {
+        DEV_CONFIG.perspective = parseInt(e.target.value, 10);
+        valPerspective.textContent = e.target.value + 'px';
+      });
+    }
+
+    // Card Scale
+    const ctrlCardScale = document.getElementById('ctrl-card-scale');
+    const valCardScale = document.getElementById('val-card-scale');
+    if (ctrlCardScale) {
+      ctrlCardScale.addEventListener('input', e => {
+        DEV_CONFIG.cardScale = parseFloat(e.target.value);
+        valCardScale.textContent = e.target.value + 'x';
+      });
+    }
+
+    // Card Tilt
+    const ctrlCardTilt = document.getElementById('ctrl-card-tilt');
+    const valCardTilt = document.getElementById('val-card-tilt');
+    if (ctrlCardTilt) {
+      ctrlCardTilt.addEventListener('input', e => {
+        DEV_CONFIG.cardTilt = parseFloat(e.target.value);
+        valCardTilt.textContent = e.target.value + 'x';
+      });
+    }
+
+    // Auto-Rotate
+    const ctrlAutoRotate = document.getElementById('ctrl-auto-rotate');
+    if (ctrlAutoRotate) {
+      ctrlAutoRotate.addEventListener('click', () => {
+        DEV_CONFIG.autoRotate = !DEV_CONFIG.autoRotate;
+        ctrlAutoRotate.classList.toggle('is-active', DEV_CONFIG.autoRotate);
+      });
+    }
+    const ctrlAutoSpeed = document.getElementById('ctrl-auto-speed');
+    const valAutoSpeed = document.getElementById('val-auto-speed');
+    if (ctrlAutoSpeed) {
+      ctrlAutoSpeed.addEventListener('input', e => {
+        DEV_CONFIG.autoRotateSpeed = parseFloat(e.target.value);
+        valAutoSpeed.textContent = e.target.value;
+      });
+    }
+
+    // Spring Stiffness & Damping
+    const ctrlStiffness = document.getElementById('ctrl-stiffness');
+    const valStiffness = document.getElementById('val-stiffness');
+    if (ctrlStiffness) {
+      ctrlStiffness.addEventListener('input', e => {
+        DEV_CONFIG.springStiffness = parseInt(e.target.value, 10);
+        valStiffness.textContent = e.target.value;
+      });
+    }
+    const ctrlDamping = document.getElementById('ctrl-damping');
+    const valDamping = document.getElementById('val-damping');
+    if (ctrlDamping) {
+      ctrlDamping.addEventListener('input', e => {
+        DEV_CONFIG.springDamping = parseInt(e.target.value, 10);
+        valDamping.textContent = e.target.value;
+      });
+    }
+
+    // Reflections Opacity
+    const ctrlReflection = document.getElementById('ctrl-reflection');
+    const valReflection = document.getElementById('val-reflection');
+    if (ctrlReflection) {
+      ctrlReflection.addEventListener('input', e => {
+        DEV_CONFIG.reflectionOpacity = parseInt(e.target.value, 10);
+        valReflection.textContent = e.target.value + '%';
+        document.documentElement.style.setProperty('--dev-reflection-op', (DEV_CONFIG.reflectionOpacity / 100).toString());
+      });
+    }
+
+    // Sea Plate Brightness
+    const ctrlSeaBright = document.getElementById('ctrl-sea-bright');
+    const valSeaBright = document.getElementById('val-sea-bright');
+    if (ctrlSeaBright) {
+      ctrlSeaBright.addEventListener('input', e => {
+        DEV_CONFIG.seaBrightness = parseInt(e.target.value, 10);
+        valSeaBright.textContent = e.target.value + '%';
+        const oceanPlate = document.getElementById('ocean-scene-layer');
+        if (oceanPlate) oceanPlate.style.filter = `brightness(${DEV_CONFIG.seaBrightness}%)`;
+      });
+    }
+
+    // Manual Scrub
+    const ctrlManualScrub = document.getElementById('ctrl-manual-scrub');
+    const valManualScrub = document.getElementById('val-manual-scrub');
+    if (ctrlManualScrub) {
+      ctrlManualScrub.addEventListener('input', e => {
+        const val = parseInt(e.target.value, 10);
+        DEV_CONFIG.manualScrub = val;
+        if (val < 0) {
+          valManualScrub.textContent = 'OFF (Scroll-Driven)';
+          handleScroll();
+        } else {
+          valManualScrub.textContent = val + '%';
+          applyManualScrub(val / 100);
+        }
+      });
+    }
+
+    function applyManualScrub(pct) {
+      if (handlingVideo && videoDuration) {
+        handlingVideo.currentTime = Math.min(pct * videoDuration, videoDuration - (1 / 48));
+      }
+      if (giantLetters) {
+        const glX = 100 - (pct * 220);
+        giantLetters.style.setProperty('--gl-x', glX);
+      }
+      if (servicesBand) {
+        const vw = window.innerWidth;
+        const sWidth = servicesBand.scrollWidth || 1900;
+        const endTx = Math.min(0, -(sWidth - vw + 80));
+        const stripTx = vw - pct * (vw - endTx);
+        servicesBand.style.transform = 'translate3d(' + stripTx.toFixed(1) + 'px, 0, 0)';
+      }
+    }
+
+    // Hero Viewports
+    const ctrlAVp = document.getElementById('ctrl-a-vp');
+    const valAVp = document.getElementById('val-a-vp');
+    if (ctrlAVp) {
+      ctrlAVp.addEventListener('input', e => {
+        DEV_CONFIG.aViewports = parseFloat(e.target.value);
+        valAVp.textContent = e.target.value + ' vh';
+        updateLayout();
+      });
+    }
+    const ctrlBVp = document.getElementById('ctrl-b-vp');
+    const valBVp = document.getElementById('val-b-vp');
+    if (ctrlBVp) {
+      ctrlBVp.addEventListener('input', e => {
+        DEV_CONFIG.bViewportsMult = parseFloat(e.target.value);
+        valBVp.textContent = e.target.value + 'x';
+        updateLayout();
+      });
+    }
+
+    // Giant Letters Text Input
+    const ctrlGiantText = document.getElementById('ctrl-giant-text');
+    if (ctrlGiantText) {
+      ctrlGiantText.addEventListener('input', e => {
+        DEV_CONFIG.giantText = e.target.value;
+        if (giantLetters) giantLetters.textContent = e.target.value;
+      });
+    }
+
+    // Typography Controls
+    const ctrlHeadingFont = document.getElementById('ctrl-heading-font');
+    if (ctrlHeadingFont) {
+      ctrlHeadingFont.addEventListener('change', e => {
+        DEV_CONFIG.headingFont = e.target.value;
+        document.documentElement.style.setProperty('--dev-font-heading', e.target.value);
+        document.querySelectorAll('.solutions-title, .solution-name, .service-title').forEach(el => {
+          el.style.fontFamily = e.target.value;
+        });
+      });
+    }
+
+    const ctrlHeadScale = document.getElementById('ctrl-head-scale');
+    const valHeadScale = document.getElementById('val-head-scale');
+    if (ctrlHeadScale) {
+      ctrlHeadScale.addEventListener('input', e => {
+        DEV_CONFIG.headingScale = parseFloat(e.target.value);
+        valHeadScale.textContent = e.target.value + 'x';
+        document.querySelectorAll('.solutions-title').forEach(el => {
+          el.style.fontSize = `calc(44px * ${DEV_CONFIG.headingScale})`;
+        });
+        document.querySelectorAll('.solution-name').forEach(el => {
+          el.style.fontSize = `calc(21px * ${DEV_CONFIG.headingScale})`;
+        });
+      });
+    }
+
+    const ctrlTracking = document.getElementById('ctrl-tracking');
+    const valTracking = document.getElementById('val-tracking');
+    if (ctrlTracking) {
+      ctrlTracking.addEventListener('input', e => {
+        DEV_CONFIG.tracking = parseFloat(e.target.value);
+        valTracking.textContent = e.target.value + 'em';
+        document.querySelectorAll('.solutions-title, .solution-name, .service-title').forEach(el => {
+          el.style.letterSpacing = e.target.value + 'em';
+        });
+      });
+    }
+
+    const ctrlBodyScale = document.getElementById('ctrl-body-scale');
+    const valBodyScale = document.getElementById('val-body-scale');
+    if (ctrlBodyScale) {
+      ctrlBodyScale.addEventListener('input', e => {
+        DEV_CONFIG.bodyScale = parseFloat(e.target.value);
+        valBodyScale.textContent = e.target.value + 'x';
+        document.querySelectorAll('.solution-body, .band-desc').forEach(el => {
+          el.style.fontSize = `calc(13.5px * ${DEV_CONFIG.bodyScale})`;
+        });
+      });
+    }
+
+    const ctrlLeading = document.getElementById('ctrl-leading');
+    const valLeading = document.getElementById('val-leading');
+    if (ctrlLeading) {
+      ctrlLeading.addEventListener('input', e => {
+        DEV_CONFIG.leading = parseFloat(e.target.value);
+        valLeading.textContent = e.target.value;
+        document.querySelectorAll('.solution-body, .band-desc').forEach(el => {
+          el.style.lineHeight = e.target.value;
+        });
+      });
+    }
+
+    // Color Swatches & Accent
+    function setAccent(hex) {
+      DEV_CONFIG.accentColor = hex;
+      document.documentElement.style.setProperty('--dev-cobalt', hex);
+      document.documentElement.style.setProperty('--cobalt', hex);
+      document.querySelectorAll('.dev-swatch').forEach(s => {
+        s.classList.toggle('is-active', s.getAttribute('data-color') === hex);
+      });
+      const native = document.getElementById('ctrl-color-native');
+      if (native) native.value = hex;
+    }
+
+    document.querySelectorAll('.dev-swatch').forEach(sw => {
+      sw.addEventListener('click', () => setAccent(sw.getAttribute('data-color')));
+    });
+    const ctrlColorNative = document.getElementById('ctrl-color-native');
+    if (ctrlColorNative) {
+      ctrlColorNative.addEventListener('input', e => setAccent(e.target.value));
+    }
+
+    // Card Corner Radius
+    const ctrlCardRadius = document.getElementById('ctrl-card-radius');
+    const valCardRadius = document.getElementById('val-card-radius');
+    if (ctrlCardRadius) {
+      ctrlCardRadius.addEventListener('input', e => {
+        DEV_CONFIG.cardRadius = parseInt(e.target.value, 10);
+        valCardRadius.textContent = e.target.value + 'px';
+        document.querySelectorAll('.solution-card, .service-card').forEach(c => {
+          c.style.borderRadius = e.target.value + 'px';
+        });
+      });
+    }
+
+    // Card Blur
+    const ctrlCardBlur = document.getElementById('ctrl-card-blur');
+    const valCardBlur = document.getElementById('val-card-blur');
+    if (ctrlCardBlur) {
+      ctrlCardBlur.addEventListener('input', e => {
+        DEV_CONFIG.cardBlur = parseInt(e.target.value, 10);
+        valCardBlur.textContent = e.target.value + 'px';
+        document.querySelectorAll('.solution-card, .service-card').forEach(c => {
+          c.style.backdropFilter = `blur(${e.target.value}px)`;
+        });
+      });
+    }
+
+    // Presets
+    const presets = {
+      cyber: {
+        accent: '#38BDF8',
+        headingFont: "'Archivo', system-ui, sans-serif",
+        radius: 12,
+        autoRotate: true,
+        autoSpeed: 0.35,
+        ringRadius: 2100,
+        cardTilt: 1.4,
+        cardScale: 1.15,
+        tracking: 0.02
+      },
+      industrial: {
+        accent: '#F59E0B',
+        headingFont: "'Anton', Impact, sans-serif",
+        radius: 0,
+        autoRotate: false,
+        ringRadius: 1700,
+        cardTilt: 0.5,
+        cardScale: 1.0,
+        tracking: 0.04
+      },
+      swiss: {
+        accent: '#E2E8F0',
+        headingFont: "'Newsreader', Georgia, serif",
+        radius: 18,
+        autoRotate: false,
+        ringRadius: 1800,
+        cardTilt: 0.8,
+        cardScale: 1.0,
+        tracking: -0.01
+      },
+      hyperspeed: {
+        accent: '#10B981',
+        headingFont: "'Archivo', system-ui, sans-serif",
+        radius: 20,
+        autoRotate: true,
+        autoSpeed: 0.8,
+        ringRadius: 2400,
+        cardTilt: 1.8,
+        cardScale: 1.25,
+        tracking: 0.01
+      }
+    };
+
+    document.querySelectorAll('.dev-preset-card').forEach(pCard => {
+      pCard.addEventListener('click', () => {
+        const pKey = pCard.getAttribute('data-preset');
+        const p = presets[pKey];
+        if (!p) return;
+        setAccent(p.accent);
+        if (ctrlHeadingFont) {
+          ctrlHeadingFont.value = p.headingFont;
+          ctrlHeadingFont.dispatchEvent(new Event('change'));
+        }
+        if (ctrlCardRadius) {
+          ctrlCardRadius.value = p.radius;
+          ctrlCardRadius.dispatchEvent(new Event('input'));
+        }
+        if (ctrlRingRadius) {
+          ctrlRingRadius.value = p.ringRadius;
+          ctrlRingRadius.dispatchEvent(new Event('input'));
+        }
+        if (ctrlCardTilt) {
+          ctrlCardTilt.value = p.cardTilt;
+          ctrlCardTilt.dispatchEvent(new Event('input'));
+        }
+        if (ctrlCardScale) {
+          ctrlCardScale.value = p.cardScale;
+          ctrlCardScale.dispatchEvent(new Event('input'));
+        }
+        if (ctrlTracking) {
+          ctrlTracking.value = p.tracking;
+          ctrlTracking.dispatchEvent(new Event('input'));
+        }
+        DEV_CONFIG.autoRotate = p.autoRotate;
+        if (ctrlAutoRotate) ctrlAutoRotate.classList.toggle('is-active', p.autoRotate);
+        if (p.autoSpeed && ctrlAutoSpeed) {
+          ctrlAutoSpeed.value = p.autoSpeed;
+          ctrlAutoSpeed.dispatchEvent(new Event('input'));
+        }
+        showGlobalToast(`Persona Loaded: ${pKey.toUpperCase()}`);
+      });
+    });
+
+    // Export Config
+    const btnExportConfig = document.getElementById('btn-export-config');
+    if (btnExportConfig) {
+      btnExportConfig.addEventListener('click', () => {
+        const exportObj = {
+          cssVariables: {
+            '--cobalt': DEV_CONFIG.accentColor,
+            '--card-radius': DEV_CONFIG.cardRadius + 'px',
+            '--card-blur': DEV_CONFIG.cardBlur + 'px',
+            '--dev-font-heading': DEV_CONFIG.headingFont
+          },
+          ring3d: {
+            radius: DEV_CONFIG.ringRadius,
+            perspective: DEV_CONFIG.perspective,
+            cardScale: DEV_CONFIG.cardScale,
+            cardTilt: DEV_CONFIG.cardTilt,
+            autoRotate: DEV_CONFIG.autoRotate,
+            autoRotateSpeed: DEV_CONFIG.autoRotateSpeed
+          },
+          typography: {
+            headingScale: DEV_CONFIG.headingScale,
+            tracking: DEV_CONFIG.tracking + 'em',
+            bodyScale: DEV_CONFIG.bodyScale,
+            lineHeight: DEV_CONFIG.leading
+          }
+        };
+        const exportStr = JSON.stringify(exportObj, null, 2);
+        navigator.clipboard.writeText(exportStr).then(() => {
+          showGlobalToast('Config Copied to Clipboard!');
+        }).catch(() => {
+          prompt('Copy Configuration:', exportStr);
+        });
+      });
+    }
+
+    // Reset Defaults
+    const btnResetDefaults = document.getElementById('btn-reset-defaults');
+    if (btnResetDefaults) {
+      btnResetDefaults.addEventListener('click', () => {
+        location.reload();
+      });
+    }
 
   })();
   </script>
