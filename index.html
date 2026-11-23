@@ -447,17 +447,17 @@
       top: var(--edge-px, 50vh);
       left: 0;
       bottom: 0;
-      width: 100%;
-      transform: translate3d(calc(var(--band-x, 100) * 1vw), 0, 0);
+      width: max-content;
+      transform: translate3d(100vw, 0, 0);
       background: transparent;
       color: #FFFFFF;
       z-index: 5;
       display: flex;
       align-items: center;
       padding-left: calc(45 * var(--u));
-      padding-right: calc(60 * var(--u));
-      gap: calc(40 * var(--u));
-      overflow: hidden;
+      padding-right: calc(80 * var(--u));
+      padding-bottom: calc(52 * var(--u));
+      gap: calc(30 * var(--u));
       will-change: transform;
     }
     .band-intro {
@@ -503,12 +503,14 @@
       gap: calc(24 * var(--u));
     }
     .service-card {
-      width: calc(280 * var(--u));
-      height: calc(360 * var(--u));
+      width: min(calc(275 * var(--u)), 290px);
+      height: min(calc(340 * var(--u)), calc((100vh - var(--edge-px, 50vh)) - 82px));
+      max-height: 350px;
+      min-height: 220px;
       background: #171717;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: calc(16 * var(--u));
-      padding: calc(26 * var(--u));
+      padding: calc(20 * var(--u)) calc(22 * var(--u));
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -516,6 +518,13 @@
       overflow: hidden;
       transition: transform 0.4s var(--main-ease), border-color 0.4s ease;
       cursor: pointer;
+      flex-shrink: 0;
+    }
+    .services-cards-track {
+      display: flex;
+      align-items: center;
+      gap: calc(24 * var(--u));
+      flex-shrink: 0;
     }
     .service-card:hover {
       transform: translateY(-8px);
@@ -1444,26 +1453,33 @@
 
       .giant-letters { font-size: 140px; }
       .services-band {
-        flex-direction: column;
-        padding: 20px 16px;
-        height: auto;
-        min-height: calc(100lvh - 44vh);
+        flex-direction: row;
+        width: max-content;
+        padding-bottom: 50px;
+        gap: 18px;
       }
       .band-intro {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-        padding-bottom: 20px;
-        margin-bottom: 20px;
+        width: 260px;
+        padding-right: 18px;
+        border-right: 1px solid rgba(255, 255, 255, 0.12);
+        border-bottom: none;
+        margin-bottom: 0;
       }
       .services-cards-track {
-        flex-direction: column;
-        width: 100%;
+        flex-direction: row;
+        gap: 16px;
       }
       .service-card {
-        width: 100%;
-        height: auto;
-        min-height: 180px;
+        width: 240px;
+        height: min(290px, calc((100vh - var(--edge-px, 50vh)) - 64px));
+        min-height: 200px;
+        padding: 16px;
+      }
+      .service-title {
+        font-size: 20px;
+      }
+      .service-info {
+        font-size: 12px;
       }
 
       .fleet-header {
@@ -3836,8 +3852,8 @@
         handlingVideo.src = desiredSrc;
       }
 
-      const stripWidth = servicesBand.scrollWidth || 1800;
-      B_VIEWPORTS = ((stripWidth + 0.45 * vw) / vw) * 1.1;
+      const stripWidth = servicesBand ? (servicesBand.scrollWidth || 1900) : 1900;
+      B_VIEWPORTS = Math.max(2.6, ((stripWidth + 0.25 * vw) / vw) * 1.35);
       const totalH = (1 + A_VIEWPORTS + B_VIEWPORTS) * vh;
       heroTrack.style.height = totalH + 'px';
     }
@@ -3910,13 +3926,23 @@
       const glX = 100 - (pServices * 220);
       giantLetters.style.setProperty('--gl-x', glX);
 
-      // Services band enters from right (100vw down to 0)
-      const bandX = 100 * (1 - pServices);
-      servicesBand.style.setProperty('--band-x', bandX);
+      // Services band horizontal glide across the screen
+      if (servicesBand) {
+        const sWidth = servicesBand.scrollWidth || 1900;
+        const endTx = Math.min(0, -(sWidth - vw + 80));
+        const stripTx = vw - pServices * (vw - endTx);
+        servicesBand.style.transform = 'translate3d(' + stripTx.toFixed(1) + 'px, 0, 0)';
+      }
 
-      // Telemetry Speedometer update
+      // Telemetry Speedometer update & clean fade-out
       const curSpeed = (24.8 + Math.sin(pClip * Math.PI) * 12.4).toFixed(1);
       hudSpeed.textContent = curSpeed;
+
+      const telemetryHud = document.querySelector('.telemetry-hud');
+      if (telemetryHud) {
+        telemetryHud.style.opacity = Math.max(0, 1 - pServices * 2.5);
+        telemetryHud.style.pointerEvents = pServices > 0.2 ? 'none' : 'auto';
+      }
     }
 
     window.addEventListener('scroll', () => {
