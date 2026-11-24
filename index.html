@@ -273,6 +273,9 @@
       display: flex;
       align-items: center;
       gap: 3px;
+      color: var(--ink);
+    }
+    body.is-dark-nav .nav-logo {
       color: #FFFFFF;
     }
     .nav-logo .dot {
@@ -2845,9 +2848,11 @@
       background: rgba(255, 255, 255, 0.94);
       border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     }
+    body:not(.is-dark-nav) .nav-logo,
     body:not(.is-dark-nav) .brand-title {
       color: #0A0E11 !important;
     }
+    body:not(.is-dark-nav) .nav-tagline,
     body:not(.is-dark-nav) .brand-tagline {
       color: #4B5563 !important;
       border-left-color: #D1D5DB !important;
