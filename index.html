@@ -2889,7 +2889,7 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       z-index: 99998;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       opacity: 0;
@@ -2898,6 +2898,7 @@
       padding: 20px;
     }
     .qr-modal-backdrop.is-open {
+      display: flex;
       opacity: 1;
       pointer-events: auto;
     }
