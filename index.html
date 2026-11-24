@@ -10,7 +10,7 @@
   <!-- GOOGLE FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600;700&family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Archivo:wght@400;500;600;700&family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..500&display=swap" rel="stylesheet">
 
   <style>
     /* LOCAL SELF-HOSTED FONTS AS FALLBACK */
@@ -48,15 +48,18 @@
       --ink-muted: #647C8A;
       --line: rgba(238, 244, 246, 0.14);
       --cobalt: var(--dev-cobalt, #38BDF8);
-      --dev-font-heading: "Geist", system-ui, sans-serif;
+      --dev-font-heading: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --dev-font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --dev-card-radius: 16px;
       --dev-card-bg: #0E141B;
       --dev-card-blur: 16px;
       --dev-reflection-op: 0.65;
-      --dev-heading-scale: 1.15;
-      --dev-tracking: 0.08em;
+      --dev-heading-scale: 1.08;
+      --dev-heading-weight: 600;
+      --dev-heading-transform: uppercase;
+      --dev-tracking: 0.015em;
       --dev-body-scale: 1;
-      --dev-leading: 1.6;
+      --dev-leading: 1.65;
       --cobalt-dark: #0284C7;
       --accent: #38BDF8;
       --aqua: #BAE6FD;
@@ -65,11 +68,13 @@
       --giant-letters: #E9E9E9;
       --band-bg: #111111;
 
+      --font-heading: var(--dev-font-heading, "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+      --font-body: var(--dev-font-body, "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
       --font-anton: "Anton", Impact, sans-serif;
-      --font-archivo: var(--dev-font-heading, "Geist", system-ui, sans-serif);
-      --font-mono: "JetBrains Mono", "Geist Mono", monospace;
+      --font-archivo: var(--font-heading);
+      --font-mono: "JetBrains Mono", "Geist Mono", SFMono-Regular, monospace;
       --font-serif: "Newsreader", Georgia, serif;
-      --font-sans: "Geist", system-ui, sans-serif;
+      --font-sans: var(--font-body);
 
       --main-ease: cubic-bezier(.22, 1, .36, 1);
       --wall-scale: 1.1;
@@ -477,6 +482,9 @@
       flex-shrink: 0;
       padding-right: calc(30 * var(--u));
       border-right: 1px solid rgba(255, 255, 255, 0.12);
+      position: relative;
+      z-index: 10;
+      background: #111111;
     }
     .band-kicker {
       font-family: var(--font-mono);
@@ -489,27 +497,97 @@
       line-height: 1.3;
     }
     .band-headline {
-      font-family: var(--font-anton);
-      font-size: calc(54 * var(--u));
-      letter-spacing: 0.03em;
-      line-height: 1.02;
-      text-transform: uppercase;
+      font-family: var(--font-heading);
+      font-weight: var(--dev-heading-weight, 700);
+      font-size: calc(46 * var(--u) * var(--dev-heading-scale, 1.08));
+      letter-spacing: var(--dev-tracking, -0.015em);
+      line-height: 1.05;
+      text-transform: var(--dev-heading-transform, uppercase);
       margin: 0 0 calc(16 * var(--u)) 0;
       color: #FFFFFF;
     }
     .band-desc {
-      font-family: var(--font-archivo);
-      font-size: calc(14.5 * var(--u));
-      line-height: 1.6;
-      letter-spacing: 0.01em;
-      color: var(--ink-soft);
+      font-family: var(--font-body);
+      font-size: calc(14.5 * var(--u) * var(--dev-body-scale, 1));
+      line-height: var(--dev-leading, 1.65);
+      letter-spacing: 0.005em;
+      color: #CBD5E1;
       margin: 0;
+    }
+
+    /* Carousel navigation controls in band-intro */
+    .services-nav-controls {
+      display: flex;
+      align-items: center;
+      gap: calc(14 * var(--u));
+      margin-top: calc(22 * var(--u));
+      user-select: none;
+    }
+    .services-nav-arrows {
+      display: flex;
+      align-items: center;
+      gap: calc(8 * var(--u));
+    }
+    .services-nav-btn {
+      width: calc(34 * var(--u));
+      height: calc(34 * var(--u));
+      min-width: 32px;
+      min-height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 0;
+    }
+    .services-nav-btn:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: #38BDF8;
+      color: #38BDF8;
+      transform: scale(1.08);
+    }
+    .services-nav-btn:active {
+      transform: scale(0.95);
+    }
+    .services-nav-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .service-nav-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .service-nav-dot.is-active {
+      width: 20px;
+      border-radius: 9999px;
+      background: #38BDF8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+    }
+    .services-nav-count {
+      font-family: var(--font-mono);
+      font-size: calc(11 * var(--u));
+      font-weight: 600;
+      color: #94A3B8;
+      letter-spacing: 0.12em;
+      margin-left: auto;
     }
 
     .services-cards-track {
       display: flex;
       align-items: center;
       gap: calc(24 * var(--u));
+      flex-shrink: 0;
+      transform: translate3d(calc(var(--services-shift, 0) * 1px), 0, 0);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .service-card {
       width: min(calc(275 * var(--u)), 290px);
@@ -519,56 +597,51 @@
       background: #171717;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: calc(16 * var(--u));
-      padding: calc(20 * var(--u)) calc(22 * var(--u));
+      padding: calc(22 * var(--u)) calc(22 * var(--u));
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
       overflow: hidden;
-      transition: transform 0.4s var(--main-ease), border-color 0.4s ease;
+      transition: transform 0.4s var(--main-ease), border-color 0.4s ease, box-shadow 0.4s ease;
       cursor: pointer;
-      flex-shrink: 0;
-    }
-    .services-cards-track {
-      display: flex;
-      align-items: center;
-      gap: calc(24 * var(--u));
       flex-shrink: 0;
     }
     .service-card:hover {
       transform: translateY(-8px);
       border-color: var(--cobalt);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.2);
     }
     .service-num {
       font-family: var(--font-mono);
-      font-size: calc(11.5 * var(--u));
+      font-size: calc(11 * var(--u));
       font-weight: 600;
       letter-spacing: 0.16em;
       color: var(--cobalt);
     }
     .service-icon {
-      font-size: calc(36 * var(--u));
-      margin-top: calc(10 * var(--u));
+      font-size: calc(34 * var(--u));
+      margin-top: calc(8 * var(--u));
     }
     .service-body {
       margin-top: auto;
     }
     .service-title {
-      font-family: var(--font-archivo);
-      font-weight: 700;
-      font-size: calc(20 * var(--u) * var(--dev-heading-scale, 1.15));
-      letter-spacing: var(--dev-tracking, 0.08em);
+      font-family: var(--font-heading);
+      font-weight: var(--dev-heading-weight, 600);
+      font-size: calc(18.5 * var(--u) * var(--dev-heading-scale, 1.08));
+      letter-spacing: var(--dev-tracking, 0.015em);
       line-height: 1.25;
-      text-transform: uppercase;
+      text-transform: var(--dev-heading-transform, uppercase);
       color: #FFFFFF;
       margin: 0 0 calc(8 * var(--u)) 0;
     }
     .service-info {
-      font-family: var(--font-archivo);
-      font-size: calc(13.5 * var(--u));
-      line-height: 1.55;
-      letter-spacing: 0.01em;
-      color: var(--ink-soft);
+      font-family: var(--font-body);
+      font-size: calc(13.5 * var(--u) * var(--dev-body-scale, 1));
+      line-height: var(--dev-leading, 1.6);
+      letter-spacing: 0.005em;
+      color: #94A3B8;
       margin: 0;
     }
     .service-arrow {
@@ -1688,19 +1761,19 @@
       line-height: 1.3;
     }
     .solutions-title {
-      font-family: var(--font-archivo);
-      font-weight: 700;
-      font-size: calc(44 * var(--u) * var(--dev-heading-scale, 1.15));
-      letter-spacing: var(--dev-tracking, 0.08em);
-      line-height: 1.1;
-      text-transform: uppercase;
+      font-family: var(--font-heading);
+      font-weight: var(--dev-heading-weight, 700);
+      font-size: calc(38 * var(--u) * var(--dev-heading-scale, 1.08));
+      letter-spacing: var(--dev-tracking, -0.01em);
+      line-height: 1.12;
+      text-transform: var(--dev-heading-transform, uppercase);
       margin: 0 0 calc(16 * var(--u)) 0;
       color: #FFFFFF;
     }
     .solutions-desc {
-      font-family: var(--font-archivo);
-      font-size: calc(15 * var(--u));
-      line-height: 1.65;
+      font-family: var(--font-body);
+      font-size: calc(15 * var(--u) * var(--dev-body-scale, 1));
+      line-height: var(--dev-leading, 1.65);
       letter-spacing: 0.005em;
       color: #94A3B8;
       max-width: calc(740 * var(--u));
@@ -1757,21 +1830,21 @@
       font-family: var(--font-mono);
       font-size: calc(9.5 * var(--u));
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       line-height: 1;
-      color: #93C5FD;
-      background: rgba(59, 130, 246, 0.15);
-      border: 1px solid rgba(59, 130, 246, 0.35);
-      border-radius: 4px;
-      padding: calc(4 * var(--u)) calc(9 * var(--u));
+      color: #7DD3FC;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.32);
+      border-radius: 6px;
+      padding: calc(4.5 * var(--u)) calc(9.5 * var(--u));
       text-transform: uppercase;
     }
     .solution-metric {
       font-family: var(--font-mono);
-      font-size: calc(11.5 * var(--u));
+      font-size: calc(11 * var(--u));
       font-weight: 600;
       color: #38BDF8;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.075em;
       line-height: 1.35;
       text-transform: uppercase;
       display: flex;
@@ -1779,7 +1852,7 @@
       gap: 7px;
     }
     .solution-metric::before {
-      content: ;
+      content: '';
       display: inline-block;
       width: 5px;
       height: 5px;
@@ -1788,22 +1861,22 @@
       box-shadow: 0 0 6px rgba(56, 189, 248, 0.7);
     }
     .solution-name {
-      font-family: var(--font-archivo);
-      font-size: calc(21 * var(--u) * var(--dev-heading-scale, 1.15));
-      font-weight: 700;
-      letter-spacing: var(--dev-tracking, 0.08em);
-      line-height: 1.25;
-      text-transform: uppercase;
+      font-family: var(--font-heading);
+      font-size: calc(19.5 * var(--u) * var(--dev-heading-scale, 1.08));
+      font-weight: var(--dev-heading-weight, 600);
+      letter-spacing: var(--dev-tracking, 0.015em);
+      line-height: 1.28;
+      text-transform: var(--dev-heading-transform, uppercase);
       color: #FFFFFF;
       margin: 0;
     }
     .solution-body {
-      font-family: var(--font-archivo);
-      font-size: calc(13.5 * var(--u));
-      line-height: 1.62;
+      font-family: var(--font-body);
+      font-size: calc(13.5 * var(--u) * var(--dev-body-scale, 1));
+      line-height: var(--dev-leading, 1.65);
       letter-spacing: 0.005em;
-      color: #94A3B8;
-      margin: calc(4 * var(--u)) 0 0 0;
+      color: #CBD5E1;
+      margin: calc(6 * var(--u)) 0 0 0;
     }
     .solution-specs {
       margin-top: calc(22 * var(--u));
@@ -2695,7 +2768,9 @@
     .loader-screen.is-fading,
     .loader-screen.is-fading * {
       pointer-events: none !important;
-      opacity: 0;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      display: none !important;
     }
 
     /* RESPONSIVE ADDITIONS */
@@ -3472,6 +3547,26 @@
           <div class="band-kicker">SERVICES & CAPACITIES</div>
           <h2 class="band-headline">FREIGHT<br>ENGINEERED.</h2>
           <p class="band-desc">From heavy container reach-stacking to deep-sea container lines and temperature-critical reefer fleets, ABC Cargo moves the critical components of global commerce.</p>
+
+          <!-- Interactive Carousel Controls for Display Optimization -->
+          <div class="services-nav-controls">
+            <div class="services-nav-arrows">
+              <button class="services-nav-btn" id="services-prev" aria-label="Previous service" title="Scroll to previous card">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+              </button>
+              <button class="services-nav-btn" id="services-next" aria-label="Next service" title="Scroll to next card">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+            </div>
+            <div class="services-nav-dots" id="services-nav-dots">
+              <span class="service-nav-dot is-active" data-idx="0"></span>
+              <span class="service-nav-dot" data-idx="1"></span>
+              <span class="service-nav-dot" data-idx="2"></span>
+              <span class="service-nav-dot" data-idx="3"></span>
+              <span class="service-nav-dot" data-idx="4"></span>
+            </div>
+            <div class="services-nav-count" id="services-nav-count">01 / 05</div>
+          </div>
         </div>
 
         <div class="services-cards-track">
@@ -4535,30 +4630,44 @@
       <!-- TAB 3: TYPOGRAPHY STUDIO -->
       <div class="dev-tab-content" id="tab-typo" style="display: none;">
         <div class="dev-section-group">
-          <p class="dev-section-title">Headings Font & Scale</p>
+          <p class="dev-section-title">Headings Font & Casing</p>
           <div class="dev-field">
             <label class="dev-field-header" for="ctrl-heading-font">Card & Section Heading Font</label>
             <select class="dev-select" id="ctrl-heading-font">
+              <option value="'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" selected>Geist (Modern High-Tech)</option>
+              <option value="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Inter (Precision Swiss UI)</option>
               <option value="'Archivo', system-ui, sans-serif">Archivo (Industrial Grotesk)</option>
               <option value="'Anton', Impact, sans-serif">Anton (Condensed Bold Poster)</option>
               <option value="'Newsreader', Georgia, serif">Newsreader (Executive Editorial Serif)</option>
-              <option value="'JetBrains Mono', monospace">JetBrains Mono (Technical Monospace)</option>
-              <option value="'Geist', system-ui, sans-serif" selected>Geist (Modern High-Tech)</option>
             </select>
+          </div>
+          <div class="dev-toggle-row">
+            <span>Title Letter Casing</span>
+            <div style="display: flex; gap: 6px;">
+              <button class="dev-btn is-active" id="btn-case-upper" style="padding: 4px 8px; font-size: 10px;">UPPERCASE</button>
+              <button class="dev-btn" id="btn-case-title" style="padding: 4px 8px; font-size: 10px;">Title Case</button>
+            </div>
+          </div>
+          <div class="dev-field">
+            <div class="dev-field-header">
+              <span>Heading Font Weight</span>
+              <span class="dev-val-readout" id="val-head-weight">600 (SemiBold)</span>
+            </div>
+            <input type="range" class="dev-slider" id="ctrl-head-weight" min="400" max="800" step="100" value="600">
           </div>
           <div class="dev-field">
             <div class="dev-field-header">
               <span>Headings Scale</span>
-              <span class="dev-val-readout" id="val-head-scale">1.15x</span>
+              <span class="dev-val-readout" id="val-head-scale">1.08x</span>
             </div>
-            <input type="range" class="dev-slider" id="ctrl-head-scale" min="0.8" max="1.4" step="0.05" value="1.15">
+            <input type="range" class="dev-slider" id="ctrl-head-scale" min="0.8" max="1.4" step="0.02" value="1.08">
           </div>
           <div class="dev-field">
             <div class="dev-field-header">
               <span>Tracking / Letter-Spacing</span>
-              <span class="dev-val-readout" id="val-tracking">0.08em</span>
+              <span class="dev-val-readout" id="val-tracking">0.015em</span>
             </div>
-            <input type="range" class="dev-slider" id="ctrl-tracking" min="-0.04" max="0.15" step="0.01" value="0.08">
+            <input type="range" class="dev-slider" id="ctrl-tracking" min="-0.03" max="0.12" step="0.005" value="0.015">
           </div>
         </div>
 
@@ -4793,9 +4902,7 @@
       if (introFinished) return;
       introFinished = true;
       loaderScreen.classList.add('is-fading');
-      setTimeout(() => {
-        loaderScreen.style.display = 'none';
-      }, 800);
+      loaderScreen.style.display = 'none';
       // Play ocean video
       oceanVideo.play().then(() => oceanVideo.classList.add('is-playing')).catch(() => {});
     }
@@ -6030,12 +6137,12 @@
     // ====================================================
     window.DEV_CONFIG = {
       // 3D Ring
-      ringRadius: 1800,
-      perspective: 760,
-      cardScale: 1.0,
-      cardTilt: 1.0,
-      autoRotate: false,
-      autoRotateSpeed: 0.25,
+      ringRadius: 1300,
+      perspective: 1110,
+      cardScale: 0.75,
+      cardTilt: 0.9,
+      autoRotate: true,
+      autoRotateSpeed: 0.30,
       springStiffness: 180,
       springDamping: 32,
       reflectionOpacity: 65,
@@ -6048,14 +6155,16 @@
       giantText: "ABC CARGO · GLOBAL INTERMODAL",
 
       // Typography
-      headingFont: "'Archivo', system-ui, sans-serif",
-      headingScale: 1.0,
-      tracking: 0.0,
+      headingFont: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+      headingScale: 1.08,
+      headingWeight: 600,
+      headingTransform: "uppercase",
+      tracking: 0.015,
       bodyScale: 1.0,
-      leading: 1.6,
+      leading: 1.65,
 
       // Theme
-      accentColor: "#2F63FF",
+      accentColor: "#38BDF8",
       cardRadius: 16,
       cardBlur: 16
     };
@@ -6264,11 +6373,44 @@
       ctrlHeadingFont.addEventListener('change', e => {
         DEV_CONFIG.headingFont = e.target.value;
         document.documentElement.style.setProperty('--dev-font-heading', e.target.value);
-        document.querySelectorAll('.solutions-title, .solution-name, .service-title').forEach(el => {
+        document.querySelectorAll('.band-headline, .solutions-title, .solution-name, .service-title').forEach(el => {
           el.style.fontFamily = e.target.value;
         });
       });
     }
+
+    // Heading Weight Slider
+    const ctrlHeadWeight = document.getElementById('ctrl-head-weight');
+    const valHeadWeight = document.getElementById('val-head-weight');
+    if (ctrlHeadWeight) {
+      ctrlHeadWeight.addEventListener('input', e => {
+        DEV_CONFIG.headingWeight = parseInt(e.target.value, 10);
+        const weightLabel = DEV_CONFIG.headingWeight === 400 ? '400 (Regular)' :
+                            DEV_CONFIG.headingWeight === 500 ? '500 (Medium)' :
+                            DEV_CONFIG.headingWeight === 600 ? '600 (SemiBold)' :
+                            DEV_CONFIG.headingWeight === 700 ? '700 (Bold)' : '800 (ExtraBold)';
+        valHeadWeight.textContent = weightLabel;
+        document.documentElement.style.setProperty('--dev-heading-weight', DEV_CONFIG.headingWeight);
+        document.querySelectorAll('.band-headline, .solutions-title, .solution-name, .service-title').forEach(el => {
+          el.style.fontWeight = DEV_CONFIG.headingWeight;
+        });
+      });
+    }
+
+    // Letter Casing Toggles (UPPERCASE vs Title Case)
+    const btnCaseUpper = document.getElementById('btn-case-upper');
+    const btnCaseTitle = document.getElementById('btn-case-title');
+    function setHeadingCase(isUpper) {
+      DEV_CONFIG.headingTransform = isUpper ? 'uppercase' : 'capitalize';
+      if (btnCaseUpper) btnCaseUpper.classList.toggle('is-active', isUpper);
+      if (btnCaseTitle) btnCaseTitle.classList.toggle('is-active', !isUpper);
+      document.documentElement.style.setProperty('--dev-heading-transform', DEV_CONFIG.headingTransform);
+      document.querySelectorAll('.band-headline, .solutions-title, .solution-name, .service-title').forEach(el => {
+        el.style.textTransform = DEV_CONFIG.headingTransform;
+      });
+    }
+    if (btnCaseUpper) btnCaseUpper.addEventListener('click', () => setHeadingCase(true));
+    if (btnCaseTitle) btnCaseTitle.addEventListener('click', () => setHeadingCase(false));
 
     const ctrlHeadScale = document.getElementById('ctrl-head-scale');
     const valHeadScale = document.getElementById('val-head-scale');
@@ -6276,12 +6418,7 @@
       ctrlHeadScale.addEventListener('input', e => {
         DEV_CONFIG.headingScale = parseFloat(e.target.value);
         valHeadScale.textContent = e.target.value + 'x';
-        document.querySelectorAll('.solutions-title').forEach(el => {
-          el.style.fontSize = `calc(44px * ${DEV_CONFIG.headingScale})`;
-        });
-        document.querySelectorAll('.solution-name').forEach(el => {
-          el.style.fontSize = `calc(21px * ${DEV_CONFIG.headingScale})`;
-        });
+        document.documentElement.style.setProperty('--dev-heading-scale', DEV_CONFIG.headingScale);
       });
     }
 
@@ -6291,7 +6428,8 @@
       ctrlTracking.addEventListener('input', e => {
         DEV_CONFIG.tracking = parseFloat(e.target.value);
         valTracking.textContent = e.target.value + 'em';
-        document.querySelectorAll('.solutions-title, .solution-name, .service-title').forEach(el => {
+        document.documentElement.style.setProperty('--dev-tracking', e.target.value + 'em');
+        document.querySelectorAll('.band-headline, .solutions-title, .solution-name, .service-title').forEach(el => {
           el.style.letterSpacing = e.target.value + 'em';
         });
       });
@@ -6486,6 +6624,86 @@
           prompt('Copy Configuration:', exportStr);
         });
       });
+    }
+
+    // ====================================================
+    // SERVICES CAROUSEL CONTROLLER (Smooth Display Navigation)
+    // ====================================================
+    let curServiceIdx = 0;
+    const totalServiceCards = 5;
+    const servicesCardsTrack = document.querySelector('.services-cards-track');
+    const servicesPrevBtn = document.getElementById('services-prev');
+    const servicesNextBtn = document.getElementById('services-next');
+    const servicesNavCount = document.getElementById('services-nav-count');
+    const serviceDots = document.querySelectorAll('.service-nav-dot');
+
+    function updateServiceCarousel(idx) {
+      curServiceIdx = Math.max(0, Math.min(totalServiceCards - 1, idx));
+      if (servicesCardsTrack) {
+        const firstCard = servicesCardsTrack.querySelector('.service-card');
+        const cardWidth = firstCard ? firstCard.offsetWidth : 275;
+        const u = Math.min(window.innerWidth / 1440, window.innerHeight / 960);
+        const gap = 24 * u;
+        const shiftPx = -(curServiceIdx * (cardWidth + gap));
+        servicesCardsTrack.style.setProperty('--services-shift', shiftPx);
+      }
+      if (servicesNavCount) {
+        servicesNavCount.textContent = `0${curServiceIdx + 1} / 0${totalServiceCards}`;
+      }
+      serviceDots.forEach((dot, dIdx) => {
+        dot.classList.toggle('is-active', dIdx === curServiceIdx);
+      });
+      // Visual accent on selected card
+      const allCards = document.querySelectorAll('.service-card');
+      allCards.forEach((c, cIdx) => {
+        if (cIdx === curServiceIdx) {
+          c.style.borderColor = 'var(--cobalt)';
+        } else {
+          c.style.borderColor = '';
+        }
+      });
+    }
+    window.updateServiceCarousel = updateServiceCarousel;
+
+    if (servicesNextBtn) {
+      servicesNextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        updateServiceCarousel(curServiceIdx + 1);
+      });
+    }
+    if (servicesPrevBtn) {
+      servicesPrevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        updateServiceCarousel(curServiceIdx - 1);
+      });
+    }
+    serviceDots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetIdx = parseInt(dot.getAttribute('data-idx'), 10);
+        updateServiceCarousel(targetIdx);
+      });
+    });
+
+    // Clicking any service card shifts it to active focus
+    document.querySelectorAll('.service-card').forEach((card, idx) => {
+      card.addEventListener('click', () => {
+        updateServiceCarousel(idx);
+      });
+    });
+
+    // Touch swipe support for mobile/trackpads on services track
+    let servicesTouchStartX = 0;
+    if (servicesCardsTrack) {
+      servicesCardsTrack.addEventListener('touchstart', e => {
+        servicesTouchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      servicesCardsTrack.addEventListener('touchend', e => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const diff = servicesTouchStartX - touchEndX;
+        if (diff > 40) updateServiceCarousel(curServiceIdx + 1);
+        else if (diff < -40) updateServiceCarousel(curServiceIdx - 1);
+      }, { passive: true });
     }
 
     // Reset Defaults
