@@ -602,6 +602,77 @@
     }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
+    /* Experimental Live Corridor Telemetry Ribbon */
+    .corridor-ribbon {
+      width: 100%;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: rgba(56, 189, 248, 0.03);
+      padding: 12px 0;
+      position: relative;
+      z-index: 2;
+    }
+    .corridor-track {
+      display: flex;
+      width: max-content;
+      gap: 48px;
+      animation: ribbonScroll 32s linear infinite;
+      font-family: var(--font-code);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .corridor-ribbon:hover .corridor-track { animation-play-state: paused; }
+    .corridor-item { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; }
+    .corridor-item strong { color: var(--cobalt); font-weight: 600; }
+    @keyframes ribbonScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Custom Precision Reticle Cursor (Desktop Pointer) */
+    @media (pointer: fine) {
+      .custom-reticle {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 28px;
+        height: 28px;
+        border: 1px solid rgba(56, 189, 248, 0.55);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 950;
+        transform: translate3d(-100px, -100px, 0);
+        transition: width 0.22s var(--ease-out), height 0.22s var(--ease-out), border-color 0.22s ease, background 0.22s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .custom-reticle::after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--cobalt);
+      }
+      .custom-reticle.is-hover {
+        width: 46px;
+        height: 46px;
+        border-color: var(--cobalt);
+        background: rgba(56, 189, 248, 0.08);
+      }
+    }
+    @media (pointer: coarse) {
+      .custom-reticle { display: none; }
+    }
+
+    /* Kinetic Magnetic Buttons */
+    .magnetic-btn {
+      will-change: transform;
+      transition: transform 0.25s var(--ease-out), background 0.25s ease, border-color 0.25s ease;
+    }
+
     @media (max-width: 1024px) {
       .about-hero { grid-template-columns: 1fr; }
       .hero-metrics { grid-template-columns: repeat(2, 1fr); }
@@ -620,6 +691,7 @@
 <body>
   <canvas id="dubai-ocean-canvas" aria-hidden="true"></canvas>
   <div class="grain-overlay" aria-hidden="true"></div>
+  <div class="custom-reticle" id="custom-reticle" aria-hidden="true"></div>
 
   <!-- NAVIGATION -->
   <header class="site-nav">
@@ -681,16 +753,34 @@
 
       <!-- Aperture Row-Inspired 9-Blade Mechanical Chronometer -->
       <div class="iris-stage">
-        <div class="iris-canvas-wrap" id="iris-wrap" title="Move cursor or scroll to actuate the 9-blade Dubai Chronometer">
+        <div class="iris-canvas-wrap" id="iris-wrap" title="Click to cycle eras · Move cursor or scroll to actuate the 9-blade Dubai Chronometer">
           <canvas id="iris-canvas" width="760" height="760"></canvas>
           <div class="iris-center-readout">
             <div class="iris-year" id="iris-year">1998</div>
             <div class="iris-sub" id="iris-sub">24°59'N · 55°03'E</div>
           </div>
         </div>
-        <div class="iris-caption">INTERACTIVE 9-BLADE MARITIME IRIS · SCROLL OR HOVER</div>
+        <div class="iris-caption">CLICK IRIS TO CYCLE ERAS · SCROLL OR HOVER TO ACTUATE</div>
       </div>
     </section>
+
+    <!-- LIVE DUBAI CORRIDOR TELEMETRY RIBBON -->
+    <div class="corridor-ribbon" aria-label="Live Dubai Maritime Corridors">
+      <div class="corridor-track">
+        <span class="corridor-item"><strong>DXB → RTM</strong> 14D EXPRESS LOOP</span>
+        <span class="corridor-item"><strong>DXB → SIN</strong> 9D MAINLINE</span>
+        <span class="corridor-item"><strong>JAFZA → DWC</strong> 4H BONDED SEA-AIR BRIDGE</span>
+        <span class="corridor-item"><strong>DXB → SHA</strong> 13D DIRECT</span>
+        <span class="corridor-item"><strong>CRYO-PHARMA</strong> -80°C ZERO EXCURSIONS</span>
+        <span class="corridor-item"><strong>ACTIVE FLEET</strong> 24,912 VESSELS &amp; RIGS</span>
+        <span class="corridor-item"><strong>DXB → RTM</strong> 14D EXPRESS LOOP</span>
+        <span class="corridor-item"><strong>DXB → SIN</strong> 9D MAINLINE</span>
+        <span class="corridor-item"><strong>JAFZA → DWC</strong> 4H BONDED SEA-AIR BRIDGE</span>
+        <span class="corridor-item"><strong>DXB → SHA</strong> 13D DIRECT</span>
+        <span class="corridor-item"><strong>CRYO-PHARMA</strong> -80°C ZERO EXCURSIONS</span>
+        <span class="corridor-item"><strong>ACTIVE FLEET</strong> 24,912 VESSELS &amp; RIGS</span>
+      </div>
+    </div>
 
     <!-- THE DUBAI-BASED FRAMEWORK -->
     <section class="section-block reveal">
@@ -870,8 +960,8 @@
           <h3 style="font-size: clamp(24px, 2.8vw, 36px); font-weight: 800; margin: 0; letter-spacing: -0.02em;">EXPLORE THE 3D FLEET &amp; LIVE RATE ENGINE</h3>
         </div>
         <div class="cta-actions">
-          <a href="index.html#fleet" class="btn-primary">Launch 3D Ocean Fleet ↗</a>
-          <a href="index.html#dispatch" class="btn-secondary">Instant Rate Calculator</a>
+          <a href="index.html#fleet" class="btn-primary magnetic-btn">Launch 3D Ocean Fleet ↗</a>
+          <a href="index.html#dispatch" class="btn-secondary magnetic-btn">Instant Rate Calculator</a>
         </div>
       </div>
     </section>
@@ -1015,7 +1105,7 @@
       tick();
     })();
 
-    // 3. Aperture Row-Inspired 9-Blade Mechanical Iris & Tangent Chronometer
+    // 3. Aperture Row-Inspired 9-Blade Mechanical Iris & Orbital Bearing Chronometer
     (function initIris() {
       const canvas = document.getElementById('iris-canvas');
       const wrap = document.getElementById('iris-wrap');
@@ -1023,17 +1113,26 @@
       const ctx = canvas.getContext('2d');
       const W = 760, H = 760, CX = W / 2, CY = H / 2;
       let targetOpen = 0.62, open = 0.62;
-      let rot = 0, targetRot = 0;
+      let rot = 0, targetRot = 0, sweep = 0;
 
       wrap.addEventListener('pointermove', e => {
         const r = wrap.getBoundingClientRect();
         const nx = (e.clientX - r.left) / r.width - 0.5;
         const ny = (e.clientY - r.top) / r.height - 0.5;
         targetOpen = Math.max(0.22, Math.min(0.92, 0.55 - Math.hypot(nx, ny) * 0.65));
-        targetRot = nx * 0.8;
+        targetRot = nx * 0.85;
       });
       wrap.addEventListener('mouseleave', () => {
         targetOpen = 0.62;
+      });
+
+      // Click Iris to snap blades & cycle through 1998 -> 2026 eras
+      wrap.addEventListener('click', () => {
+        open = 0.14; // Mechanical shutter snap impulse
+        const btns = Array.from(document.querySelectorAll('.era-btn'));
+        const curIdx = btns.findIndex(b => b.classList.contains('is-active'));
+        const nextBtn = btns[(curIdx + 1) % btns.length];
+        if (nextBtn) nextBtn.click();
       });
 
       window.addEventListener('scroll', () => {
@@ -1041,14 +1140,34 @@
         targetRot = p * Math.PI * 1.5;
       }, { passive: true });
 
+      function drawTangentText(text, r, startAngle) {
+        ctx.save();
+        ctx.font = '600 13px "Geist Mono", monospace';
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.78)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        let angle = startAngle;
+        const step = 11 / r;
+        for (let i = 0; i < text.length; i++) {
+          ctx.save();
+          ctx.translate(Math.cos(angle) * r, Math.sin(angle) * r);
+          ctx.rotate(angle + Math.PI / 2);
+          ctx.fillText(text[i], 0, 0);
+          ctx.restore();
+          angle += step;
+        }
+        ctx.restore();
+      }
+
       function draw() {
         requestAnimationFrame(draw);
-        open += (targetOpen - open) * 0.1;
+        open += (targetOpen - open) * 0.11;
         rot += (targetRot - rot) * 0.08;
+        sweep += 0.012;
         ctx.clearRect(0, 0, W, H);
 
-        // Outer Machined Bezel & Degree Ticks
-        const R = 340;
+        // Outer Machined Bezel, Degree Ticks & Tangent Bearings
+        const R = 342;
         ctx.save();
         ctx.translate(CX, CY);
         ctx.rotate(rot * 0.35);
@@ -1066,18 +1185,36 @@
           ctx.beginPath();
           ctx.moveTo(Math.cos(rad) * (R - len), Math.sin(rad) * (R - len));
           ctx.lineTo(Math.cos(rad) * R, Math.sin(rad) * R);
-          ctx.strokeStyle = major ? 'rgba(56, 189, 248, 0.7)' : 'rgba(255, 255, 255, 0.18)';
+          ctx.strokeStyle = major ? 'rgba(56, 189, 248, 0.72)' : 'rgba(255, 255, 255, 0.16)';
           ctx.lineWidth = major ? 2 : 1;
           ctx.stroke();
         }
+
+        drawTangentText('DXB · JAFZA 24°59N', R - 34, -Math.PI * 0.62);
+        drawTangentText('RTM 312° · SIN 108°', R - 34, Math.PI * 0.32);
         ctx.restore();
 
-        // 9-Blade Clipped Mechanical Iris
-        const IR = 265;
+        // 9-Blade Clipped Mechanical Iris + Sonar Radar Sweep
+        const IR = 262;
         ctx.save();
         ctx.beginPath();
         ctx.arc(CX, CY, IR, 0, Math.PI * 2);
         ctx.clip();
+
+        // Subtle sweeping radar cone inside iris
+        ctx.save();
+        ctx.translate(CX, CY);
+        ctx.rotate(sweep);
+        const grad = ctx.createLinearGradient(0, 0, IR, 0);
+        grad.addColorStop(0, 'rgba(56, 189, 248, 0.14)');
+        grad.addColorStop(1, 'rgba(56, 189, 248, 0)');
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.arc(0, 0, IR, -0.35, 0.35);
+        ctx.closePath();
+        ctx.fillStyle = grad;
+        ctx.fill();
+        ctx.restore();
 
         const ro = 78 + open * (IR - 115);
         const twist = (1 - open) * (36 * Math.PI / 180);
@@ -1092,13 +1229,13 @@
 
           ctx.beginPath();
           ctx.rect(0, -IR * 1.4, IR * 2, IR * 2.8);
-          ctx.fillStyle = k % 2 === 0 ? 'rgba(15, 23, 33, 0.92)' : 'rgba(22, 33, 46, 0.92)';
+          ctx.fillStyle = k % 2 === 0 ? 'rgba(13, 20, 29, 0.92)' : 'rgba(20, 30, 42, 0.92)';
           ctx.fill();
 
           ctx.beginPath();
           ctx.moveTo(0, -IR * 1.4);
           ctx.lineTo(0, IR * 1.4);
-          ctx.strokeStyle = 'rgba(56, 189, 248, 0.48)';
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.5)';
           ctx.lineWidth = 2;
           ctx.stroke();
           ctx.restore();
@@ -1108,11 +1245,43 @@
         // Inner Bezel Ring
         ctx.beginPath();
         ctx.arc(CX, CY, IR, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
         ctx.lineWidth = 1.5;
         ctx.stroke();
       }
       draw();
+    })();
+
+    // 3B. Custom Precision Reticle & Magnetic Buttons
+    (function initReticleAndMagnet() {
+      const reticle = document.getElementById('custom-reticle');
+      if (reticle && window.matchMedia('(pointer: fine)').matches) {
+        let rx = -100, ry = -100, tx = -100, ty = -100;
+        window.addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; }, { passive: true });
+        (function loop() {
+          requestAnimationFrame(loop);
+          rx += (tx - rx) * 0.22;
+          ry += (ty - ry) * 0.22;
+          const off = reticle.classList.contains('is-hover') ? 23 : 14;
+          reticle.style.transform = `translate3d(${rx - off}px, ${ry - off}px, 0)`;
+        })();
+        document.querySelectorAll('a, button, .spotlight-card, .iris-canvas-wrap').forEach(el => {
+          el.addEventListener('mouseenter', () => reticle.classList.add('is-hover'));
+          el.addEventListener('mouseleave', () => reticle.classList.remove('is-hover'));
+        });
+      }
+
+      document.querySelectorAll('.magnetic-btn').forEach(btn => {
+        btn.addEventListener('pointermove', e => {
+          const r = btn.getBoundingClientRect();
+          const dx = (e.clientX - (r.left + r.width / 2)) * 0.22;
+          const dy = (e.clientY - (r.top + r.height / 2)) * 0.22;
+          btn.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = 'translate3d(0, 0, 0)';
+        });
+      });
     })();
 
     // 4. Cursor Specular Spotlight + 3D Tilt on Cards (Active Theory DNA)
