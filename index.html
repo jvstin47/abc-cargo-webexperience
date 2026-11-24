@@ -614,15 +614,16 @@
     .service-card {
       width: min(calc(275 * var(--u)), 290px);
       height: min(calc(340 * var(--u)), calc((100vh - var(--edge-px, 50vh)) - 82px));
-      max-height: 350px;
-      min-height: 220px;
+      max-height: 360px;
+      min-height: 270px;
       background: #171717;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: calc(16 * var(--u));
-      padding: calc(22 * var(--u)) calc(22 * var(--u));
+      padding: calc(20 * var(--u)) calc(22 * var(--u));
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      gap: calc(8 * var(--u));
       position: relative;
       overflow: hidden;
       transition: transform 0.4s var(--main-ease), border-color 0.4s ease, box-shadow 0.4s ease;
@@ -640,11 +641,13 @@
       font-weight: 600;
       letter-spacing: 0.16em;
       color: var(--cobalt);
+      flex-shrink: 0;
     }
     .service-icon {
       width: calc(38 * var(--u));
       height: calc(38 * var(--u));
-      margin-top: calc(10 * var(--u));
+      flex-shrink: 0;
+      margin-top: calc(6 * var(--u));
       border-radius: calc(10 * var(--u));
       background: rgba(56, 189, 248, 0.08);
       border: 1px solid rgba(56, 189, 248, 0.22);
@@ -659,6 +662,7 @@
     }
     .service-body {
       margin-top: auto;
+      padding-top: calc(8 * var(--u));
     }
     .service-title {
       font-family: var(--font-heading);

@@ -13,9 +13,9 @@
 
   <style>
     :root {
-      --bg: #0A0E11;
-      --surface: #111820;
-      --card: rgba(255, 255, 255, 0.025);
+      --bg: #070A0D;
+      --surface: #0D131A;
+      --card: rgba(14, 21, 29, 0.72);
       --ink: #EEF4F6;
       --muted: #94A3B8;
       --dim: #64748B;
@@ -50,7 +50,17 @@
     button, input, select, textarea { font-family: var(--font-body); }
     a { color: inherit; text-decoration: none; }
 
-    /* Static SVG Grain Overlay (Aperture Row DNA) */
+    /* Interactive Fullscreen Maritime Vector Canvas */
+    #dubai-ocean-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Static SVG Grain Overlay */
     .grain-overlay {
       position: fixed;
       inset: 0;
@@ -60,20 +70,7 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* Ambient Radial Glow */
-    .ambient-glow {
-      position: fixed;
-      top: -220px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1100px;
-      height: 620px;
-      background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.12) 0%, rgba(2, 132, 199, 0.04) 45%, transparent 72%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* NAVIGATION HEADER (Matching index.html Dark Nav) */
+    /* NAVIGATION HEADER */
     .site-nav {
       position: fixed;
       top: 0;
@@ -85,20 +82,14 @@
       align-items: center;
       padding: 0 max(24px, 3.2vw);
       z-index: 500;
-      background: rgba(10, 14, 17, 0.86);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(7, 10, 13, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
+    .nav-brand { display: flex; align-items: center; gap: 14px; }
     .nav-logo {
-      font-family: var(--font-heading);
       font-size: 20px;
       font-weight: 800;
       letter-spacing: -0.02em;
@@ -109,7 +100,6 @@
       gap: 2px;
     }
     .nav-logo .dot { color: var(--cobalt); }
-
     .nav-tagline {
       font-size: 10px;
       font-weight: 600;
@@ -120,14 +110,7 @@
       padding-left: 12px;
       white-space: nowrap;
     }
-
-    .nav-items {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      flex-wrap: nowrap;
-    }
-
+    .nav-items { display: flex; align-items: center; gap: 22px; flex-wrap: nowrap; }
     .nav-link {
       font-size: 12.5px;
       font-weight: 500;
@@ -153,7 +136,6 @@
       transition: transform 0.35s var(--ease-out);
     }
     .nav-link:hover::after, .nav-link.is-active::after { transform: scaleX(1); }
-
     .nav-cta {
       display: inline-flex;
       align-items: center;
@@ -172,31 +154,34 @@
     }
     .nav-cta:hover { background: #7DD3FC; transform: translateY(-1px); }
 
-    /* LAYOUT CONTAINER */
     .container {
-      max-width: 1320px;
+      max-width: 1340px;
       margin: 0 auto;
       padding: 0 max(24px, 3.2vw);
       position: relative;
       z-index: 2;
     }
 
-    /* HERO SECTION */
+    /* EXPERIMENTAL HERO WITH 9-BLADE IRIS CHRONOMETER */
     .about-hero {
-      padding: 152px 0 88px;
+      padding: 136px 0 84px;
       border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 48px;
+      align-items: center;
     }
 
     .telemetry-strip {
       display: inline-flex;
       align-items: center;
       flex-wrap: wrap;
-      gap: 14px;
-      padding: 8px 16px;
+      gap: 12px;
+      padding: 7px 14px;
       border-radius: 999px;
       background: rgba(56, 189, 248, 0.08);
       border: 1px solid rgba(56, 189, 248, 0.24);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       font-family: var(--font-code);
       font-size: 11px;
       letter-spacing: 0.08em;
@@ -216,44 +201,41 @@
     }
 
     .hero-headline {
-      font-size: clamp(40px, 6.2vw, 84px);
+      font-size: clamp(38px, 5.4vw, 76px);
       font-weight: 800;
-      line-height: 0.98;
-      letter-spacing: -0.03em;
+      line-height: 0.96;
+      letter-spacing: -0.035em;
       text-transform: uppercase;
-      margin: 0 0 28px;
-      max-width: 1080px;
+      margin: 0 0 24px;
     }
-    .hero-headline .accent { color: var(--cobalt); }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.25fr 1fr;
-      gap: 48px;
-      align-items: end;
-      margin-top: 32px;
+    .hero-headline .accent {
+      background: linear-gradient(90deg, #38BDF8, #818CF8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero-lead {
-      font-size: clamp(16px, 1.35vw, 20px);
+      font-size: clamp(15.5px, 1.25vw, 18.5px);
       line-height: 1.65;
       color: #CBD5E1;
-      margin: 0;
+      margin: 0 0 32px;
+      max-width: 660px;
     }
 
     .hero-metrics {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
     }
     .metric-box {
-      padding: 20px 22px;
+      padding: 16px 18px;
       background: var(--card);
+      backdrop-filter: blur(12px);
       border: 1px solid var(--line);
-      border-radius: 14px;
+      border-radius: 12px;
     }
     .metric-val {
-      font-size: clamp(28px, 2.8vw, 38px);
+      font-size: clamp(22px, 2.2vw, 30px);
       font-weight: 800;
       letter-spacing: -0.02em;
       color: #FFFFFF;
@@ -263,68 +245,148 @@
     .metric-val .unit { color: var(--cobalt); }
     .metric-lbl {
       margin-top: 6px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
+    /* 9-Blade Aperture & Dubai Chronometer Stage */
+    .iris-stage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .iris-canvas-wrap {
+      position: relative;
+      width: min(380px, 80vw);
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: crosshair;
+    }
+    #iris-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .iris-center-readout {
+      position: absolute;
+      text-align: center;
+      pointer-events: none;
+    }
+    .iris-year {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+    .iris-sub {
+      font-family: var(--font-code);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--cobalt);
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+    .iris-caption {
+      margin-top: 12px;
+      font-family: var(--font-code);
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      color: var(--dim);
+      text-transform: uppercase;
+    }
+
     /* SECTION HEADERS */
     .section-block {
-      padding: 96px 0;
+      padding: 92px 0;
       border-bottom: 1px solid var(--line);
     }
     .section-kicker {
+      font-family: var(--font-code);
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--cobalt);
       margin-bottom: 12px;
     }
     .section-title {
-      font-size: clamp(30px, 3.8vw, 52px);
+      font-size: clamp(28px, 3.6vw, 48px);
       font-weight: 800;
       letter-spacing: -0.025em;
       line-height: 1.06;
       text-transform: uppercase;
-      margin: 0 0 18px;
+      margin: 0 0 16px;
     }
     .section-desc {
       font-size: 16px;
       line-height: 1.65;
       color: var(--muted);
       max-width: 720px;
-      margin: 0 0 48px;
+      margin: 0 0 44px;
     }
 
-    /* DUBAI FRAMEWORK CARDS */
+    /* ACTIVE THEORY CURSOR-SPOTLIGHT + 3D TILT + VIEWFINDER RETICLE CARDS */
     .framework-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
+      perspective: 1100px;
     }
-    .fw-card {
+    .spotlight-card {
+      position: relative;
       background: var(--card);
+      backdrop-filter: blur(14px);
       border: 1px solid var(--line);
       border-radius: 16px;
       padding: 32px;
       display: flex;
       flex-direction: column;
       gap: 16px;
-      transition: border-color 0.3s ease, transform 0.3s var(--ease-out), background 0.3s ease;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.25s var(--ease-out), border-color 0.3s ease;
+      --mx: 50%;
+      --my: 50%;
     }
-    .fw-card:hover {
-      border-color: rgba(56, 189, 248, 0.45);
-      background: rgba(56, 189, 248, 0.035);
-      transform: translateY(-4px);
+    .spotlight-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(420px circle at var(--mx) var(--my), rgba(56, 189, 248, 0.14), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
     }
-    .fw-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .spotlight-card:hover::before { opacity: 1; }
+    .spotlight-card:hover { border-color: rgba(56, 189, 248, 0.45); }
+
+    /* Aperture Row Viewfinder Corner Reticles */
+    .reticle-corner {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-color: var(--cobalt);
+      border-style: solid;
+      opacity: 0;
+      transition: all 0.3s var(--ease-out);
+      pointer-events: none;
     }
+    .reticle-tl { top: 10px; left: 10px; border-width: 1.5px 0 0 1.5px; transform: translate(-6px, -6px); }
+    .reticle-tr { top: 10px; right: 10px; border-width: 1.5px 1.5px 0 0; transform: translate(6px, -6px); }
+    .reticle-bl { bottom: 10px; left: 10px; border-width: 0 0 1.5px 1.5px; transform: translate(-6px, 6px); }
+    .reticle-br { bottom: 10px; right: 10px; border-width: 0 1.5px 1.5px 0; transform: translate(6px, 6px); }
+    .spotlight-card:hover .reticle-corner { opacity: 0.9; transform: translate(0, 0); }
+
+    .fw-top { display: flex; justify-content: space-between; align-items: center; }
     .fw-badge {
       font-family: var(--font-code);
       font-size: 11px;
@@ -348,19 +410,8 @@
       color: var(--cobalt);
     }
     .fw-icon svg { width: 19px; height: 19px; }
-    .fw-title {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      margin: 4px 0 0;
-      color: #FFFFFF;
-    }
-    .fw-copy {
-      font-size: 14.5px;
-      line-height: 1.65;
-      color: var(--muted);
-      margin: 0;
-    }
+    .fw-title { font-size: 22px; font-weight: 700; letter-spacing: -0.015em; margin: 4px 0 0; color: #FFFFFF; }
+    .fw-copy { font-size: 14.5px; line-height: 1.65; color: var(--muted); margin: 0; }
     .fw-specs {
       margin-top: auto;
       padding-top: 16px;
@@ -373,18 +424,14 @@
     }
     .fw-specs span.lbl { color: var(--dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 
-    /* INTERACTIVE CHRONICLE TIMELINE (1998 - 2026) */
+    /* INTERACTIVE CHRONICLE TIMELINE */
     .timeline-shell {
       display: grid;
       grid-template-columns: 320px 1fr;
       gap: 36px;
       align-items: start;
     }
-    .era-tabs {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .era-tabs { display: flex; flex-direction: column; gap: 10px; }
     .era-btn {
       text-align: left;
       padding: 16px 20px;
@@ -398,32 +445,20 @@
       align-items: center;
       transition: all 0.25s ease;
     }
-    .era-btn:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-      color: #FFFFFF;
-    }
+    .era-btn:hover { border-color: rgba(56, 189, 248, 0.4); color: #FFFFFF; transform: translateX(4px); }
     .era-btn.is-active {
       background: rgba(56, 189, 248, 0.12);
       border-color: var(--cobalt);
       color: #FFFFFF;
     }
-    .era-year {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      font-variant-numeric: tabular-nums;
-    }
+    .era-year { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
     .era-btn.is-active .era-year { color: var(--cobalt); }
-    .era-loc {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
+    .era-loc { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
 
     .era-stage {
-      background: linear-gradient(145deg, rgba(17, 24, 32, 0.95), rgba(10, 14, 17, 0.98));
-      border: 1px solid rgba(56, 189, 248, 0.22);
+      background: linear-gradient(145deg, rgba(14, 21, 29, 0.92), rgba(7, 10, 13, 0.96));
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.24);
       border-radius: 18px;
       padding: 40px;
       min-height: 320px;
@@ -431,6 +466,7 @@
       flex-direction: column;
       justify-content: space-between;
       gap: 24px;
+      transition: transform 0.3s var(--ease-out);
     }
     .era-stage-meta {
       display: flex;
@@ -443,19 +479,8 @@
       color: var(--cobalt);
       letter-spacing: 0.08em;
     }
-    .era-stage-title {
-      font-size: clamp(24px, 2.5vw, 34px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin: 0;
-      color: #FFFFFF;
-    }
-    .era-stage-body {
-      font-size: 15.5px;
-      line-height: 1.7;
-      color: #CBD5E1;
-      margin: 0;
-    }
+    .era-stage-title { font-size: clamp(24px, 2.5vw, 34px); font-weight: 800; letter-spacing: -0.02em; margin: 0; color: #FFFFFF; }
+    .era-stage-body { font-size: 15.5px; line-height: 1.7; color: #CBD5E1; margin: 0; }
     .era-stage-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -463,57 +488,21 @@
       padding-top: 22px;
       border-top: 1px solid var(--line);
     }
-    .era-stat-val {
-      font-size: 20px;
-      font-weight: 700;
-      color: #FFFFFF;
-      font-variant-numeric: tabular-nums;
-    }
-    .era-stat-lbl {
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-top: 4px;
-    }
+    .era-stat-val { font-size: 20px; font-weight: 700; color: #FFFFFF; font-variant-numeric: tabular-nums; }
+    .era-stat-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
 
     /* DUBAI COMMAND HUBS */
-    .hubs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-    .hub-card {
-      padding: 28px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-    }
-    .hub-coord {
-      font-family: var(--font-code);
-      font-size: 11px;
-      color: var(--cobalt);
-      margin-bottom: 10px;
-    }
-    .hub-name {
-      font-size: 20px;
-      font-weight: 700;
-      margin: 0 0 10px;
-      color: #FFFFFF;
-    }
-    .hub-desc {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--muted);
-      margin: 0;
-    }
+    .hubs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .hub-coord { font-family: var(--font-code); font-size: 11px; color: var(--cobalt); margin-bottom: 6px; }
+    .hub-name { font-size: 20px; font-weight: 700; margin: 0 0 8px; color: #FFFFFF; }
+    .hub-desc { font-size: 14px; line-height: 1.6; color: var(--muted); margin: 0; }
 
     /* CTA BANNER */
     .cta-banner {
       margin: 88px 0 0;
-      padding: 56px 48px;
+      padding: 52px 48px;
       border-radius: 20px;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.14) 0%, rgba(17, 24, 32, 0.9) 65%);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.14) 0%, rgba(14, 21, 29, 0.92) 65%);
       border: 1px solid rgba(56, 189, 248, 0.3);
       display: flex;
       justify-content: space-between;
@@ -521,11 +510,7 @@
       flex-wrap: wrap;
       gap: 28px;
     }
-    .cta-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
+    .cta-actions { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn-primary {
       padding: 14px 26px;
       border-radius: 999px;
@@ -554,18 +539,20 @@
 
     /* GIANT ARCHITECTURAL FOOTER */
     .site-footer {
-      background: #06090C;
+      background: #05070A;
       color: var(--muted);
       padding: 72px max(24px, 3.2vw) 48px;
       border-top: 1px solid var(--line);
       margin-top: 96px;
+      position: relative;
+      z-index: 2;
       overflow: hidden;
     }
     .footer-grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1fr 1fr;
       gap: 40px;
-      max-width: 1320px;
+      max-width: 1340px;
       margin: 0 auto 48px;
     }
     .footer-col-title {
@@ -576,15 +563,10 @@
       color: var(--cobalt);
       margin-bottom: 14px;
     }
-    .footer-col-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 13px;
-    }
+    .footer-col-list { display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
     .footer-col-list a:hover { color: #FFFFFF; }
     .footer-bottom-bar {
-      max-width: 1320px;
+      max-width: 1340px;
       margin: 0 auto 24px;
       padding-top: 24px;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
@@ -609,21 +591,22 @@
       margin-top: 12px;
     }
 
-    /* SCROLL REVEAL */
     .reveal {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(22px);
       transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
     }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 960px) {
-      .hero-grid, .framework-grid, .timeline-shell, .hubs-grid { grid-template-columns: 1fr; }
+    @media (max-width: 1024px) {
+      .about-hero { grid-template-columns: 1fr; }
+      .hero-metrics { grid-template-columns: repeat(2, 1fr); }
+      .framework-grid, .timeline-shell, .hubs-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 820px) {
       .nav-tagline, .nav-link:not(.is-active) { display: none; }
-      .about-hero { padding-top: 116px; }
+      .about-hero { padding-top: 112px; }
       .era-stage { padding: 26px; }
       .era-stage-stats { grid-template-columns: 1fr; }
       .cta-banner { padding: 32px 24px; }
@@ -631,8 +614,8 @@
   </style>
 </head>
 <body>
+  <canvas id="dubai-ocean-canvas" aria-hidden="true"></canvas>
   <div class="grain-overlay" aria-hidden="true"></div>
-  <div class="ambient-glow" aria-hidden="true"></div>
 
   <!-- NAVIGATION -->
   <header class="site-nav">
@@ -652,45 +635,55 @@
   </header>
 
   <main class="container">
-    <!-- HERO -->
+    <!-- EXPERIMENTAL HERO WITH 9-BLADE APERTURE CHRONOMETER -->
     <section class="about-hero">
-      <div class="telemetry-strip">
-        <span class="pulse-dot"></span>
-        <span>EST. 1998 · JEBEL ALI &amp; PORT RASHID, DUBAI, UAE</span>
-        <span>·</span>
-        <span id="dubai-clock">DXB GST --:--:--</span>
-        <span>·</span>
-        <span>LAT 24°59'08"N · LON 55°03'40"E</span>
-      </div>
+      <div>
+        <div class="telemetry-strip">
+          <span class="pulse-dot"></span>
+          <span>EST. 1998 · JEBEL ALI &amp; PORT RASHID, DUBAI, UAE</span>
+          <span>·</span>
+          <span id="dubai-clock">DXB GST --:--:--</span>
+        </div>
 
-      <h1 class="hero-headline">
-        ARCHITECTED IN <span class="accent">DUBAI.</span><br>
-        BUILT FOR THE WORLD’S OCEANS.
-      </h1>
+        <h1 class="hero-headline">
+          ARCHITECTED IN <span class="accent">DUBAI.</span><br>
+          BUILT FOR THE WORLD’S OCEANS.
+        </h1>
 
-      <div class="hero-grid">
         <p class="hero-lead">
-          Founded in Dubai in 1998 at the maritime crossroads of East Asia, Europe, and Africa, <strong>ABC Cargo</strong> operates a sovereign, Dubai-engineered intermodal logistics framework. Over nearly three decades of continuous execution, we have evolved from a four-vessel Arabian Gulf feeder line into an autonomous deep-sea, Sea-Air, and GDP-certified cold-chain infrastructure serving 140+ countries.
+          Founded in Dubai in 1998 at the maritime crossroads of East Asia, Europe, and Africa, <strong>ABC Cargo</strong> operates a sovereign, Dubai-engineered intermodal logistics framework. Over 28+ years of unbroken execution, we have evolved from a four-vessel Arabian Gulf feeder line into an autonomous deep-sea, Sea-Air, and GDP-certified cold-chain infrastructure serving 140+ countries.
         </p>
 
         <div class="hero-metrics">
           <div class="metric-box">
             <div class="metric-val">1998</div>
-            <div class="metric-lbl">Founded · Port Rashid, Dubai</div>
+            <div class="metric-lbl">Port Rashid, Dubai</div>
           </div>
           <div class="metric-box">
-            <div class="metric-val">28<span class="unit">+</span> YRS</div>
-            <div class="metric-lbl">Unbroken Maritime Excellence</div>
+            <div class="metric-val">28<span class="unit">+</span></div>
+            <div class="metric-lbl">Years Excellence</div>
           </div>
           <div class="metric-box">
-            <div class="metric-val">11.4<span class="unit">M+</span></div>
-            <div class="metric-lbl">Annual TEU Orchestrated</div>
+            <div class="metric-val">11.4<span class="unit">M</span></div>
+            <div class="metric-lbl">Annual TEU</div>
           </div>
           <div class="metric-box">
             <div class="metric-val">99.8<span class="unit">%</span></div>
-            <div class="metric-lbl">Schedule &amp; Cold-Chain Integrity</div>
+            <div class="metric-lbl">Integrity Rate</div>
           </div>
         </div>
+      </div>
+
+      <!-- Aperture Row-Inspired 9-Blade Mechanical Chronometer -->
+      <div class="iris-stage">
+        <div class="iris-canvas-wrap" id="iris-wrap" title="Move cursor or scroll to actuate the 9-blade Dubai Chronometer">
+          <canvas id="iris-canvas" width="760" height="760"></canvas>
+          <div class="iris-center-readout">
+            <div class="iris-year" id="iris-year">1998</div>
+            <div class="iris-sub" id="iris-sub">24°59'N · 55°03'E</div>
+          </div>
+        </div>
+        <div class="iris-caption">INTERACTIVE 9-BLADE MARITIME IRIS · SCROLL OR HOVER</div>
       </div>
     </section>
 
@@ -703,7 +696,9 @@
       </p>
 
       <div class="framework-grid">
-        <article class="fw-card">
+        <article class="spotlight-card">
+          <span class="reticle-corner reticle-tl"></span><span class="reticle-corner reticle-tr"></span>
+          <span class="reticle-corner reticle-bl"></span><span class="reticle-corner reticle-br"></span>
           <div class="fw-top">
             <span class="fw-badge">MODULE 01 // SEA-AIR</span>
             <div class="fw-icon" aria-hidden="true">
@@ -718,7 +713,9 @@
           </div>
         </article>
 
-        <article class="fw-card">
+        <article class="spotlight-card">
+          <span class="reticle-corner reticle-tl"></span><span class="reticle-corner reticle-tr"></span>
+          <span class="reticle-corner reticle-bl"></span><span class="reticle-corner reticle-br"></span>
           <div class="fw-top">
             <span class="fw-badge">MODULE 02 // TELEMETRY</span>
             <div class="fw-icon" aria-hidden="true">
@@ -733,7 +730,9 @@
           </div>
         </article>
 
-        <article class="fw-card">
+        <article class="spotlight-card">
+          <span class="reticle-corner reticle-tl"></span><span class="reticle-corner reticle-tr"></span>
+          <span class="reticle-corner reticle-bl"></span><span class="reticle-corner reticle-br"></span>
           <div class="fw-top">
             <span class="fw-badge">MODULE 03 // CRYO-PHARMA</span>
             <div class="fw-icon" aria-hidden="true">
@@ -748,7 +747,9 @@
           </div>
         </article>
 
-        <article class="fw-card">
+        <article class="spotlight-card">
+          <span class="reticle-corner reticle-tl"></span><span class="reticle-corner reticle-tr"></span>
+          <span class="reticle-corner reticle-bl"></span><span class="reticle-corner reticle-br"></span>
           <div class="fw-top">
             <span class="fw-badge">MODULE 04 // ESG LEDGER</span>
             <div class="fw-icon" aria-hidden="true">
@@ -835,17 +836,23 @@
       </p>
 
       <div class="hubs-grid">
-        <div class="hub-card">
+        <div class="spotlight-card">
+          <span class="reticle-corner reticle-tl"></span><span class="reticle-corner reticle-tr"></span>
+          <span class="reticle-corner reticle-bl"></span><span class="reticle-corner reticle-br"></span>
           <div class="hub-coord">24°59'08"N · 55°03'40"E</div>
           <h3 class="hub-name">JAFZA Deepwater NOC</h3>
           <p class="hub-desc">24/7 Network Operations Center at Jebel Ali Berth 03 overseeing ultra-large container vessel (ULCV) slot allocations, crane rates, and bonded transshipment.</p>
         </div>
-        <div class="hub-card">
+        <div class="spotlight-card">
+          <span class="reticle-corner reticle-tl"></span><span class="reticle-corner reticle-tr"></span>
+          <span class="reticle-corner reticle-bl"></span><span class="reticle-corner reticle-br"></span>
           <div class="hub-coord">24°53'47"N · 55°09'41"E</div>
           <h3 class="hub-name">DWC Cryo-Pharma Apron</h3>
           <p class="hub-desc">Dedicated temperature-controlled air cargo facility at Al Maktoum International powering our 4-hour Sea-Air bridge for lifesciences and semiconductor freight.</p>
         </div>
-        <div class="hub-card">
+        <div class="spotlight-card">
+          <span class="reticle-corner reticle-tl"></span><span class="reticle-corner reticle-tr"></span>
+          <span class="reticle-corner reticle-bl"></span><span class="reticle-corner reticle-br"></span>
           <div class="hub-coord">25°12'43"N · 55°16'54"E</div>
           <h3 class="hub-name">DIFC Charter &amp; AI Lab</h3>
           <p class="hub-desc">Global commercial chartering desk, maritime ESG compliance governance, and the engineering team behind our predictive AIS routing engine.</p>
@@ -924,7 +931,203 @@
     updateDubaiClock();
     setInterval(updateDubaiClock, 1000);
 
-    // 2. Interactive Chronicle Timeline (1998 - 2026)
+    // 2. Interactive Maritime Vector Constellation Canvas (Active Theory DNA)
+    (function initOceanCanvas() {
+      const canvas = document.getElementById('dubai-ocean-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = 0, h = 0, dpr = Math.min(2, window.devicePixelRatio || 1);
+      const mouse = { x: -9999, y: -9999, sx: -9999, sy: -9999 };
+      const nodes = [];
+      const COUNT = 58;
+
+      function resize() {
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      window.addEventListener('resize', resize, { passive: true });
+      resize();
+
+      for (let i = 0; i < COUNT; i++) {
+        nodes.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          r: 1.2 + Math.random() * 1.4
+        });
+      }
+
+      window.addEventListener('pointermove', e => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      }, { passive: true });
+
+      function tick() {
+        requestAnimationFrame(tick);
+        ctx.clearRect(0, 0, w, h);
+        mouse.sx += (mouse.x - mouse.sx) * 0.1;
+        mouse.sy += (mouse.y - mouse.sy) * 0.1;
+
+        for (let i = 0; i < COUNT; i++) {
+          const n = nodes[i];
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > w) n.vx *= -1;
+          if (n.y < 0 || n.y > h) n.vy *= -1;
+
+          const dxm = n.x - mouse.sx;
+          const dym = n.y - mouse.sy;
+          const dm = Math.hypot(dxm, dym);
+          if (dm < 170 && dm > 1) {
+            const push = (1 - dm / 170) * 0.9;
+            n.x += (dxm / dm) * push;
+            n.y += (dym / dm) * push;
+          }
+
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = dm < 180 ? 'rgba(56, 189, 248, 0.7)' : 'rgba(148, 163, 184, 0.25)';
+          ctx.fill();
+
+          for (let j = i + 1; j < COUNT; j++) {
+            const m = nodes[j];
+            const dist = Math.hypot(n.x - m.x, n.y - m.y);
+            if (dist < 145) {
+              ctx.beginPath();
+              ctx.moveTo(n.x, n.y);
+              ctx.lineTo(m.x, m.y);
+              ctx.strokeStyle = `rgba(56, 189, 248, ${(1 - dist / 145) * 0.14})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+      tick();
+    })();
+
+    // 3. Aperture Row-Inspired 9-Blade Mechanical Iris & Tangent Chronometer
+    (function initIris() {
+      const canvas = document.getElementById('iris-canvas');
+      const wrap = document.getElementById('iris-wrap');
+      if (!canvas || !wrap) return;
+      const ctx = canvas.getContext('2d');
+      const W = 760, H = 760, CX = W / 2, CY = H / 2;
+      let targetOpen = 0.62, open = 0.62;
+      let rot = 0, targetRot = 0;
+
+      wrap.addEventListener('pointermove', e => {
+        const r = wrap.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width - 0.5;
+        const ny = (e.clientY - r.top) / r.height - 0.5;
+        targetOpen = Math.max(0.22, Math.min(0.92, 0.55 - Math.hypot(nx, ny) * 0.65));
+        targetRot = nx * 0.8;
+      });
+      wrap.addEventListener('mouseleave', () => {
+        targetOpen = 0.62;
+      });
+
+      window.addEventListener('scroll', () => {
+        const p = Math.min(1, window.scrollY / (document.body.scrollHeight - window.innerHeight || 1));
+        targetRot = p * Math.PI * 1.5;
+      }, { passive: true });
+
+      function draw() {
+        requestAnimationFrame(draw);
+        open += (targetOpen - open) * 0.1;
+        rot += (targetRot - rot) * 0.08;
+        ctx.clearRect(0, 0, W, H);
+
+        // Outer Machined Bezel & Degree Ticks
+        const R = 340;
+        ctx.save();
+        ctx.translate(CX, CY);
+        ctx.rotate(rot * 0.35);
+
+        ctx.beginPath();
+        ctx.arc(0, 0, R, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.28)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        for (let deg = 0; deg < 360; deg += 5) {
+          const rad = deg * Math.PI / 180;
+          const major = deg % 30 === 0;
+          const len = major ? 16 : 7;
+          ctx.beginPath();
+          ctx.moveTo(Math.cos(rad) * (R - len), Math.sin(rad) * (R - len));
+          ctx.lineTo(Math.cos(rad) * R, Math.sin(rad) * R);
+          ctx.strokeStyle = major ? 'rgba(56, 189, 248, 0.7)' : 'rgba(255, 255, 255, 0.18)';
+          ctx.lineWidth = major ? 2 : 1;
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        // 9-Blade Clipped Mechanical Iris
+        const IR = 265;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(CX, CY, IR, 0, Math.PI * 2);
+        ctx.clip();
+
+        const ro = 78 + open * (IR - 115);
+        const twist = (1 - open) * (36 * Math.PI / 180);
+
+        for (let k = 0; k < 9; k++) {
+          const theta = (k / 9) * Math.PI * 2 + twist + rot * 0.2;
+          ctx.save();
+          ctx.translate(CX, CY);
+          ctx.rotate(theta);
+          ctx.translate(ro, 0);
+          ctx.rotate(-twist * 1.5);
+
+          ctx.beginPath();
+          ctx.rect(0, -IR * 1.4, IR * 2, IR * 2.8);
+          ctx.fillStyle = k % 2 === 0 ? 'rgba(15, 23, 33, 0.92)' : 'rgba(22, 33, 46, 0.92)';
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.moveTo(0, -IR * 1.4);
+          ctx.lineTo(0, IR * 1.4);
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.48)';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.restore();
+        }
+        ctx.restore();
+
+        // Inner Bezel Ring
+        ctx.beginPath();
+        ctx.arc(CX, CY, IR, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+      draw();
+    })();
+
+    // 4. Cursor Specular Spotlight + 3D Tilt on Cards (Active Theory DNA)
+    document.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        card.style.setProperty('--mx', `${x}px`);
+        card.style.setProperty('--my', `${y}px`);
+        const rx = ((y / r.height) - 0.5) * -6;
+        const ry = ((x / r.width) - 0.5) * 6;
+        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
+    });
+
+    // 5. Interactive Chronicle Timeline (1998 - 2026)
     const ERAS = {
       '1998': {
         badge: 'ERA 01 // FOUNDATION',
@@ -973,6 +1176,9 @@
       }
     };
 
+    const irisYearEl = document.getElementById('iris-year');
+    const irisSubEl = document.getElementById('iris-sub');
+
     document.querySelectorAll('.era-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.era-btn').forEach(b => {
@@ -994,10 +1200,13 @@
         document.getElementById('era-lbl-2').textContent = d.l2;
         document.getElementById('era-stat-3').textContent = d.s3;
         document.getElementById('era-lbl-3').textContent = d.l3;
+
+        if (irisYearEl) irisYearEl.textContent = btn.dataset.era;
+        if (irisSubEl) irisSubEl.textContent = d.coords.split('·')[1]?.trim() || "24°59'N · 55°03'E";
       });
     });
 
-    // 3. Active Theory Matrix Text Scramble on Nav & Badges
+    // 6. Matrix Text Scramble
     (function initMatrixScramble() {
       const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#*';
       document.querySelectorAll('.nav-link, .fw-badge').forEach(el => {
@@ -1027,7 +1236,7 @@
       });
     })();
 
-    // 4. Scroll Reveal Observer
+    // 7. Scroll Reveal Observer
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
