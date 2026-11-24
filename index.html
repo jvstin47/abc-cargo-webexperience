@@ -87,6 +87,11 @@
       --intro-scale: 1;
     }
 
+    @media (min-width: 821px) {
+      .quick-dock {
+        display: none !important;
+      }
+    }
     @media (max-width: 820px) {
       :root {
         --u: calc(100vw / 390);
@@ -1689,6 +1694,11 @@
     .footer-link:hover { color: #FFFFFF; }
 
     /* MOBILE REFOW (< 820px) */
+    @media (min-width: 821px) {
+      .quick-dock {
+        display: none !important;
+      }
+    }
     @media (max-width: 820px) {
       .site-nav {
         height: 56px;
@@ -2156,6 +2166,7 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
+      gap: 16px;
       border-top: 1px solid rgba(255, 255, 255, 0.15);
       padding-top: calc(16 * var(--u));
       margin-top: calc(16 * var(--u));
@@ -2686,7 +2697,7 @@
       inset: 0;
       background: rgba(3, 6, 9, 0.85);
       backdrop-filter: blur(14px);
-      z-index: 1350;
+      z-index: 2000;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2868,7 +2879,7 @@
       cursor: pointer;
     }
 
-    /* FLOATING QUICK ACTIONS DOCK */
+    /* FLOATING QUICK ACTIONS DOCK (Mobile only — Desktop uses fixed header) */
     .quick-dock {
       position: fixed;
       bottom: calc(24 * var(--u));
@@ -2943,6 +2954,11 @@
         grid-template-columns: 1fr;
       }
     }
+    @media (min-width: 821px) {
+      .quick-dock {
+        display: none !important;
+      }
+    }
     @media (max-width: 820px) {
       .nav-track-btn,
       .nav-sound-btn,
@@ -2968,8 +2984,8 @@
         white-space: nowrap;
         flex-shrink: 0;
       }
-      #dev-studio-pill {
-        bottom: 64px !important;
+      #dev-trigger-pill {
+        bottom: 68px !important;
         right: 12px !important;
         padding: 6px 10px !important;
         font-size: 10px !important;
@@ -3247,7 +3263,8 @@
       position: fixed;
       bottom: calc(24 * var(--u));
       right: calc(24 * var(--u));
-      z-index: 99990;
+      z-index: 400;
+      opacity: 0.55;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -5132,19 +5149,19 @@
       img.src = s.img;
     });
 
-    // Odometer animation
+    // Odometer animation (crisp 450ms sweep)
     let odoDisplay = 0;
     let odoTimer = setInterval(() => {
-      let target = Math.min(100, Math.round((loadedCount / totalAssets) * 100));
+      let target = Math.min(100, Math.max(odoDisplay + 4, Math.round((loadedCount / totalAssets) * 100)));
       if (odoDisplay < target) {
-        odoDisplay++;
+        odoDisplay = Math.min(100, target);
         odometerVal.textContent = String(odoDisplay).padStart(3, '0');
       }
       if (odoDisplay >= 100) {
         clearInterval(odoTimer);
-        setTimeout(finishIntro, 400);
+        setTimeout(finishIntro, 150);
       }
-    }, 25);
+    }, 16);
 
     // Failsafe intro completion
     setTimeout(() => {
