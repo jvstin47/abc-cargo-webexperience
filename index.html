@@ -103,6 +103,9 @@
     *, *::before, *::after {
       box-sizing: inherit;
     }
+    button, input, select, textarea {
+      font-family: var(--font-body);
+    }
     body {
       margin: 0;
       padding: 0;
@@ -921,6 +924,72 @@
       will-change: transform;
     }
 
+    /* Aperture Row-inspired Maritime Compass Azimuth Dial */
+    .compass-hud {
+      position: absolute;
+      top: calc(20 * var(--u));
+      right: calc(24 * var(--u));
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 14px;
+      background: rgba(10, 14, 17, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      pointer-events: none;
+      color: #FFFFFF;
+    }
+    .compass-dial-svg {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+    }
+    .compass-dial-ring {
+      transform-origin: 15px 15px;
+      will-change: transform;
+    }
+    .compass-readout {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+    .compass-hdg {
+      font-family: var(--font-code);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #38BDF8;
+    }
+    .compass-sub {
+      font-family: var(--font-heading);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+    }
+
+    /* AIS Map Sonar Radar Ping */
+    @keyframes sonarExpand {
+      0% { r: 6; opacity: 0.95; stroke-width: 2.5; }
+      100% { r: 44; opacity: 0; stroke-width: 0.5; }
+    }
+    .sonar-ping-ring {
+      fill: none;
+      stroke: #38BDF8;
+      pointer-events: none;
+      opacity: 0;
+    }
+    .sonar-ping-ring.is-pinging {
+      animation: sonarExpand 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .sonar-ping-ring.delay.is-pinging {
+      animation: sonarExpand 1.15s 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
     .ring-card {
       position: absolute;
       width: 284px;
@@ -1530,16 +1599,64 @@
       color: var(--ink-soft);
     }
 
-    /* FOOTER */
+    /* FOOTER (Giant Architectural Wordmark) */
     .site-footer {
-      background: #080B0E;
+      background: #06090C;
       color: var(--ink-soft);
-      padding: calc(50 * var(--u)) calc(45 * var(--u)) calc(40 * var(--u));
+      padding: calc(72 * var(--u)) calc(45 * var(--u)) calc(110 * var(--u));
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: var(--font-heading);
+      position: relative;
+      overflow: hidden;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: calc(40 * var(--u));
+      max-width: calc(1360 * var(--u));
+      margin: 0 auto calc(56 * var(--u));
+    }
+    .footer-col-title {
+      font-size: calc(11 * var(--u));
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cobalt);
+      margin-bottom: calc(16 * var(--u));
+    }
+    .footer-col-list {
+      display: flex;
+      flex-direction: column;
+      gap: calc(10 * var(--u));
+      font-size: calc(13 * var(--u));
+      color: #94A3B8;
+    }
+    .footer-wordmark {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: clamp(48px, 11.2vw, 180px);
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.06);
+      text-align: center;
+      user-select: none;
+      margin: calc(20 * var(--u)) auto 0;
+      white-space: nowrap;
+    }
+    .footer-bottom-bar {
+      max-width: calc(1360 * var(--u));
+      margin: 0 auto calc(24 * var(--u));
+      padding-top: calc(24 * var(--u));
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      font-family: var(--font-archivo);
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: calc(12 * var(--u));
+      color: #64748B;
+    }
       font-size: calc(12.5 * var(--u));
       line-height: 1.6;
       letter-spacing: 0.01em;
@@ -1596,11 +1713,16 @@
         gap: 18px;
       }
       .band-intro {
-        width: 260px;
+        width: 250px;
         padding-right: 18px;
         border-right: 1px solid rgba(255, 255, 255, 0.12);
         border-bottom: none;
         margin-bottom: 0;
+        overflow: hidden;
+      }
+      .band-headline {
+        font-size: 30px !important;
+        line-height: 1.05 !important;
       }
       .services-cards-track {
         flex-direction: row;
@@ -1662,9 +1784,11 @@
         grid-template-columns: 1fr;
       }
       .site-footer {
-        flex-direction: column;
-        gap: 20px;
-        padding: 30px 16px;
+        padding: 48px 16px 120px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
       }
     }
 
@@ -2164,8 +2288,20 @@
       transform: translateY(-4px);
     }
     .cert-icon {
-      font-size: calc(28 * var(--u));
+      width: calc(40 * var(--u));
+      height: calc(40 * var(--u));
+      margin: 0 auto calc(4 * var(--u));
+      border-radius: calc(10 * var(--u));
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--cobalt);
+    }
+    .cert-icon svg {
+      width: calc(20 * var(--u));
+      height: calc(20 * var(--u));
     }
     .cert-title {
       font-family: var(--font-anton);
@@ -2819,12 +2955,24 @@
       }
       .quick-dock {
         bottom: 12px;
-        padding: 4px 8px;
+        max-width: calc(100vw - 24px);
+        padding: 5px 8px;
         gap: 4px;
+        overflow-x: auto;
+        scrollbar-width: none;
       }
+      .quick-dock::-webkit-scrollbar { display: none; }
       .dock-btn {
-        padding: 6px 10px;
-        font-size: 10px;
+        padding: 6px 8px;
+        font-size: 10.5px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      #dev-studio-pill {
+        bottom: 64px !important;
+        right: 12px !important;
+        padding: 6px 10px !important;
+        font-size: 10px !important;
       }
     }
     @media (max-width: 768px) {
@@ -3804,6 +3952,24 @@
       <div class="ocean-mist"></div>
       <div class="petals-layer front" id="petals-front"></div>
       <div class="motes-layer" id="motes-layer"></div>
+
+      <!-- Aperture Row-inspired Maritime Compass Azimuth Dial -->
+      <div class="compass-hud" id="compass-hud" aria-hidden="true">
+        <svg class="compass-dial-svg" viewBox="0 0 30 30">
+          <circle cx="15" cy="15" r="13" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+          <g class="compass-dial-ring" id="compass-dial-ring">
+            <line x1="15" y1="2" x2="15" y2="5.5" stroke="#38BDF8" stroke-width="1.6"/>
+            <line x1="15" y1="24.5" x2="15" y2="28" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+            <line x1="2" y1="15" x2="5.5" y2="15" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+            <line x1="24.5" y1="15" x2="28" y2="15" stroke="rgba(255,255,255,0.45)" stroke-width="1.2"/>
+            <circle cx="15" cy="15" r="2.2" fill="#38BDF8"/>
+          </g>
+        </svg>
+        <div class="compass-readout">
+          <span class="compass-hdg" id="compass-hdg">HDG 000° N</span>
+          <span class="compass-sub">AIS RING AZIMUTH</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -4099,7 +4265,7 @@
           <path d="M5,145 Q80,150 171.5,152.5" fill="none" stroke="url(#routeGrad1)" stroke-width="2.5" stroke-dasharray="6,4" filter="url(#routeGlow)"/>
 
           <!-- Eurasia Maritime Silk Road: Rotterdam -> Gibraltar -> Suez -> Dubai -> Singapore -> Shanghai -->
-          <path d="M512.4,104.5 Q490,140 485,170 Q515,185 570,195 Q605,195 652.9,175.6 Q680,210 720,225 788.4,238.1 Q800,200 837.4,159.2" fill="none" stroke="url(#routeGrad2)" stroke-width="2.5" stroke-dasharray="7,4" filter="url(#routeGlow)"/>
+          <path d="M512.4,104.5 Q490,140 485,170 Q515,185 570,195 Q605,195 652.9,175.6 Q680,210 720,225 T788.4,238.1 Q800,200 837.4,159.2" fill="none" stroke="url(#routeGrad2)" stroke-width="2.5" stroke-dasharray="7,4" filter="url(#routeGlow)"/>
 
           <!-- Transatlantic North Sea to Americas -->
           <path d="M512.4,104.5 Q380,120 280,145" fill="none" stroke="url(#routeGrad1)" stroke-width="1.8" stroke-dasharray="4,4" opacity="0.6"/>
@@ -4139,6 +4305,12 @@
             <circle class="node-pin" cx="652.9" cy="175.6" r="5" fill="#38BDF8" stroke="#FFFFFF" stroke-width="1.5"/>
             <text x="664.9" y="189.6" font-family="var(--font-heading)" font-size="10.5" font-weight="700" fill="#FFFFFF">DUBAI (JEBEL ALI)</text>
           </g>
+
+          <!-- Sonar Radar Ping Overlay -->
+          <g id="map-sonar-ping" transform="translate(512.4, 104.5)">
+            <circle class="sonar-ping-ring" cx="0" cy="0" r="6"/>
+            <circle class="sonar-ping-ring delay" cx="0" cy="0" r="6"/>
+          </g>
         </svg>
       </div>
 
@@ -4173,32 +4345,44 @@
 
     <div class="cert-grid">
       <div class="cert-item">
-        <div class="cert-icon">🛡️</div>
+        <div class="cert-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
         <h4 class="cert-title">ISO 9001:2015</h4>
         <p class="cert-desc">Quality Management Systems for Multi-Modal Freight Operations.</p>
       </div>
       <div class="cert-item">
-        <div class="cert-icon">🌱</div>
+        <div class="cert-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+        </div>
         <h4 class="cert-title">ISO 14001:2015</h4>
         <p class="cert-desc">Environmental Management &amp; Scope-3 Carbon Accounting Standards.</p>
       </div>
       <div class="cert-item">
-        <div class="cert-icon">🔒</div>
+        <div class="cert-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
         <h4 class="cert-title">ISO 27001</h4>
         <p class="cert-desc">Cybersecurity &amp; Telemetry Data Protection for Marine AIS Networks.</p>
       </div>
       <div class="cert-item">
-        <div class="cert-icon">⚓</div>
+        <div class="cert-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" x2="12" y1="22" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+        </div>
         <h4 class="cert-title">C-TPAT TIER 3</h4>
         <p class="cert-desc">Customs-Trade Partnership Against Terrorism Highest Trust Rating.</p>
       </div>
       <div class="cert-item">
-        <div class="cert-icon">📑</div>
+        <div class="cert-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+        </div>
         <h4 class="cert-title">AEO-F OPERATOR</h4>
         <p class="cert-desc">Authorized Economic Operator Full Customs Simplifications &amp; Security.</p>
       </div>
       <div class="cert-item">
-        <div class="cert-icon">✈️</div>
+        <div class="cert-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+        </div>
         <h4 class="cert-title">IATA &amp; BIMCO</h4>
         <p class="cert-desc">Accredited Air Cargo Agent &amp; International Maritime Council Member.</p>
       </div>
@@ -4208,18 +4392,46 @@
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="footer-left">
-      <span class="footer-brand">ABC CARGO.</span>
-      <span>© 2026 ABC Cargo Group Inc. Global Intermodal Freight Infrastructure. All rights reserved.</span>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand" style="color: #FFF; font-size: calc(20 * var(--u)); font-weight: 800; letter-spacing: -0.02em; margin-bottom: calc(12 * var(--u));">ABC<span style="color: var(--cobalt);">.</span>CARGO</div>
+        <p style="font-size: calc(13 * var(--u)); line-height: 1.6; color: #94A3B8; max-width: calc(340 * var(--u)); margin: 0;">Global intermodal freight infrastructure, autonomous deep-sea fleets, and GDP-certified cold chain corridors operating across 140+ countries.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-col-list">
+          <a href="#hero" class="footer-link">Overview</a>
+          <a href="#services" class="footer-link">Services &amp; Capacities</a>
+          <a href="#solutions" class="footer-link">Enterprise Solutions</a>
+          <a href="#fleet" class="footer-link">3D Ocean Fleet</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Operations</div>
+        <div class="footer-col-list">
+          <a href="#dispatch" class="footer-link">Rate Calculator</a>
+          <a href="#terminals" class="footer-link">AIS Port Radar</a>
+          <a href="#certifications" class="footer-link">ESG &amp; Compliance</a>
+          <a href="kv-hero.html" class="footer-link" target="_blank">KV Hero (Original) ↗</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Global Desk</div>
+        <div class="footer-col-list">
+          <span>Rotterdam · Maasvlakte II</span>
+          <span>Singapore · Pasir Panjang</span>
+          <span>Shanghai · Yangshan Deepwater</span>
+          <span style="color: var(--cobalt); font-weight: 600;">24/7 Dispatch NOC</span>
+        </div>
+      </div>
     </div>
-    <div class="footer-right">
-      <a href="#hero" class="footer-link">Hero</a>
-      <a href="#services" class="footer-link">Services</a>
-      <a href="#fleet" class="footer-link">3D Fleet</a>
-      <a href="#dispatch" class="footer-link">Dispatch</a>
-      <a href="#terminals" class="footer-link">Terminals</a>
-      <a href="kv-hero.html" class="footer-link" target="_blank">KV Hero (Original) ↗</a>
+
+    <div class="footer-bottom-bar">
+      <span>© 2026 ABC Cargo Group Inc. Global Intermodal Freight Infrastructure.</span>
+      <span>IMO / IATA / C-TPAT Tier 3 Certified Carrier</span>
     </div>
+
+    <div class="footer-wordmark" aria-hidden="true">ABC CARGO</div>
   </footer>
 
   <!-- FLOATING CURSOR PREVIEW CARD -->
@@ -4370,7 +4582,7 @@
       <div class="fleet-modal-layout">
         <div>
           <div class="fleet-modal-media">
-            <img class="fleet-modal-img" id="fleet-modal-img" alt="Fleet vessel preview" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:12px;"><video class="fleet-modal-video" id="fleet-modal-video" loop muted playsinline autoplay style="display:none;"></video>
+            <img class="fleet-modal-img" id="fleet-modal-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="Fleet vessel preview" style="width:100%; height:100%; object-fit:cover; display:block; border-radius:12px;"><video class="fleet-modal-video" id="fleet-modal-video" loop muted playsinline autoplay style="display:none;"></video>
           </div>
           <p id="fleet-modal-desc" style="font-family: var(--font-archivo); font-size: calc(13.5 * var(--u)); color: var(--ink-soft); line-height: 1.6; margin-top: 14px;">
             Neo-Panamax ultra-large container carrier engineered with dual-fuel LNG/methanol propulsion, bulbous hydrodynamic bow, and automated lash-monitoring systems.
@@ -4503,7 +4715,7 @@
       <p class="qr-desc" id="qr-target-desc">Scan with your smartphone camera to bridge real-time satellite AIS vessel telemetry and live B/L tracking straight to your mobile screen.</p>
       
       <div class="qr-code-box">
-        <img id="qr-img-display" width="180" height="180" alt="Mobile Telemetry QR Code" style="display: block; border-radius: 8px;">
+        <img id="qr-img-display" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" width="180" height="180" alt="Mobile Telemetry QR Code" style="display: block; border-radius: 8px;">
       </div>
 
       <div>
@@ -5328,6 +5540,9 @@
     // 6. ANIMATION LOOP FOR 3D RING
     let lastTime = performance.now();
     let frameCount = 0;
+    const compassDialRing = document.getElementById('compass-dial-ring');
+    const compassHdgEl = document.getElementById('compass-hdg');
+    let lastCompassDeg = -1;
 
     function render3DRing(now) {
       requestAnimationFrame(render3DRing);
@@ -5335,6 +5550,18 @@
       const dt = Math.max(1, Math.min(100, now - lastTime));
       lastTime = now;
       frameCount++;
+
+      // Update Maritime Compass Azimuth Dial
+      const hdgDeg = ((Math.round(dispRot) % 360) + 360) % 360;
+      if (compassDialRing) {
+        compassDialRing.style.transform = `rotate(${dispRot}deg)`;
+      }
+      if (compassHdgEl && hdgDeg !== lastCompassDeg) {
+        lastCompassDeg = hdgDeg;
+        const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+        const cardinal = dirs[Math.round(hdgDeg / 45) % 8];
+        compassHdgEl.textContent = `HDG ${String(hdgDeg).padStart(3, '0')}° ${cardinal}`;
+      }
 
       const dtSec = dt / 1000;
       const k = Math.min(3, dt / 16.67);
@@ -5628,14 +5855,14 @@
       if (!toast) {
         toast = document.createElement('div');
         toast.id = 'global-toast';
-        toast.style.cssText = 'position:fixed;bottom:30px;right:30px;background:#00E676;color:#0A0E11;padding:12px 22px;border-radius:9999px;font-family:var(--font-mono);font-size:12px;font-weight:700;letter-spacing:0.06em;z-index:9999;box-shadow:0 8px 30px rgba(0,230,118,0.4);display:flex;align-items:center;gap:8px;transform:translateY(80px);opacity:0;transition:all 0.35s cubic-bezier(0.16,1,0.3,1);pointer-events:none;';
+        toast.style.cssText = 'position:fixed;top:94px;right:24px;background:#00E676;color:#0A0E11;padding:12px 22px;border-radius:9999px;font-family:var(--font-heading);font-size:12px;font-weight:700;letter-spacing:0.04em;z-index:9999;box-shadow:0 8px 30px rgba(0,230,118,0.35);display:flex;align-items:center;gap:8px;transform:translateY(-20px);opacity:0;transition:all 0.35s cubic-bezier(0.16,1,0.3,1);pointer-events:none;';
         document.body.appendChild(toast);
       }
       toast.innerHTML = '<span>✓</span> <span>' + msg + '</span>';
       toast.style.transform = 'translateY(0)';
       toast.style.opacity = '1';
       setTimeout(() => {
-        toast.style.transform = 'translateY(80px)';
+        toast.style.transform = 'translateY(-20px)';
         toast.style.opacity = '0';
       }, 3500);
     }
@@ -5937,10 +6164,25 @@
     const inspectorDwell = document.getElementById('inspector-dwell');
     const inspectorWeather = document.getElementById('inspector-weather');
 
+    const mapSonarPing = document.getElementById('map-sonar-ping');
+
     mapNodes.forEach(node => {
       node.addEventListener('click', () => {
         mapNodes.forEach(n => n.classList.remove('is-active'));
         node.classList.add('is-active');
+
+        // Trigger Sonar Radar Ping on active port coordinates
+        const pin = node.querySelector('.node-pin');
+        if (mapSonarPing && pin) {
+          const cx = pin.getAttribute('cx');
+          const cy = pin.getAttribute('cy');
+          mapSonarPing.setAttribute('transform', `translate(${cx}, ${cy})`);
+          mapSonarPing.querySelectorAll('.sonar-ping-ring').forEach(ring => {
+            ring.classList.remove('is-pinging');
+            void ring.offsetWidth; // Force reflow to restart animation
+            ring.classList.add('is-pinging');
+          });
+        }
 
         if (inspectorPortName) inspectorPortName.textContent = node.dataset.name + ' (' + node.dataset.code + ')';
         if (inspectorCrane) inspectorCrane.textContent = node.dataset.crane;
@@ -5951,6 +6193,47 @@
         showGlobalToast('Port Satellite Link: ' + node.dataset.name + ' Active');
       });
     });
+
+    // F2. ACTIVE THEORY MATRIX TEXT SCRAMBLE ON HOVER
+    (function initMatrixScramble() {
+      const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#*';
+      document.querySelectorAll('.nav-link, .sol-badge').forEach(el => {
+        const orig = el.textContent;
+        let rafId = null;
+        el.addEventListener('mouseenter', () => {
+          if (rafId) cancelAnimationFrame(rafId);
+          const start = performance.now();
+          const dur = 260;
+          function tick(now) {
+            const p = Math.min(1, (now - start) / dur);
+            const reveal = Math.floor(p * orig.length);
+            let out = '';
+            for (let i = 0; i < orig.length; i++) {
+              if (orig[i] === ' ' || i < reveal) {
+                out += orig[i];
+              } else {
+                out += GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+              }
+            }
+            el.textContent = out;
+            if (p < 1) {
+              rafId = requestAnimationFrame(tick);
+            } else {
+              el.textContent = orig;
+              rafId = null;
+            }
+          }
+          rafId = requestAnimationFrame(tick);
+        });
+        el.addEventListener('mouseleave', () => {
+          if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+          }
+          el.textContent = orig;
+        });
+      });
+    })();
 
     // G. CLIENT-SIDE SYNTHESIZED MARITIME AMBIENT SOUND (Pure Web Audio API)
     const btnSoundToggle = document.getElementById('btn-sound-toggle');
