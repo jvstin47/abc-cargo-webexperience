@@ -10,7 +10,7 @@
   <!-- GOOGLE FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Archivo:wght@400;500;600;700&family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     /* LOCAL SELF-HOSTED FONTS AS FALLBACK */
@@ -68,13 +68,14 @@
       --giant-letters: #E9E9E9;
       --band-bg: #111111;
 
-      --font-heading: var(--dev-font-heading, "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-      --font-body: var(--dev-font-body, "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+      --font-heading: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-anton: var(--font-heading);
       --font-archivo: var(--font-heading);
-      --font-mono: "JetBrains Mono", "Geist Mono", SFMono-Regular, monospace;
+      --font-mono: var(--font-heading);
       --font-serif: var(--font-heading);
-      --font-sans: var(--font-body);
+      --font-sans: var(--font-heading);
+      --font-code: "Geist Mono", "JetBrains Mono", SFMono-Regular, monospace;
 
       --main-ease: cubic-bezier(.22, 1, .36, 1);
       --wall-scale: 1.1;
@@ -1208,25 +1209,26 @@
       pointer-events: none;
     }
     .dispatch-headline {
-      font-family: var(--font-anton);
-      font-size: calc(82 * var(--u));
-      letter-spacing: 0.03em;
-      line-height: 0.98;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: calc(64 * var(--u));
+      letter-spacing: -0.025em;
+      line-height: 1.05;
       text-transform: uppercase;
       text-align: center;
       color: #FFFFFF;
-      margin: 0 0 calc(16 * var(--u)) 0;
+      margin: 0 0 calc(14 * var(--u)) 0;
       z-index: 5;
     }
     .dispatch-subtitle {
-      font-family: var(--font-archivo);
-      font-size: calc(18 * var(--u));
+      font-family: var(--font-body);
+      font-size: calc(16 * var(--u));
       line-height: 1.6;
-      letter-spacing: 0.01em;
-      color: var(--ink-soft);
-      max-width: calc(660 * var(--u));
+      letter-spacing: 0;
+      color: #94A3B8;
+      max-width: calc(640 * var(--u));
       text-align: center;
-      margin: 0 0 calc(45 * var(--u)) 0;
+      margin: 0 0 calc(40 * var(--u)) 0;
       z-index: 5;
       text-wrap: balance;
     }
@@ -1248,10 +1250,10 @@
       gap: calc(20 * var(--u));
     }
     .brief-kicker {
-      font-family: var(--font-mono);
+      font-family: var(--font-heading);
       font-size: calc(11 * var(--u));
-      font-weight: 600;
-      letter-spacing: 0.22em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent);
       margin: 0;
@@ -1938,23 +1940,23 @@
       gap: calc(7 * var(--u));
     }
     .calc-label {
-      font-family: var(--font-mono);
-      font-size: calc(10.5 * var(--u));
+      font-family: var(--font-heading);
+      font-size: calc(11 * var(--u));
       font-weight: 600;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--ink-soft);
+      color: #94A3B8;
       line-height: 1.3;
     }
     .calc-select, .calc-range {
       background: #17202A;
       color: #FFFFFF;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: calc(8 * var(--u));
       padding: calc(11 * var(--u)) calc(14 * var(--u));
-      font-family: var(--font-archivo);
-      font-size: calc(13.5 * var(--u));
-      letter-spacing: 0.01em;
+      font-family: var(--font-body);
+      font-size: calc(14 * var(--u));
+      letter-spacing: 0;
       line-height: 1.4;
       outline: none;
       transition: border-color 0.2s ease;
@@ -1966,7 +1968,7 @@
     }
     .calc-readout-card {
       background: #0E161E;
-      border: 1px solid rgba(47, 99, 255, 0.3);
+      border: 1px solid rgba(56, 189, 248, 0.3);
       border-radius: calc(14 * var(--u));
       padding: calc(24 * var(--u));
       display: flex;
@@ -1984,19 +1986,19 @@
       margin-bottom: calc(16 * var(--u));
     }
     .calc-readout-title {
-      font-family: var(--font-mono);
-      font-size: calc(11 * var(--u));
-      font-weight: 600;
-      letter-spacing: 0.18em;
+      font-family: var(--font-heading);
+      font-size: calc(11.5 * var(--u));
+      font-weight: 700;
+      letter-spacing: 0.08em;
       color: var(--cobalt);
       text-transform: uppercase;
       line-height: 1.3;
     }
     .calc-transit-pill {
-      font-family: var(--font-mono);
+      font-family: var(--font-heading);
       font-size: calc(11 * var(--u));
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.04em;
       background: rgba(0, 230, 118, 0.12);
       border: 1px solid rgba(0, 230, 118, 0.35);
       color: #00E676;
@@ -2008,15 +2010,20 @@
       display: flex;
       flex-direction: column;
       gap: calc(10 * var(--u));
-      font-family: var(--font-mono);
-      font-size: calc(12 * var(--u));
-      letter-spacing: 0.06em;
+      font-family: var(--font-body);
+      font-size: calc(13.5 * var(--u));
+      letter-spacing: 0;
       line-height: 1.6;
-      color: var(--ink-soft);
+      color: #CBD5E1;
     }
     .calc-breakdown-row {
       display: flex;
       justify-content: space-between;
+    }
+    .calc-breakdown-row span:last-child {
+      font-weight: 600;
+      color: #FFFFFF;
+      font-variant-numeric: tabular-nums;
     }
     .calc-total-row {
       display: flex;
@@ -2027,23 +2034,26 @@
       margin-top: calc(16 * var(--u));
     }
     .calc-total-label {
-      font-family: var(--font-anton);
-      font-size: calc(19 * var(--u));
-      color: #FFFFFF;
-      letter-spacing: 0.05em;
+      font-family: var(--font-heading);
+      font-size: calc(13 * var(--u));
+      font-weight: 700;
+      color: #94A3B8;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
     .calc-total-price {
-      font-family: var(--font-mono);
-      font-size: calc(30 * var(--u));
-      font-weight: 700;
+      font-family: var(--font-heading);
+      font-size: calc(32 * var(--u));
+      font-weight: 800;
       letter-spacing: -0.02em;
       font-variant-numeric: tabular-nums;
-      color: #FFFFFF;
+      color: #38BDF8;
     }
     .calc-esg-notice {
-      font-family: var(--font-mono);
-      font-size: calc(10.5 * var(--u));
-      letter-spacing: 0.08em;
+      font-family: var(--font-body);
+      font-size: calc(11 * var(--u));
+      font-weight: 500;
+      letter-spacing: 0.02em;
       color: #4CAF50;
       margin-top: calc(10 * var(--u));
       display: flex;
@@ -2058,10 +2068,10 @@
       border: none;
       border-radius: calc(10 * var(--u));
       padding: calc(14 * var(--u));
-      font-family: var(--font-archivo);
+      font-family: var(--font-heading);
       font-size: calc(13 * var(--u));
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       cursor: pointer;
       transition: all 0.25s ease;
