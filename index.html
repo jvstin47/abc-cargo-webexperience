@@ -498,8 +498,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: calc(380 * var(--u));
+      width: calc(390 * var(--u));
       flex-shrink: 0;
+      padding-left: calc(28 * var(--u));
       padding-right: calc(30 * var(--u));
       border-right: 1px solid rgba(255, 255, 255, 0.12);
       position: relative;
@@ -640,8 +641,20 @@
       color: var(--cobalt);
     }
     .service-icon {
-      font-size: calc(34 * var(--u));
-      margin-top: calc(8 * var(--u));
+      width: calc(38 * var(--u));
+      height: calc(38 * var(--u));
+      margin-top: calc(10 * var(--u));
+      border-radius: calc(10 * var(--u));
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cobalt);
+    }
+    .service-icon svg {
+      width: calc(19 * var(--u));
+      height: calc(19 * var(--u));
     }
     .service-body {
       margin-top: auto;
@@ -658,6 +671,7 @@
     }
     .service-info {
       font-family: var(--font-body);
+      padding-right: calc(26 * var(--u));
       font-size: calc(13.5 * var(--u) * var(--dev-body-scale, 1));
       line-height: var(--dev-leading, 1.6);
       letter-spacing: 0.005em;
@@ -3760,10 +3774,12 @@
           <!-- Card 1 -->
           <div class="service-card">
             <span class="service-num">01 / MARITIME</span>
-            <div class="service-icon">🚢</div>
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/><path d="M12 2v3"/></svg>
+            </div>
             <div class="service-body">
               <h3 class="service-title">OCEAN CONTAINER LINES</h3>
-              <p class="service-info">Direct deep-sea vessel chartering and guaranteed high-cube slot allocation across transpacific & European routes.</p>
+              <p class="service-info">Direct deep-sea vessel chartering and guaranteed high-cube slot allocation across transpacific &amp; European routes.</p>
             </div>
             <span class="service-arrow">↗</span>
           </div>
@@ -3771,7 +3787,9 @@
           <!-- Card 2 -->
           <div class="service-card">
             <span class="service-num">02 / INTERMODAL</span>
-            <div class="service-icon">🚛</div>
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4V5H2v12h3"/><path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/><path d="M14 17h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>
+            </div>
             <div class="service-body">
               <h3 class="service-title">CONTAINER DRAYAGE</h3>
               <p class="service-info">GPS-monitored reach-stacker terminal transfer and dedicated black rig haulage to inland rail corridors.</p>
@@ -3782,7 +3800,9 @@
           <!-- Card 3 -->
           <div class="service-card">
             <span class="service-num">03 / COLD CHAIN</span>
-            <div class="service-icon">❄️</div>
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m17 5-5 5-5-5"/><path d="m17 19-5-5-5 5"/><path d="M2 12h20"/><path d="m5 7 5 5-5 5"/><path d="m19 7-5 5 5 5"/></svg>
+            </div>
             <div class="service-body">
               <h3 class="service-title">REEFER LIFE-SCIENCE</h3>
               <p class="service-info">Continuous sub-zero telemetry monitoring for pharma, biologics and perishable food commodities worldwide.</p>
@@ -3793,7 +3813,9 @@
           <!-- Card 4 -->
           <div class="service-card">
             <span class="service-num">04 / PROJECT</span>
-            <div class="service-icon">🏗️</div>
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M6 20V4h4v16"/><path d="M3 7h18l-2-3H5Z"/><path d="M17 7v6"/><path d="M15 13h4v3h-4z"/></svg>
+            </div>
             <div class="service-body">
               <h3 class="service-title">HEAVY-HAUL RIGGING</h3>
               <p class="service-info">Specialized multi-axle modular transporters and super-heavy breakbulk rigging for energy infrastructure.</p>
@@ -3804,7 +3826,9 @@
           <!-- Card 5 -->
           <div class="service-card">
             <span class="service-num">05 / EXPEDITED</span>
-            <div class="service-icon">✈️</div>
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+            </div>
             <div class="service-body">
               <h3 class="service-title">AIR CARGO CHARTERS</h3>
               <p class="service-info">Dedicated widebody freighter charters for time-critical aviation, automotive and disaster response freight.</p>
