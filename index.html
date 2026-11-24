@@ -70,10 +70,10 @@
 
       --font-heading: var(--dev-font-heading, "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
       --font-body: var(--dev-font-body, "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-      --font-anton: "Anton", Impact, sans-serif;
+      --font-anton: var(--font-heading);
       --font-archivo: var(--font-heading);
       --font-mono: "JetBrains Mono", "Geist Mono", SFMono-Regular, monospace;
-      --font-serif: "Newsreader", Georgia, serif;
+      --font-serif: var(--font-heading);
       --font-sans: var(--font-body);
 
       --main-ease: cubic-bezier(.22, 1, .36, 1);
@@ -263,50 +263,57 @@
       color: var(--ink-light);
     }
     .nav-logo {
-      font-family: var(--font-anton);
-      font-size: calc(35 * var(--u));
-      letter-spacing: 0.03em;
+      font-family: var(--font-heading);
+      font-size: calc(20 * var(--u));
+      font-weight: 800;
+      letter-spacing: -0.02em;
       line-height: 1;
       text-transform: uppercase;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
+      color: #FFFFFF;
     }
     .nav-logo .dot {
       color: var(--cobalt);
     }
     .nav-tagline {
       font-family: var(--font-mono);
-      font-size: calc(10.5 * var(--u));
-      font-weight: 500;
-      letter-spacing: 0.18em;
+      font-size: calc(10 * var(--u));
+      font-weight: 600;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       line-height: 1.35;
-      color: var(--ink-muted);
-      border-left: 1px solid rgba(0, 0, 0, 0.15);
-      padding-left: calc(14 * var(--u));
+      color: #64748B;
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
+      padding-left: calc(12 * var(--u));
     }
     body.is-dark-nav .nav-tagline {
       border-left-color: rgba(255, 255, 255, 0.15);
-      color: var(--ink-soft);
+      color: #94A3B8;
     }
 
     .nav-items {
       display: flex;
       align-items: center;
-      gap: calc(26 * var(--u));
+      gap: calc(20 * var(--u));
+      flex-wrap: nowrap;
     }
     .nav-link {
-      font-family: var(--font-archivo);
-      font-weight: 600;
-      font-size: calc(12 * var(--u));
-      letter-spacing: 0.12em;
+      font-family: var(--font-heading);
+      font-weight: 500;
+      font-size: calc(12.5 * var(--u));
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       text-decoration: none;
-      color: var(--ink);
+      color: #94A3B8;
       position: relative;
-      padding: 8px 0;
-      transition: color 0.3s ease;
+      padding: 6px 0;
+      transition: color 0.25s ease;
+      white-space: nowrap;
+    }
+    .nav-link:hover, .nav-link.is-active {
+      color: #FFFFFF;
     }
     body.is-dark-nav .nav-link {
       color: var(--ink-light);
@@ -392,9 +399,10 @@
       bottom: calc(100% - var(--edge-px, 50vh));
       left: 0;
       transform: translate3d(calc(var(--gl-x, 100) * 1vw), 0, 0);
-      font-family: var(--font-anton);
-      font-size: calc(290 * var(--u));
-      letter-spacing: 0.02em;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: calc(240 * var(--u));
+      letter-spacing: -0.03em;
       line-height: 0.85;
       color: var(--giant-letters);
       white-space: nowrap;
@@ -686,15 +694,14 @@
       z-index: 10;
     }
     .fleet-sentence {
-      font-family: var(--font-serif);
-      font-size: calc(44 * var(--u));
-      font-weight: 400;
-      line-height: 1.36;
-      letter-spacing: -0.018em;
-      word-spacing: 0.035em;
-      max-width: calc(960 * var(--u));
+      font-family: var(--font-heading);
+      font-size: calc(32 * var(--u));
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      max-width: calc(920 * var(--u));
       margin: 0;
-      color: var(--ink-light);
+      color: #FFFFFF;
       text-wrap: balance;
     }
     .fleet-sentence .choice {
@@ -769,12 +776,12 @@
       padding-right: 0;
     }
     .fleet-stat-num {
-      font-family: var(--font-serif);
-      font-size: calc(40 * var(--u));
-      font-weight: 400;
+      font-family: var(--font-heading);
+      font-size: calc(36 * var(--u));
+      font-weight: 700;
       line-height: 1.05;
       letter-spacing: -0.02em;
-      color: var(--ink-light);
+      color: #FFFFFF;
       font-variant-numeric: tabular-nums;
     }
     .fleet-stat-lbl {
@@ -1251,12 +1258,11 @@
       line-height: 1.3;
     }
     .brief-sentence {
-      font-family: var(--font-serif);
-      font-size: calc(26 * var(--u));
-      line-height: calc(44 * var(--u));
+      font-family: var(--font-heading);
+      font-size: calc(22 * var(--u));
+      line-height: calc(38 * var(--u));
       letter-spacing: -0.01em;
-      word-spacing: 0.02em;
-      color: var(--ink-light);
+      color: #FFFFFF;
       margin: 0;
     }
     .brief-input {
@@ -3076,7 +3082,7 @@
        ==================================================== */
     .dev-trigger-pill {
       position: fixed;
-      top: calc(88 * var(--u));
+      bottom: calc(24 * var(--u));
       right: calc(24 * var(--u));
       z-index: 99990;
       display: inline-flex;
@@ -3494,12 +3500,12 @@
       <div class="nav-tagline">Global Fleet Group</div>
     </a>
     <nav class="nav-items">
-      <a href="#hero" class="nav-link is-active">HERO</a>
+      <a href="#hero" class="nav-link is-active">OVERVIEW</a>
       <a href="#services" class="nav-link">SERVICES</a>
       <a href="#solutions" class="nav-link">SOLUTIONS</a>
-      <a href="#fleet" class="nav-link">3D FLEET</a>
-      <a href="#dispatch" class="nav-link">RATE CALCULATOR</a>
-      <a href="#terminals" class="nav-link">PORT NETWORK</a>
+      <a href="#fleet" class="nav-link">FLEET</a>
+      <a href="#dispatch" class="nav-link">RATES</a>
+      <a href="#terminals" class="nav-link">NETWORK</a>
       
       <!-- Live Shipment Tracking Button -->
       <button class="nav-track-btn" id="btn-open-track" aria-label="Track Shipment by B/L or Container Number">
