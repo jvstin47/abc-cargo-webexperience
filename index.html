@@ -977,6 +977,49 @@
       text-overflow: ellipsis;
     }
 
+    /* APERTURE ROW INSPIRA: AIS RETICLE TARGETING BRACKETS */
+    .ais-reticle {
+      position: absolute;
+      inset: -12px;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.35s cubic-bezier(.34,1.56,.64,1);
+      transform: scale(1.12);
+    }
+    .ring-card:hover .ais-reticle {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .reticle-corner {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #38BDF8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+    }
+    .reticle-tl { top: 0; left: 0; border-right: none; border-bottom: none; border-top-left-radius: 4px; }
+    .reticle-tr { top: 0; right: 0; border-left: none; border-bottom: none; border-top-right-radius: 4px; }
+    .reticle-bl { bottom: 0; left: 0; border-right: none; border-top: none; border-bottom-left-radius: 4px; }
+    .reticle-br { bottom: 0; right: 0; border-left: none; border-top: none; border-bottom-right-radius: 4px; }
+    .reticle-badge {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: #38BDF8;
+      background: rgba(10, 14, 18, 0.94);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      border-radius: 9999px;
+      padding: 2px 8px;
+      white-space: nowrap;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    }
+
     /* FLOATING CURSOR PREVIEW CARD */
     .cursor-preview {
       position: fixed;
@@ -4996,12 +5039,23 @@
         <span style="font-size: 16px;">↗</span>
       `;
 
+      const reticle = document.createElement('div');
+      reticle.className = 'ais-reticle';
+      reticle.innerHTML = `
+        <span class="reticle-corner reticle-tl"></span>
+        <span class="reticle-corner reticle-tr"></span>
+        <span class="reticle-corner reticle-bl"></span>
+        <span class="reticle-corner reticle-br"></span>
+        <span class="reticle-badge">● AIS TARGET LOCKED</span>
+      `;
+
       face.appendChild(poster);
       face.appendChild(vid);
       face.appendChild(chip);
       face.appendChild(labelBar);
       tiltWrap.appendChild(frame);
       tiltWrap.appendChild(face);
+      tiltWrap.appendChild(reticle);
       card.appendChild(tiltWrap);
       ringCenter.appendChild(card);
 
@@ -5247,14 +5301,22 @@
 
           slot.el.style.transform = `translate3d(${x}px, 0px, ${z}px) rotateY(${lYaw}deg) scale(${cardScale})`;
 
-          // Active Theory Progressive Depth Falloff
+          // Active Theory Progressive Depth Falloff & Aperture Row Velocity Motion Blur
           const absR = Math.abs(r);
           const angleNorm = Math.min(1, absR / 92);
           const depthOpacity = Math.max(0.18, 1 - Math.pow(angleNorm, 1.7) * 0.78);
           const depthBright = Math.max(48, Math.round((1 - angleNorm * 0.45) * 100));
           const depthContrast = Math.max(76, Math.round((1 - angleNorm * 0.22) * 100));
           slot.el.style.opacity = depthOpacity.toFixed(3);
-          slot.el.style.filter = `brightness(${depthBright}%) contrast(${depthContrast}%)`;
+
+          const vMag = Math.abs(rotVel);
+          const vBlur = vMag > 1.2 ? Math.min(4.5, (vMag - 1.2) * 0.2) : 0;
+          const qBlur = Math.round(vBlur * 2) / 2; // Quantize to 0.5px
+          if (qBlur >= 0.5) {
+            slot.el.style.filter = `blur(${qBlur}px) brightness(${depthBright}%) contrast(${depthContrast}%)`;
+          } else {
+            slot.el.style.filter = `brightness(${depthBright}%) contrast(${depthContrast}%)`;
+          }
 
           // Video playback within 78 deg (only if asset provides video)
           if (site.video && Math.abs(r) <= 78 && !document.hidden) {
