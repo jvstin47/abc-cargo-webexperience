@@ -2744,6 +2744,213 @@
       color: #000000 !important;
     }
 
+    /* ====================================================
+       ACTIVE THEORY INSPIRA: CYBERNETIC & CINEMATIC STYLES
+       ==================================================== */
+    /* 1. Matrix Text Scramble Glow */
+    [data-scrambling="true"] {
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.9), 0 0 2px rgba(255, 255, 255, 0.8) !important;
+      color: #38BDF8 !important;
+      transition: none !important;
+    }
+
+    /* 2. Audio Equalizer Waveform Glyphs */
+    .audio-equalizer {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 12px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+    .eq-bar {
+      width: 2.5px;
+      background: var(--cobalt);
+      border-radius: 1px;
+      height: 3px;
+      transition: height 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s;
+    }
+    .nav-sound-btn.is-active .eq-bar.bar-1,
+    .dock-btn.is-sound-active .eq-bar.bar-1 {
+      animation: eqDance1 0.75s infinite ease-in-out alternate;
+    }
+    .nav-sound-btn.is-active .eq-bar.bar-2,
+    .dock-btn.is-sound-active .eq-bar.bar-2 {
+      animation: eqDance2 1.05s infinite ease-in-out 0.18s alternate;
+    }
+    .nav-sound-btn.is-active .eq-bar.bar-3,
+    .dock-btn.is-sound-active .eq-bar.bar-3 {
+      animation: eqDance3 0.65s infinite ease-in-out 0.35s alternate;
+    }
+    .nav-sound-btn.is-active .eq-bar.bar-4,
+    .dock-btn.is-sound-active .eq-bar.bar-4 {
+      animation: eqDance2 0.88s infinite ease-in-out 0.1s alternate;
+    }
+    @keyframes eqDance1 {
+      0% { height: 3px; opacity: 0.5; }
+      100% { height: 12px; opacity: 1; }
+    }
+    @keyframes eqDance2 {
+      0% { height: 4px; opacity: 0.6; }
+      100% { height: 10px; opacity: 1; }
+    }
+    @keyframes eqDance3 {
+      0% { height: 2px; opacity: 0.4; }
+      100% { height: 13px; opacity: 1; }
+    }
+
+    /* 3. Subtle Film Grain Overlay */
+    .film-grain-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 99980;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* 4. Mobile QR Telemetry Sync Modal & Trigger */
+    .btn-qr-sync {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #38BDF8;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-transform: uppercase;
+    }
+    .btn-qr-sync:hover {
+      background: #38BDF8;
+      color: #04121A;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+      transform: translateY(-1px);
+    }
+    .qr-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(4, 8, 12, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 99998;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+      padding: 20px;
+    }
+    .qr-modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .qr-card {
+      background: #0B1117;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 20px;
+      padding: 32px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), 0 0 32px rgba(56, 189, 248, 0.15);
+      position: relative;
+      animation: qrCardPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes qrCardPop {
+      0% { transform: scale(0.92) translateY(16px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .qr-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #94A3B8;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .qr-close-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .qr-radar-sweep {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 8px #10B981;
+      animation: devPulse 1.8s infinite;
+      margin-right: 6px;
+    }
+    .qr-telemetry-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: #38BDF8;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-title {
+      font-family: var(--font-archivo);
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 8px 0;
+      letter-spacing: 0.02em;
+    }
+    .qr-desc {
+      font-family: var(--font-archivo);
+      font-size: 13px;
+      color: #94A3B8;
+      margin: 0 0 20px 0;
+      line-height: 1.5;
+    }
+    .qr-code-box {
+      background: #FFFFFF;
+      padding: 16px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      margin-bottom: 16px;
+    }
+    .qr-code-box svg {
+      display: block;
+    }
+    .qr-status-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #A0B3C0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 6px 12px;
+      display: inline-block;
+    }
+
   
     /* ====================================================
        EXPERIMENTAL DEV CONTROLS STUDIO HUD
@@ -3139,6 +3346,8 @@
   </style>
 </head>
 <body>
+  <!-- Subtle Cinematic Film Grain Overlay -->
+  <div class="film-grain-overlay" aria-hidden="true"></div>
 
   <!-- FULLSCREEN LOADER SCREEN -->
   <aside class="loader-screen" id="loader-screen" aria-label="Loading global logistics grid">
@@ -3181,9 +3390,12 @@
 
       <!-- Ambient Maritime Sound Synthesizer Toggle -->
       <button class="nav-sound-btn" id="btn-sound-toggle" aria-label="Toggle ambient maritime acoustic soundscape">
-        <svg class="sound-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
-          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
-        </svg>
+        <span class="audio-equalizer" id="nav-audio-eq" aria-hidden="true">
+          <span class="eq-bar bar-1"></span>
+          <span class="eq-bar bar-2"></span>
+          <span class="eq-bar bar-3"></span>
+          <span class="eq-bar bar-4"></span>
+        </span>
         <span id="sound-label">AUDIO: OFF</span>
       </button>
 
@@ -3759,11 +3971,14 @@
           <span style="font-family: var(--font-mono); font-size: 10px; color: var(--cobalt); letter-spacing: 0.16em;">ACTIVE TERMINAL TELEMETRY</span>
           <h4 id="inspector-port-name" style="font-family: var(--font-anton); font-size: 22px; color: #FFF; margin: 2px 0 0 0;">PORT OF ROTTERDAM (BERTH 42)</h4>
         </div>
-        <div style="display: flex; gap: calc(24 * var(--u)); font-family: var(--font-mono); font-size: 11.5px; flex-wrap: wrap;">
+        <div style="display: flex; gap: calc(24 * var(--u)); font-family: var(--font-mono); font-size: 11.5px; flex-wrap: wrap; align-items: center;">
           <div><span style="color: var(--ink-soft);">CRANE RATE:</span> <strong id="inspector-crane" style="color: #FFF;">38/HR</strong></div>
           <div><span style="color: var(--ink-soft);">CHANNEL DRAFT:</span> <strong id="inspector-draft" style="color: #FFF;">16.5M</strong></div>
           <div><span style="color: var(--ink-soft);">DWELL TIME:</span> <strong id="inspector-dwell" style="color: #00E676;">1.8 DAYS</strong></div>
           <div><span style="color: var(--ink-soft);">CONDITIONS:</span> <strong id="inspector-weather" style="color: #64B5F6;">11°C · FORCE 3 GENTLE BREEZE</strong></div>
+          <button class="btn-qr-sync" id="btn-sync-terminal-qr" title="Sync live port telemetry to mobile device">
+            <span>📱 SYNC TO MOBILE</span>
+          </button>
         </div>
       </div>
     </div>
@@ -3958,6 +4173,9 @@
         <button class="btn-action-outline" id="btn-copy-edi">COPY EDI 310 MANIFEST</button>
         <button class="btn-action-outline" id="btn-print-waybill">PRINT OFFICIAL WAYBILL ↗</button>
       </div>
+      <button class="btn-qr-sync" id="btn-sync-tracking-qr" style="margin-top: 12px; width: 100%; justify-content: center; padding: 10px;">
+        <span>📱 SYNC LIVE SHIPMENT TELEMETRY TO MOBILE (QR)</span>
+      </button>
     </div>
   </aside>
 
@@ -4083,10 +4301,39 @@
     <a href="#terminals" class="dock-btn">
       <span>⚓ Port Map</span>
     </a>
+    <button class="dock-btn" id="dock-btn-sound" title="Toggle Ambient Audio">
+      <span class="audio-equalizer" id="dock-audio-eq" aria-hidden="true">
+        <span class="eq-bar bar-1"></span>
+        <span class="eq-bar bar-2"></span>
+        <span class="eq-bar bar-3"></span>
+      </span>
+      <span id="dock-sound-label">Audio: Off</span>
+    </button>
     <a href="#dispatch" class="dock-btn primary">
       <span>Get Quote ↗</span>
     </a>
   </nav>
+
+  <!-- ACTIVE THEORY INSPIRA: MOBILE TELEMETRY HANDOFF MODAL -->
+  <div class="qr-modal-backdrop" id="qr-modal-backdrop" aria-hidden="true">
+    <div class="qr-card">
+      <button class="qr-close-btn" id="btn-close-qr" aria-label="Close Mobile Handoff">✕</button>
+      <div class="qr-telemetry-tag">
+        <span class="qr-radar-sweep"></span>
+        <span id="qr-target-tag">AIS SATELLITE TELEMETRY</span>
+      </div>
+      <h3 class="qr-title" id="qr-target-title">Mobile Telemetry Handoff</h3>
+      <p class="qr-desc" id="qr-target-desc">Scan with your smartphone camera to bridge real-time satellite AIS vessel telemetry and live B/L tracking straight to your mobile screen.</p>
+      
+      <div class="qr-code-box">
+        <img id="qr-img-display" width="180" height="180" alt="Mobile Telemetry QR Code" style="display: block; border-radius: 8px;">
+      </div>
+
+      <div>
+        <div class="qr-status-pill" id="qr-status-coords">LAT 51°57'08"N · LON 4°08'44"E · 24.8 KTS</div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -4919,19 +5166,26 @@
 
       // Geometry calculation with DEV_CONFIG
       const tilt = 0;
-      const radius = (window.DEV_CONFIG ? DEV_CONFIG.ringRadius : 1800);
-      const perspective = (window.DEV_CONFIG ? DEV_CONFIG.perspective : 760);
+      const radius = (window.DEV_CONFIG ? DEV_CONFIG.ringRadius : 1300);
+      const perspective = (window.DEV_CONFIG ? DEV_CONFIG.perspective : 1110);
       const roll = 0;
-      const cardScale = 2.3 * (window.DEV_CONFIG ? DEV_CONFIG.cardScale : 1.0);
+      const cardScale = 2.3 * (window.DEV_CONFIG ? DEV_CONFIG.cardScale : 0.75);
 
       let wallScale = window.innerWidth <= 820 ? 0.8 : 1.1;
       const fit = Math.min(1.05, (window.innerWidth - 32) / 1240, 0.66 * window.innerHeight / 800) / wallScale;
       const A = wallScale * fit;
 
-      lensBox.style.perspective = (perspective * A) + 'px';
-      lensBox.style.perspectiveOrigin = '50% 50%';
+      // Active Theory Organic Camera Parallax & Frustum Sway
+      const normMx = dispPtrX; // -1 to 1
+      const normMy = dispPtrY; // -1 to 1
+      const camRoll = normMx * 1.8;
+      const camPitch = -normMy * 2.2;
+      const camYaw = normMx * 2.4;
 
-      ringCenter.style.transform = `translate3d(0, 0, 0) scale3d(${A}, ${A}, ${A})`;
+      lensBox.style.perspective = (perspective * A) + 'px';
+      lensBox.style.perspectiveOrigin = `${50 + normMx * 3.5}% ${50 + normMy * 3.5}%`;
+
+      ringCenter.style.transform = `translate3d(${sX * 12}px, ${sY * 8}px, 0) scale3d(${A}, ${A}, ${A}) rotateX(${camPitch}deg) rotateY(${camYaw}deg) rotateZ(${camRoll}deg)`;
 
       // 16 Slots positioning
       const N = 16;
@@ -4992,7 +5246,15 @@
           else slot.el.classList.remove('is-flipped');
 
           slot.el.style.transform = `translate3d(${x}px, 0px, ${z}px) rotateY(${lYaw}deg) scale(${cardScale})`;
-          slot.el.style.opacity = 1;
+
+          // Active Theory Progressive Depth Falloff
+          const absR = Math.abs(r);
+          const angleNorm = Math.min(1, absR / 92);
+          const depthOpacity = Math.max(0.18, 1 - Math.pow(angleNorm, 1.7) * 0.78);
+          const depthBright = Math.max(48, Math.round((1 - angleNorm * 0.45) * 100));
+          const depthContrast = Math.max(76, Math.round((1 - angleNorm * 0.22) * 100));
+          slot.el.style.opacity = depthOpacity.toFixed(3);
+          slot.el.style.filter = `brightness(${depthBright}%) contrast(${depthContrast}%)`;
 
           // Video playback within 78 deg (only if asset provides video)
           if (site.video && Math.abs(r) <= 78 && !document.hidden) {
@@ -5358,14 +5620,21 @@
       });
     }
 
-    // Bind card clicks in 3D fleet ring to open modal
+    // Bind card clicks in 3D fleet ring: spin to center or open modal (Active Theory behavior)
     if (typeof cardSlots !== 'undefined' && Array.isArray(cardSlots)) {
       cardSlots.forEach(slot => {
         if (slot && slot.el) {
           slot.el.addEventListener('click', (e) => {
             e.preventDefault();
-            const site = SITES[slot.currentSiteIndex] || SITES[0];
-            openFleetModal(site);
+            const curRotVal = dispRot || 0;
+            const rawAngle = (360 * slot.slotIndex / 16 + curRotVal + 180) % 360;
+            const curR = ((rawAngle + 360) % 360) - 180;
+            if (Math.abs(curR) > 16) {
+              targetRot -= curR;
+            } else {
+              const site = SITES[slot.currentSiteIndex] || SITES[0];
+              openFleetModal(site);
+            }
           });
         }
       });
@@ -5538,37 +5807,156 @@
       }
     }
 
-    if (btnSoundToggle) {
-      btnSoundToggle.addEventListener('click', () => {
-        if (!audioCtx) {
-          initWebAudioAcoustic();
-        }
-        if (audioCtx && audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
+    function toggleMaritimeAudio(forceState) {
+      if (!audioCtx) initWebAudioAcoustic();
+      if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+      if (!masterGain) return;
 
-        if (!isAudioActive && masterGain) {
-          isAudioActive = true;
-          masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-          masterGain.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 2.5);
-          if (soundLabel) soundLabel.textContent = 'AUDIO: ON';
-          btnSoundToggle.classList.add('is-active');
-          showGlobalToast('Ambient Maritime Soundscape: ON');
-        } else if (isAudioActive && masterGain) {
-          isAudioActive = false;
-          masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-          masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.2);
-          if (soundLabel) soundLabel.textContent = 'AUDIO: OFF';
-          btnSoundToggle.classList.remove('is-active');
-        }
+      const nextState = forceState !== undefined ? forceState : !isAudioActive;
+      isAudioActive = nextState;
+
+      const dockSoundBtn = document.getElementById('dock-btn-sound');
+      const dockSoundLbl = document.getElementById('dock-sound-label');
+
+      if (isAudioActive) {
+        masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        masterGain.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 2.5);
+        if (soundLabel) soundLabel.textContent = 'AUDIO: ON';
+        if (btnSoundToggle) btnSoundToggle.classList.add('is-active');
+        if (dockSoundBtn) dockSoundBtn.classList.add('is-sound-active');
+        if (dockSoundLbl) dockSoundLbl.textContent = 'Audio: On';
+        showGlobalToast('Ambient Maritime Soundscape: ON');
+      } else {
+        masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.2);
+        if (soundLabel) soundLabel.textContent = 'AUDIO: OFF';
+        if (btnSoundToggle) btnSoundToggle.classList.remove('is-active');
+        if (dockSoundBtn) dockSoundBtn.classList.remove('is-sound-active');
+        if (dockSoundLbl) dockSoundLbl.textContent = 'Audio: Off';
+      }
+    }
+
+    if (btnSoundToggle) btnSoundToggle.addEventListener('click', () => toggleMaritimeAudio());
+    const dockSoundBtn = document.getElementById('dock-btn-sound');
+    if (dockSoundBtn) dockSoundBtn.addEventListener('click', () => toggleMaritimeAudio());
+
+    // H. ACTIVE THEORY INSPIRA: MOBILE TELEMETRY HANDOFF (QR)
+    const qrModalBackdrop = document.getElementById('qr-modal-backdrop');
+    const btnCloseQr = document.getElementById('btn-close-qr');
+    const qrImgDisplay = document.getElementById('qr-img-display');
+    const qrTargetTag = document.getElementById('qr-target-tag');
+    const qrTargetTitle = document.getElementById('qr-target-title');
+    const qrTargetDesc = document.getElementById('qr-target-desc');
+    const qrStatusCoords = document.getElementById('qr-status-coords');
+
+    function openMobileHandoffQR(title, tag, coords, urlParams) {
+      if (!qrModalBackdrop) return;
+      if (qrTargetTitle) qrTargetTitle.textContent = title || 'Mobile Telemetry Sync';
+      if (qrTargetTag) qrTargetTag.textContent = tag || 'AIS SATELLITE STREAM';
+      if (qrStatusCoords) qrStatusCoords.textContent = coords || 'LAT 51°57\'08"N · LON 4°08\'44"E · 24.8 KTS';
+      
+      const targetUrl = window.location.origin + window.location.pathname + (urlParams || '#dispatch');
+      if (qrImgDisplay) {
+        qrImgDisplay.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(targetUrl);
+      }
+      qrModalBackdrop.classList.add('is-open');
+    }
+
+    function closeMobileHandoffQR() {
+      if (qrModalBackdrop) qrModalBackdrop.classList.remove('is-open');
+    }
+
+    if (btnCloseQr) btnCloseQr.addEventListener('click', closeMobileHandoffQR);
+    if (qrModalBackdrop) {
+      qrModalBackdrop.addEventListener('click', (e) => {
+        if (e.target === qrModalBackdrop) closeMobileHandoffQR();
       });
     }
 
-    // H. KEYBOARD ESCAPE LISTENER
+    const btnSyncTerminalQr = document.getElementById('btn-sync-terminal-qr');
+    if (btnSyncTerminalQr) {
+      btnSyncTerminalQr.addEventListener('click', () => {
+        const portName = document.getElementById('inspector-port-name')?.textContent || 'ROTTERDAM (BERTH 42)';
+        openMobileHandoffQR(
+          portName + ' TELEMETRY',
+          'LIVE BERTH TELEMETRY',
+          'SATELLITE FREQUENCY 161.975 MHZ · STREAM ONLINE',
+          '#terminals'
+        );
+      });
+    }
+
+    const btnSyncTrackingQr = document.getElementById('btn-sync-tracking-qr');
+    if (btnSyncTrackingQr) {
+      btnSyncTrackingQr.addEventListener('click', () => {
+        const code = document.getElementById('tracking-code-input')?.value.trim() || 'ABCU-984210-4';
+        openMobileHandoffQR(
+          'SHIPMENT: ' + code,
+          'CONTAINER SATELLITE GPS AIS',
+          'SUB-ZERO -80°C TELEMETRY · TAMPER PROOF',
+          '?track=' + encodeURIComponent(code)
+        );
+      });
+    }
+
+    // I. ACTIVE THEORY INSPIRA: CYBERNETIC MATRIX TEXT SCRAMBLER
+    const SCRAMBLE_GLYPHS = '!<>-_\\/[]{}—=+*^?#_0101XYZ';
+    function initMatrixScramble() {
+      const targets = document.querySelectorAll('.nav-link, .solutions-kicker, .service-num, .dock-btn span, .dev-tab-btn, .nav-cta, .btn-qr-sync, .btn-action-outline');
+      targets.forEach(el => {
+        if (el.children.length > 0 && !el.matches('.dock-btn span, .btn-qr-sync span')) return;
+        const originalText = el.textContent.trim();
+        if (!originalText || originalText.length < 2) return;
+        el.dataset.originalText = originalText;
+
+        let frameId = null;
+        let isScrambling = false;
+
+        function runScramble() {
+          if (isScrambling) return;
+          isScrambling = true;
+          el.setAttribute('data-scrambling', 'true');
+          const str = el.dataset.originalText;
+          const len = str.length;
+          const duration = Math.min(420, Math.max(200, len * 22));
+          const start = performance.now();
+
+          function step(now) {
+            const progress = Math.min(1, (now - start) / duration);
+            const lockIndex = Math.floor(progress * len);
+            let out = '';
+            for (let i = 0; i < len; i++) {
+              if (str[i] === ' ' || str[i] === '\n' || str[i] === '/' || str[i] === '·') {
+                out += str[i];
+              } else if (i < lockIndex) {
+                out += str[i];
+              } else {
+                out += SCRAMBLE_GLYPHS[Math.floor(Math.random() * SCRAMBLE_GLYPHS.length)];
+              }
+            }
+            el.textContent = out;
+            if (progress < 1) {
+              frameId = requestAnimationFrame(step);
+            } else {
+              el.textContent = str;
+              el.removeAttribute('data-scrambling');
+              isScrambling = false;
+            }
+          }
+          frameId = requestAnimationFrame(step);
+        }
+
+        el.addEventListener('mouseenter', runScramble);
+      });
+    }
+    initMatrixScramble();
+
+    // J. KEYBOARD ESCAPE LISTENER
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeTrackingDrawer();
         closeFleetModal();
+        closeMobileHandoffQR();
         if (bolModalBackdrop) bolModalBackdrop.classList.remove('is-open');
       }
     });
