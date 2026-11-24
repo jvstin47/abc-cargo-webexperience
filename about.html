@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About ABC Cargo | Dubai-Based Maritime Framework &amp; 28 Years of Excellence</title>
+  <meta name="description" content="Founded in Dubai in 1998, ABC Cargo is a Dubai-based intermodal logistics framework uniting deep-sea fleets, the JAFZA Sea-Air Bridge, and autonomous AIS telemetry across 140+ countries.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A0E11'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-size='14' font-weight='900' fill='%2338BDF8'%3EABC%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0A0E11;
+      --surface: #111820;
+      --card: rgba(255, 255, 255, 0.025);
+      --ink: #EEF4F6;
+      --muted: #94A3B8;
+      --dim: #64748B;
+      --line: rgba(255, 255, 255, 0.09);
+      --cobalt: #38BDF8;
+      --cobalt-dark: #0284C7;
+      --emerald: #34D399;
+      --font-heading: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-body: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-code: "Geist Mono", SFMono-Regular, monospace;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input, select, textarea { font-family: var(--font-body); }
+    a { color: inherit; text-decoration: none; }
+
+    /* Static SVG Grain Overlay (Aperture Row DNA) */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Ambient Radial Glow */
+    .ambient-glow {
+      position: fixed;
+      top: -220px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1100px;
+      height: 620px;
+      background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.12) 0%, rgba(2, 132, 199, 0.04) 45%, transparent 72%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAVIGATION HEADER (Matching index.html Dark Nav) */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 max(24px, 3.2vw);
+      z-index: 500;
+      background: rgba(10, 14, 17, 0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .nav-logo .dot { color: var(--cobalt); }
+
+    .nav-tagline {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-left: 1px solid rgba(255, 255, 255, 0.16);
+      padding-left: 12px;
+      white-space: nowrap;
+    }
+
+    .nav-items {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: nowrap;
+    }
+
+    .nav-link {
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      position: relative;
+      padding: 6px 0;
+      transition: color 0.25s ease;
+      white-space: nowrap;
+    }
+    .nav-link:hover, .nav-link.is-active { color: #FFFFFF; }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--cobalt);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s var(--ease-out);
+    }
+    .nav-link:hover::after, .nav-link.is-active::after { transform: scaleX(1); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 36px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--cobalt);
+      color: #061018;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+    .nav-cta:hover { background: #7DD3FC; transform: translateY(-1px); }
+
+    /* LAYOUT CONTAINER */
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 max(24px, 3.2vw);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* HERO SECTION */
+    .about-hero {
+      padding: 152px 0 88px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .telemetry-strip {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.24);
+      margin-bottom: 28px;
+      font-family: var(--font-code);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--cobalt);
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.85); }
+    }
+
+    .hero-headline {
+      font-size: clamp(40px, 6.2vw, 84px);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin: 0 0 28px;
+      max-width: 1080px;
+    }
+    .hero-headline .accent { color: var(--cobalt); }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 48px;
+      align-items: end;
+      margin-top: 32px;
+    }
+
+    .hero-lead {
+      font-size: clamp(16px, 1.35vw, 20px);
+      line-height: 1.65;
+      color: #CBD5E1;
+      margin: 0;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .metric-box {
+      padding: 20px 22px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    .metric-val {
+      font-size: clamp(28px, 2.8vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+    }
+    .metric-val .unit { color: var(--cobalt); }
+    .metric-lbl {
+      margin-top: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* SECTION HEADERS */
+    .section-block {
+      padding: 96px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--cobalt);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(30px, 3.8vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.06;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+    .section-desc {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 0 48px;
+    }
+
+    /* DUBAI FRAMEWORK CARDS */
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .fw-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.3s ease, transform 0.3s var(--ease-out), background 0.3s ease;
+    }
+    .fw-card:hover {
+      border-color: rgba(56, 189, 248, 0.45);
+      background: rgba(56, 189, 248, 0.035);
+      transform: translateY(-4px);
+    }
+    .fw-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .fw-badge {
+      font-family: var(--font-code);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--cobalt);
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .fw-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cobalt);
+    }
+    .fw-icon svg { width: 19px; height: 19px; }
+    .fw-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin: 4px 0 0;
+      color: #FFFFFF;
+    }
+    .fw-copy {
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin: 0;
+    }
+    .fw-specs {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #CBD5E1;
+      font-variant-numeric: tabular-nums;
+    }
+    .fw-specs span.lbl { color: var(--dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* INTERACTIVE CHRONICLE TIMELINE (1998 - 2026) */
+    .timeline-shell {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+    .era-tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .era-btn {
+      text-align: left;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.25s ease;
+    }
+    .era-btn:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      color: #FFFFFF;
+    }
+    .era-btn.is-active {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: var(--cobalt);
+      color: #FFFFFF;
+    }
+    .era-year {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+    .era-btn.is-active .era-year { color: var(--cobalt); }
+    .era-loc {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .era-stage {
+      background: linear-gradient(145deg, rgba(17, 24, 32, 0.95), rgba(10, 14, 17, 0.98));
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 18px;
+      padding: 40px;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .era-stage-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-family: var(--font-code);
+      font-size: 11px;
+      color: var(--cobalt);
+      letter-spacing: 0.08em;
+    }
+    .era-stage-title {
+      font-size: clamp(24px, 2.5vw, 34px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0;
+      color: #FFFFFF;
+    }
+    .era-stage-body {
+      font-size: 15.5px;
+      line-height: 1.7;
+      color: #CBD5E1;
+      margin: 0;
+    }
+    .era-stage-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+    .era-stat-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFFFFF;
+      font-variant-numeric: tabular-nums;
+    }
+    .era-stat-lbl {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    /* DUBAI COMMAND HUBS */
+    .hubs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .hub-card {
+      padding: 28px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+    .hub-coord {
+      font-family: var(--font-code);
+      font-size: 11px;
+      color: var(--cobalt);
+      margin-bottom: 10px;
+    }
+    .hub-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 10px;
+      color: #FFFFFF;
+    }
+    .hub-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* CTA BANNER */
+    .cta-banner {
+      margin: 88px 0 0;
+      padding: 56px 48px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.14) 0%, rgba(17, 24, 32, 0.9) 65%);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 14px 26px;
+      border-radius: 999px;
+      background: var(--cobalt);
+      color: #061018;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover { background: #7DD3FC; transform: translateY(-2px); }
+    .btn-secondary {
+      padding: 14px 26px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+    .btn-secondary:hover { border-color: var(--cobalt); background: rgba(56, 189, 248, 0.08); }
+
+    /* GIANT ARCHITECTURAL FOOTER */
+    .site-footer {
+      background: #06090C;
+      color: var(--muted);
+      padding: 72px max(24px, 3.2vw) 48px;
+      border-top: 1px solid var(--line);
+      margin-top: 96px;
+      overflow: hidden;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      max-width: 1320px;
+      margin: 0 auto 48px;
+    }
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cobalt);
+      margin-bottom: 14px;
+    }
+    .footer-col-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .footer-col-list a:hover { color: #FFFFFF; }
+    .footer-bottom-bar {
+      max-width: 1320px;
+      margin: 0 auto 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 12px;
+      color: var(--dim);
+    }
+    .footer-wordmark {
+      font-weight: 800;
+      font-size: clamp(44px, 11vw, 175px);
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.055);
+      text-align: center;
+      user-select: none;
+      white-space: nowrap;
+      margin-top: 12px;
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 960px) {
+      .hero-grid, .framework-grid, .timeline-shell, .hubs-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 820px) {
+      .nav-tagline, .nav-link:not(.is-active) { display: none; }
+      .about-hero { padding-top: 116px; }
+      .era-stage { padding: 26px; }
+      .era-stage-stats { grid-template-columns: 1fr; }
+      .cta-banner { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain-overlay" aria-hidden="true"></div>
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <!-- NAVIGATION -->
+  <header class="site-nav">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">ABC<span class="dot">.</span>CARGO</div>
+      <div class="nav-tagline">Dubai · Global Fleet Group</div>
+    </a>
+    <nav class="nav-items">
+      <a href="index.html#hero" class="nav-link">OVERVIEW</a>
+      <a href="index.html#services" class="nav-link">SERVICES</a>
+      <a href="index.html#fleet" class="nav-link">FLEET</a>
+      <a href="index.html#dispatch" class="nav-link">RATES</a>
+      <a href="index.html#terminals" class="nav-link">NETWORK</a>
+      <a href="about.html" class="nav-link is-active">ABOUT</a>
+      <a href="index.html#dispatch" class="nav-cta">BOOK DISPATCH ↗</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="about-hero">
+      <div class="telemetry-strip">
+        <span class="pulse-dot"></span>
+        <span>EST. 1998 · JEBEL ALI &amp; PORT RASHID, DUBAI, UAE</span>
+        <span>·</span>
+        <span id="dubai-clock">DXB GST --:--:--</span>
+        <span>·</span>
+        <span>LAT 24°59'08"N · LON 55°03'40"E</span>
+      </div>
+
+      <h1 class="hero-headline">
+        ARCHITECTED IN <span class="accent">DUBAI.</span><br>
+        BUILT FOR THE WORLD’S OCEANS.
+      </h1>
+
+      <div class="hero-grid">
+        <p class="hero-lead">
+          Founded in Dubai in 1998 at the maritime crossroads of East Asia, Europe, and Africa, <strong>ABC Cargo</strong> operates a sovereign, Dubai-engineered intermodal logistics framework. Over nearly three decades of continuous execution, we have evolved from a four-vessel Arabian Gulf feeder line into an autonomous deep-sea, Sea-Air, and GDP-certified cold-chain infrastructure serving 140+ countries.
+        </p>
+
+        <div class="hero-metrics">
+          <div class="metric-box">
+            <div class="metric-val">1998</div>
+            <div class="metric-lbl">Founded · Port Rashid, Dubai</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">28<span class="unit">+</span> YRS</div>
+            <div class="metric-lbl">Unbroken Maritime Excellence</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">11.4<span class="unit">M+</span></div>
+            <div class="metric-lbl">Annual TEU Orchestrated</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">99.8<span class="unit">%</span></div>
+            <div class="metric-lbl">Schedule &amp; Cold-Chain Integrity</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE DUBAI-BASED FRAMEWORK -->
+    <section class="section-block reveal">
+      <div class="section-kicker">01 // THE JEBEL ALI FRAMEWORK</div>
+      <h2 class="section-title">WHY A DUBAI-BASED LOGISTICS ARCHITECTURE</h2>
+      <p class="section-desc">
+        Geography is destiny in global freight. Headquartered inside Jebel Ali Free Zone (JAFZA) with command operations in DIFC, our framework leverages Dubai’s 4-hour Sea-Air customs corridor and zero-friction transshipment velocity to compress transit windows between Asia, Europe, and the Americas.
+      </p>
+
+      <div class="framework-grid">
+        <article class="fw-card">
+          <div class="fw-top">
+            <span class="fw-badge">MODULE 01 // SEA-AIR</span>
+            <div class="fw-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>
+            </div>
+          </div>
+          <h3 class="fw-title">JAFZA–DWC 4-Hour Sea-Air Bridge</h3>
+          <p class="fw-copy">Direct bonded telemetry linking Jebel Ali Deepwater Berth 03 to Al Maktoum International (DWC) cargo aprons—delivering 40% faster East-to-West transit than pure ocean freight at half the cost of pure air charter.</p>
+          <div class="fw-specs">
+            <span><span class="lbl">TURNAROUND:</span> 4 HRS BONDED</span>
+            <span><span class="lbl">CORRIDORS:</span> 140+ LANES</span>
+          </div>
+        </article>
+
+        <article class="fw-card">
+          <div class="fw-top">
+            <span class="fw-badge">MODULE 02 // TELEMETRY</span>
+            <div class="fw-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            </div>
+          </div>
+          <h3 class="fw-title">Sovereign AIS Digital Twin</h3>
+          <p class="fw-copy">Engineered by our Dubai Maritime AI lab, our routing mesh fuses live satellite AIS, Suez/Malacca berth congestion feeds, and sea-state barometry to re-sequence vessel slots 72 hours ahead of port bottlenecks.</p>
+          <div class="fw-specs">
+            <span><span class="lbl">UPDATE CADENCE:</span> REAL-TIME AIS</span>
+            <span><span class="lbl">SECURITY:</span> ISO 27001</span>
+          </div>
+        </article>
+
+        <article class="fw-card">
+          <div class="fw-top">
+            <span class="fw-badge">MODULE 03 // CRYO-PHARMA</span>
+            <div class="fw-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m17 5-5 5-5-5"/><path d="m17 19-5-5-5 5"/><path d="M2 12h20"/></svg>
+            </div>
+          </div>
+          <h3 class="fw-title">Gulf-Hardened Cold Chain (-80°C)</h3>
+          <p class="fw-copy">Built to hold sub-zero cryogenic biologics across 50°C Gulf summer aprons without a single thermal excursion. Validated under WHO GDP and IATA CEIV Pharma standards from factory gate to hospital dock.</p>
+          <div class="fw-specs">
+            <span><span class="lbl">RANGE:</span> -80°C TO +25°C</span>
+            <span><span class="lbl">EXCURSIONS:</span> 0.00%</span>
+          </div>
+        </article>
+
+        <article class="fw-card">
+          <div class="fw-top">
+            <span class="fw-badge">MODULE 04 // ESG LEDGER</span>
+            <div class="fw-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            </div>
+          </div>
+          <h3 class="fw-title">Green Methanol &amp; Scope-3 Accounting</h3>
+          <p class="fw-copy">Every Bill of Lading issued through our Dubai framework includes verified ISO 14001 Scope-3 emissions telemetry and optional green biofuel bunker allocation aligned with IMO 2030 decarbonization mandates.</p>
+          <div class="fw-specs">
+            <span><span class="lbl">FUEL MIX:</span> DUAL-METHANOL</span>
+            <span><span class="lbl">AUDIT:</span> ISO 14001:2015</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 28-YEAR HERITAGE TIMELINE -->
+    <section class="section-block reveal">
+      <div class="section-kicker">02 // 1998 – 2026 CHRONICLE</div>
+      <h2 class="section-title">28 YEARS OF MARITIME EXCELLENCE</h2>
+      <p class="section-desc">
+        From four chartered feeder ships in Port Rashid to a global intermodal network. Select an era below to inspect how the ABC Cargo Dubai framework evolved.
+      </p>
+
+      <div class="timeline-shell">
+        <div class="era-tabs" role="tablist" aria-label="ABC Cargo History Eras">
+          <button class="era-btn is-active" data-era="1998" role="tab" aria-selected="true">
+            <span class="era-year">1998</span>
+            <span class="era-loc">Port Rashid, Dubai</span>
+          </button>
+          <button class="era-btn" data-era="2006" role="tab" aria-selected="false">
+            <span class="era-year">2006</span>
+            <span class="era-loc">JAFZA Deepwater</span>
+          </button>
+          <button class="era-btn" data-era="2014" role="tab" aria-selected="false">
+            <span class="era-year">2014</span>
+            <span class="era-loc">DWC Sea-Air Bridge</span>
+          </button>
+          <button class="era-btn" data-era="2021" role="tab" aria-selected="false">
+            <span class="era-year">2021</span>
+            <span class="era-loc">Autonomous AIS Lab</span>
+          </button>
+          <button class="era-btn" data-era="2026" role="tab" aria-selected="false">
+            <span class="era-year">2026</span>
+            <span class="era-loc">Global Fleet Grid</span>
+          </button>
+        </div>
+
+        <div class="era-stage" id="era-stage">
+          <div class="era-stage-meta">
+            <span id="era-badge">ERA 01 // FOUNDATION</span>
+            <span id="era-coords">PORT RASHID · 25°16'N 55°16'E</span>
+          </div>
+          <div>
+            <h3 class="era-stage-title" id="era-title">Four Feeder Vessels &amp; Arabian Gulf Precision</h3>
+            <p class="era-stage-body" id="era-body">
+              ABC Cargo was incorporated in Dubai in 1998 with four breakbulk and container feeder vessels operating out of Port Rashid. Built around strict berth-window discipline and customs-first documentation, the company became the preferred maritime link for Gulf energy, construction, and industrial importers.
+            </p>
+          </div>
+          <div class="era-stage-stats">
+            <div>
+              <div class="era-stat-val" id="era-stat-1">4 Vessels</div>
+              <div class="era-stat-lbl" id="era-lbl-1">Initial Fleet</div>
+            </div>
+            <div>
+              <div class="era-stat-val" id="era-stat-2">6 Ports</div>
+              <div class="era-stat-lbl" id="era-lbl-2">GCC Network</div>
+            </div>
+            <div>
+              <div class="era-stat-val" id="era-stat-3">48,000 TEU</div>
+              <div class="era-stat-lbl" id="era-lbl-3">Year-One Volume</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DUBAI COMMAND INFRASTRUCTURE -->
+    <section class="section-block reveal" style="border-bottom: none; padding-bottom: 0;">
+      <div class="section-kicker">03 // DUBAI COMMAND ARCHITECTURE</div>
+      <h2 class="section-title">THREE PILLARS IN THE EMIRATE</h2>
+      <p class="section-desc">
+        Every container, cryogenic air pallet, and heavy-lift project rig routed anywhere on Earth is orchestrated from three synchronized Dubai command nodes.
+      </p>
+
+      <div class="hubs-grid">
+        <div class="hub-card">
+          <div class="hub-coord">24°59'08"N · 55°03'40"E</div>
+          <h3 class="hub-name">JAFZA Deepwater NOC</h3>
+          <p class="hub-desc">24/7 Network Operations Center at Jebel Ali Berth 03 overseeing ultra-large container vessel (ULCV) slot allocations, crane rates, and bonded transshipment.</p>
+        </div>
+        <div class="hub-card">
+          <div class="hub-coord">24°53'47"N · 55°09'41"E</div>
+          <h3 class="hub-name">DWC Cryo-Pharma Apron</h3>
+          <p class="hub-desc">Dedicated temperature-controlled air cargo facility at Al Maktoum International powering our 4-hour Sea-Air bridge for lifesciences and semiconductor freight.</p>
+        </div>
+        <div class="hub-card">
+          <div class="hub-coord">25°12'43"N · 55°16'54"E</div>
+          <h3 class="hub-name">DIFC Charter &amp; AI Lab</h3>
+          <p class="hub-desc">Global commercial chartering desk, maritime ESG compliance governance, and the engineering team behind our predictive AIS routing engine.</p>
+        </div>
+      </div>
+
+      <div class="cta-banner">
+        <div>
+          <div class="section-kicker" style="margin-bottom: 8px;">EXPERIENCE THE FRAMEWORK LIVE</div>
+          <h3 style="font-size: clamp(24px, 2.8vw, 36px); font-weight: 800; margin: 0; letter-spacing: -0.02em;">EXPLORE THE 3D FLEET &amp; LIVE RATE ENGINE</h3>
+        </div>
+        <div class="cta-actions">
+          <a href="index.html#fleet" class="btn-primary">Launch 3D Ocean Fleet ↗</a>
+          <a href="index.html#dispatch" class="btn-secondary">Instant Rate Calculator</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- GIANT ARCHITECTURAL FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <div style="color: #FFF; font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px;">ABC<span style="color: var(--cobalt);">.</span>CARGO</div>
+        <p style="font-size: 13px; line-height: 1.6; color: #94A3B8; max-width: 340px; margin: 0;">Dubai-based intermodal freight framework operating autonomous deep-sea fleets and GDP cold-chain corridors since 1998.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-col-list">
+          <a href="index.html#hero">Overview</a>
+          <a href="index.html#services">Services &amp; Capacities</a>
+          <a href="index.html#fleet">3D Ocean Fleet</a>
+          <a href="about.html">About (Dubai HQ)</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Operations</div>
+        <div class="footer-col-list">
+          <a href="index.html#dispatch">Rate Calculator</a>
+          <a href="index.html#terminals">AIS Port Radar</a>
+          <a href="index.html#certifications">ESG &amp; Compliance</a>
+          <a href="kv-hero.html" target="_blank">KV Hero (Original) ↗</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Global Desk</div>
+        <div class="footer-col-list">
+          <span style="color: #FFF; font-weight: 600;">Dubai · Jebel Ali Free Zone (HQ)</span>
+          <span>Rotterdam · Maasvlakte II</span>
+          <span>Singapore · Pasir Panjang</span>
+          <span style="color: var(--cobalt); font-weight: 600;">24/7 Dispatch NOC</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <span>© 2026 ABC Cargo Group Inc. Headquartered in Dubai, United Arab Emirates.</span>
+      <span>IMO / IATA / C-TPAT Tier 3 Certified Carrier</span>
+    </div>
+
+    <div class="footer-wordmark" aria-hidden="true">DUBAI · 1998</div>
+  </footer>
+
+  <script>
+    // 1. Live Dubai GST (UTC+4) Command Clock
+    const clockEl = document.getElementById('dubai-clock');
+    function updateDubaiClock() {
+      const now = new Date();
+      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+      const dxb = new Date(utc + 4 * 3600000);
+      const hh = String(dxb.getHours()).padStart(2, '0');
+      const mm = String(dxb.getMinutes()).padStart(2, '0');
+      const ss = String(dxb.getSeconds()).padStart(2, '0');
+      if (clockEl) clockEl.textContent = `DXB GST ${hh}:${mm}:${ss}`;
+    }
+    updateDubaiClock();
+    setInterval(updateDubaiClock, 1000);
+
+    // 2. Interactive Chronicle Timeline (1998 - 2026)
+    const ERAS = {
+      '1998': {
+        badge: 'ERA 01 // FOUNDATION',
+        coords: "PORT RASHID · 25°16'N 55°16'E",
+        title: 'Four Feeder Vessels & Arabian Gulf Precision',
+        body: 'ABC Cargo was incorporated in Dubai in 1998 with four breakbulk and container feeder vessels operating out of Port Rashid. Built around strict berth-window discipline and customs-first documentation, the company became the preferred maritime link for Gulf energy, construction, and industrial importers.',
+        s1: '4 Vessels', l1: 'Initial Fleet',
+        s2: '6 Ports', l2: 'GCC Network',
+        s3: '48,000 TEU', l3: 'Year-One Volume'
+      },
+      '2006': {
+        badge: 'ERA 02 // DEEPWATER EXPANSION',
+        coords: "JAFZA BERTH 03 · 24°59'N 55°03'E",
+        title: 'Jebel Ali Automated Hub & East–West Express',
+        body: 'Transitioning deepwater operations to Jebel Ali Free Zone (JAFZA), ABC Cargo commissioned its first automated bonded transshipment terminal—unlocking direct mainline loops connecting Shanghai, Singapore, Dubai, and Rotterdam.',
+        s1: '42 Vessels', l1: 'Active Fleet',
+        s2: '34 Countries', l2: 'Trade Lanes',
+        s3: '1.2M TEU', l3: 'Annual Throughput'
+      },
+      '2014': {
+        badge: 'ERA 03 // MULTIMODAL VELOCITY',
+        coords: "DWC APRON · 24°53'N 55°09'E",
+        title: 'Pioneering the 4-Hour Dubai Sea-Air Bridge',
+        body: 'Linking Jebel Ali Deepwater berths directly to Al Maktoum International (DWC) via customs-sealed express corridors, we cut Asia-to-Europe transit times by 40% and earned WHO GDP & IATA CEIV certification for sub-zero pharmaceutical freight.',
+        s1: '4 Hours', l1: 'Sea-Air Transfer',
+        s2: '-80°C', l2: 'Cryo Capability',
+        s3: '99.4%', l3: 'Schedule Integrity'
+      },
+      '2021': {
+        badge: 'ERA 04 // AUTONOMOUS TELEMETRY',
+        coords: "DIFC AI LAB · 25°12'N 55°16'E",
+        title: 'Sovereign AIS Digital Twin & Predictive Routing',
+        body: 'Our DIFC engineering division deployed a proprietary satellite AIS and port-congestion digital twin, automatically re-routing cargo around Red Sea, Suez, and Pacific bottlenecks before delays compound.',
+        s1: '140+ Nations', l1: 'Connected Grid',
+        s2: 'Real-Time', l2: 'AIS Sensor Mesh',
+        s3: 'ISO 27001', l3: 'Cyber Governance'
+      },
+      '2026': {
+        badge: 'ERA 05 // GLOBAL INFRASTRUCTURE',
+        coords: "DUBAI GLOBAL NOC · 24°59'N 55°03'E",
+        title: '24,900+ Vessels & Rigs · Net-Zero Biofuel Fleet',
+        body: 'Today, ABC Cargo operates one of the world’s most advanced intermodal frameworks—moving 11.4M+ TEU annually across 38,200+ port calls with dual-methanol vessels and full Scope-3 carbon transparency on every Bill of Lading.',
+        s1: '11.4M+ TEU', l1: 'Annual Volume',
+        s2: '38.2K', l2: 'Annual Port Calls',
+        s3: '99.8%', l3: 'Schedule Reliability'
+      }
+    };
+
+    document.querySelectorAll('.era-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.era-btn').forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+
+        const d = ERAS[btn.dataset.era];
+        if (!d) return;
+        document.getElementById('era-badge').textContent = d.badge;
+        document.getElementById('era-coords').textContent = d.coords;
+        document.getElementById('era-title').textContent = d.title;
+        document.getElementById('era-body').textContent = d.body;
+        document.getElementById('era-stat-1').textContent = d.s1;
+        document.getElementById('era-lbl-1').textContent = d.l1;
+        document.getElementById('era-stat-2').textContent = d.s2;
+        document.getElementById('era-lbl-2').textContent = d.l2;
+        document.getElementById('era-stat-3').textContent = d.s3;
+        document.getElementById('era-lbl-3').textContent = d.l3;
+      });
+    });
+
+    // 3. Active Theory Matrix Text Scramble on Nav & Badges
+    (function initMatrixScramble() {
+      const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#*';
+      document.querySelectorAll('.nav-link, .fw-badge').forEach(el => {
+        const orig = el.textContent;
+        let rafId = null;
+        el.addEventListener('mouseenter', () => {
+          if (rafId) cancelAnimationFrame(rafId);
+          const start = performance.now();
+          const dur = 240;
+          function tick(now) {
+            const p = Math.min(1, (now - start) / dur);
+            const reveal = Math.floor(p * orig.length);
+            let out = '';
+            for (let i = 0; i < orig.length; i++) {
+              out += (orig[i] === ' ' || i < reveal) ? orig[i] : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+            }
+            el.textContent = out;
+            if (p < 1) rafId = requestAnimationFrame(tick);
+            else { el.textContent = orig; rafId = null; }
+          }
+          rafId = requestAnimationFrame(tick);
+        });
+        el.addEventListener('mouseleave', () => {
+          if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+          el.textContent = orig;
+        });
+      });
+    })();
+
+    // 4. Scroll Reveal Observer
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
