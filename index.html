@@ -47,22 +47,26 @@
       --ink-soft: #9FB4BF;
       --ink-muted: #647C8A;
       --line: rgba(238, 244, 246, 0.14);
-      --cobalt: var(--dev-cobalt, #2F63FF);
-      --dev-font-heading: "Archivo", system-ui, sans-serif;
+      --cobalt: var(--dev-cobalt, #38BDF8);
+      --dev-font-heading: "Geist", system-ui, sans-serif;
       --dev-card-radius: 16px;
       --dev-card-bg: #0E141B;
       --dev-card-blur: 16px;
       --dev-reflection-op: 0.65;
-      --cobalt-dark: #1E4ED8;
-      --accent: #3AA8D0;
-      --aqua: #9ED8E4;
-      --btn: #1E86AC;
-      --btn-hover: #2597C0;
+      --dev-heading-scale: 1.15;
+      --dev-tracking: 0.08em;
+      --dev-body-scale: 1;
+      --dev-leading: 1.6;
+      --cobalt-dark: #0284C7;
+      --accent: #38BDF8;
+      --aqua: #BAE6FD;
+      --btn: #0284C7;
+      --btn-hover: #38BDF8;
       --giant-letters: #E9E9E9;
       --band-bg: #111111;
 
       --font-anton: "Anton", Impact, sans-serif;
-      --font-archivo: "Archivo", system-ui, sans-serif;
+      --font-archivo: var(--dev-font-heading, "Geist", system-ui, sans-serif);
       --font-mono: "JetBrains Mono", "Geist Mono", monospace;
       --font-serif: "Newsreader", Georgia, serif;
       --font-sans: "Geist", system-ui, sans-serif;
@@ -552,8 +556,8 @@
     .service-title {
       font-family: var(--font-archivo);
       font-weight: 700;
-      font-size: calc(20 * var(--u));
-      letter-spacing: -0.01em;
+      font-size: calc(20 * var(--u) * var(--dev-heading-scale, 1.15));
+      letter-spacing: var(--dev-tracking, 0.08em);
       line-height: 1.25;
       text-transform: uppercase;
       color: #FFFFFF;
@@ -1643,8 +1647,8 @@
     .solutions-title {
       font-family: var(--font-archivo);
       font-weight: 700;
-      font-size: calc(44 * var(--u));
-      letter-spacing: -0.02em;
+      font-size: calc(44 * var(--u) * var(--dev-heading-scale, 1.15));
+      letter-spacing: var(--dev-tracking, 0.08em);
       line-height: 1.1;
       text-transform: uppercase;
       margin: 0 0 calc(16 * var(--u)) 0;
@@ -1742,9 +1746,9 @@
     }
     .solution-name {
       font-family: var(--font-archivo);
-      font-size: calc(21 * var(--u));
+      font-size: calc(21 * var(--u) * var(--dev-heading-scale, 1.15));
       font-weight: 700;
-      letter-spacing: -0.01em;
+      letter-spacing: var(--dev-tracking, 0.08em);
       line-height: 1.25;
       text-transform: uppercase;
       color: #FFFFFF;
@@ -4121,30 +4125,30 @@
           <div class="dev-field">
             <div class="dev-field-header">
               <span>Ring Radius</span>
-              <span class="dev-val-readout" id="val-ring-radius">1800px</span>
+              <span class="dev-val-readout" id="val-ring-radius">1300px</span>
             </div>
-            <input type="range" class="dev-slider" id="ctrl-ring-radius" min="900" max="2800" step="20" value="1800">
+            <input type="range" class="dev-slider" id="ctrl-ring-radius" min="900" max="2800" step="20" value="1300">
           </div>
           <div class="dev-field">
             <div class="dev-field-header">
               <span>Perspective Depth</span>
-              <span class="dev-val-readout" id="val-perspective">760px</span>
+              <span class="dev-val-readout" id="val-perspective">1110px</span>
             </div>
-            <input type="range" class="dev-slider" id="ctrl-perspective" min="400" max="1600" step="10" value="760">
+            <input type="range" class="dev-slider" id="ctrl-perspective" min="400" max="1600" step="10" value="1110">
           </div>
           <div class="dev-field">
             <div class="dev-field-header">
               <span>Card Scale</span>
-              <span class="dev-val-readout" id="val-card-scale">1.0x</span>
+              <span class="dev-val-readout" id="val-card-scale">0.75x</span>
             </div>
-            <input type="range" class="dev-slider" id="ctrl-card-scale" min="0.6" max="1.8" step="0.05" value="1.0">
+            <input type="range" class="dev-slider" id="ctrl-card-scale" min="0.6" max="1.8" step="0.05" value="0.75">
           </div>
           <div class="dev-field">
             <div class="dev-field-header">
               <span>Card Tilt Multiplier</span>
-              <span class="dev-val-readout" id="val-card-tilt">1.0x</span>
+              <span class="dev-val-readout" id="val-card-tilt">0.9x</span>
             </div>
-            <input type="range" class="dev-slider" id="ctrl-card-tilt" min="0.0" max="2.5" step="0.1" value="1.0">
+            <input type="range" class="dev-slider" id="ctrl-card-tilt" min="0.0" max="2.5" step="0.1" value="0.9">
           </div>
         </div>
 
@@ -4152,14 +4156,14 @@
           <p class="dev-section-title">Spring Physics & Motion</p>
           <div class="dev-toggle-row">
             <span>Continuous Auto-Rotate</span>
-            <button class="dev-toggle-btn" id="ctrl-auto-rotate"><span class="dev-toggle-knob"></span></button>
+            <button class="dev-toggle-btn is-active" id="ctrl-auto-rotate"><span class="dev-toggle-knob"></span></button>
           </div>
           <div class="dev-field">
             <div class="dev-field-header">
               <span>Auto-Rotate Velocity</span>
-              <span class="dev-val-readout" id="val-auto-speed">0.25</span>
+              <span class="dev-val-readout" id="val-auto-speed">0.30</span>
             </div>
-            <input type="range" class="dev-slider" id="ctrl-auto-speed" min="-2.0" max="2.0" step="0.05" value="0.25">
+            <input type="range" class="dev-slider" id="ctrl-auto-speed" min="-2.0" max="2.0" step="0.05" value="0.30">
           </div>
           <div class="dev-field">
             <div class="dev-field-header">
@@ -4244,26 +4248,26 @@
           <div class="dev-field">
             <label class="dev-field-header" for="ctrl-heading-font">Card & Section Heading Font</label>
             <select class="dev-select" id="ctrl-heading-font">
-              <option value="'Archivo', system-ui, sans-serif" selected>Archivo (Industrial Grotesk)</option>
+              <option value="'Archivo', system-ui, sans-serif">Archivo (Industrial Grotesk)</option>
               <option value="'Anton', Impact, sans-serif">Anton (Condensed Bold Poster)</option>
               <option value="'Newsreader', Georgia, serif">Newsreader (Executive Editorial Serif)</option>
               <option value="'JetBrains Mono', monospace">JetBrains Mono (Technical Monospace)</option>
-              <option value="'Geist', system-ui, sans-serif">Geist (Modern High-Tech)</option>
+              <option value="'Geist', system-ui, sans-serif" selected>Geist (Modern High-Tech)</option>
             </select>
           </div>
           <div class="dev-field">
             <div class="dev-field-header">
               <span>Headings Scale</span>
-              <span class="dev-val-readout" id="val-head-scale">1.0x</span>
+              <span class="dev-val-readout" id="val-head-scale">1.15x</span>
             </div>
-            <input type="range" class="dev-slider" id="ctrl-head-scale" min="0.8" max="1.4" step="0.05" value="1.0">
+            <input type="range" class="dev-slider" id="ctrl-head-scale" min="0.8" max="1.4" step="0.05" value="1.15">
           </div>
           <div class="dev-field">
             <div class="dev-field-header">
               <span>Tracking / Letter-Spacing</span>
-              <span class="dev-val-readout" id="val-tracking">0.00em</span>
+              <span class="dev-val-readout" id="val-tracking">0.08em</span>
             </div>
-            <input type="range" class="dev-slider" id="ctrl-tracking" min="-0.04" max="0.15" step="0.01" value="0.0">
+            <input type="range" class="dev-slider" id="ctrl-tracking" min="-0.04" max="0.15" step="0.01" value="0.08">
           </div>
         </div>
 
@@ -4292,12 +4296,12 @@
           <p class="dev-section-title">Brand Accent Color</p>
           <div class="dev-field">
             <div class="dev-swatches">
-              <span class="dev-swatch is-active" data-color="#2F63FF" style="background: #2F63FF;" title="Cobalt Core"></span>
-              <span class="dev-swatch" data-color="#38BDF8" style="background: #38BDF8;" title="Electric Ocean"></span>
+              <span class="dev-swatch" data-color="#2F63FF" style="background: #2F63FF;" title="Cobalt Core"></span>
+              <span class="dev-swatch is-active" data-color="#38BDF8" style="background: #38BDF8;" title="Electric Ocean"></span>
               <span class="dev-swatch" data-color="#F59E0B" style="background: #F59E0B;" title="Safety High-Vis Amber"></span>
               <span class="dev-swatch" data-color="#10B981" style="background: #10B981;" title="Cyber Emerald"></span>
               <span class="dev-swatch" data-color="#A855F7" style="background: #A855F7;" title="Neon Violet"></span>
-              <input type="color" class="dev-color-native" id="ctrl-color-native" value="#2F63FF" title="Custom Color Picker">
+              <input type="color" class="dev-color-native" id="ctrl-color-native" value="#38BDF8" title="Custom Color Picker">
             </div>
           </div>
         </div>
