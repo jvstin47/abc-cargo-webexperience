@@ -3695,7 +3695,7 @@
   <header class="site-nav" id="site-nav">
     <a href="#hero" class="nav-brand">
       <div class="nav-logo">ABC<span class="dot">.</span>CARGO</div>
-      <div class="nav-tagline">Global Fleet Group</div>
+      <div class="nav-tagline">Dubai · Global Fleet Group</div>
     </a>
     <nav class="nav-items">
       <a href="#hero" class="nav-link is-active">OVERVIEW</a>
@@ -3738,12 +3738,12 @@
 
       <!-- Real-time HUD -->
       <div class="telemetry-hud">
-        <div class="hud-title">PORT ROTTERDAM · BERTH 42</div>
+        <div class="hud-title">JEBEL ALI · TERMINAL 3, DUBAI</div>
         <div class="hud-readout">
           <span class="hud-speed" id="hud-speed">24.8</span>
           <span class="hud-unit">KTS TRANSIT</span>
         </div>
-        <div class="hud-coords">LAT 51°57'08"N · LON 4°08'44"E · PAYLOAD 42.4T</div>
+        <div class="hud-coords">LAT 24°59'08"N · LON 55°03'40"E · PAYLOAD 42.4T</div>
       </div>
 
       <!-- Services Band Strip sliding in from right -->
@@ -4459,17 +4459,16 @@
           <a href="#dispatch" class="footer-link">Rate Calculator</a>
           <a href="#terminals" class="footer-link">AIS Port Radar</a>
           <a href="#certifications" class="footer-link">ESG &amp; Compliance</a>
-          <a href="kv-hero.html" class="footer-link" target="_blank">KV Hero (Original) ↗</a>
+          <a href="about.html" class="footer-link">28-Year Dubai Chronicle</a>
         </div>
       </div>
       <div>
         <div class="footer-col-title">Global Desk</div>
         <div class="footer-col-list">
-          <span style="color: #FFF; font-weight: 600;">Dubai · Jebel Ali Free Zone (HQ)</span>
-          <span>Rotterdam · Maasvlakte II</span>
-          <span>Singapore · Pasir Panjang</span>
-          <span>Shanghai · Yangshan Deepwater</span>
-          <span style="color: var(--cobalt); font-weight: 600;">24/7 Dispatch NOC</span>
+          <span style="color: #FFF; font-weight: 600;">JAFZA South, Plot S412 · Dubai, UAE</span>
+          <span>dispatch@abccargo.ae</span>
+          <span>+971 4 881 4200 (24/7 NOC)</span>
+          <span style="color: var(--cobalt); font-weight: 600;">Rotterdam · Singapore · Shanghai</span>
         </div>
       </div>
     </div>
@@ -4767,7 +4766,7 @@
       </div>
 
       <div>
-        <div class="qr-status-pill" id="qr-status-coords">LAT 51°57'08"N · LON 4°08'44"E · 24.8 KTS</div>
+        <div class="qr-status-pill" id="qr-status-coords">LAT 24°59'08"N · LON 55°03'40"E · 24.8 KTS</div>
       </div>
     </div>
   </div>
@@ -6392,7 +6391,7 @@
       if (!qrModalBackdrop) return;
       if (qrTargetTitle) qrTargetTitle.textContent = title || 'Mobile Telemetry Sync';
       if (qrTargetTag) qrTargetTag.textContent = tag || 'AIS SATELLITE STREAM';
-      if (qrStatusCoords) qrStatusCoords.textContent = coords || 'LAT 51°57\'08"N · LON 4°08\'44"E · 24.8 KTS';
+      if (qrStatusCoords) qrStatusCoords.textContent = coords || 'LAT 24°59\'08"N · LON 55°03\'40"E · 24.8 KTS';
       
       const targetUrl = window.location.origin + window.location.pathname + (urlParams || '#dispatch');
       if (qrImgDisplay) {
