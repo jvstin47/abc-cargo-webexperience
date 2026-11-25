@@ -4307,14 +4307,14 @@
 
           <!-- Realistic Maritime Shipping Lanes -->
           <!-- Transpacific Route: Shanghai -> LA Pier 400 -->
-          <path d="M837.4,159.2 Q930,130 995,145" fill="none" stroke="url(#routeGrad1)" stroke-width="2.5" stroke-dasharray="6,4" filter="url(#routeGlow)"/>
-          <path d="M5,145 Q80,150 171.5,152.5" fill="none" stroke="url(#routeGrad1)" stroke-width="2.5" stroke-dasharray="6,4" filter="url(#routeGlow)"/>
+          <path class="maritime-lane" d="M837.4,159.2 Q930,130 995,145" fill="none" stroke="url(#routeGrad1)" stroke-width="2.5" stroke-dasharray="6,4" filter="url(#routeGlow)"/>
+          <path class="maritime-lane" d="M5,145 Q80,150 171.5,152.5" fill="none" stroke="url(#routeGrad1)" stroke-width="2.5" stroke-dasharray="6,4" filter="url(#routeGlow)"/>
 
           <!-- Eurasia Maritime Silk Road: Rotterdam -> Gibraltar -> Suez -> Dubai -> Singapore -> Shanghai -->
-          <path d="M512.4,104.5 Q490,140 485,170 Q515,185 570,195 Q605,195 652.9,175.6 Q680,210 720,225 T788.4,238.1 Q800,200 837.4,159.2" fill="none" stroke="url(#routeGrad2)" stroke-width="2.5" stroke-dasharray="7,4" filter="url(#routeGlow)"/>
+          <path class="maritime-lane" d="M512.4,104.5 Q490,140 485,170 Q515,185 570,195 Q605,195 652.9,175.6 Q680,210 720,225 T788.4,238.1 Q800,200 837.4,159.2" fill="none" stroke="url(#routeGrad2)" stroke-width="2.5" stroke-dasharray="7,4" filter="url(#routeGlow)"/>
 
           <!-- Transatlantic North Sea to Americas -->
-          <path d="M512.4,104.5 Q380,120 280,145" fill="none" stroke="url(#routeGrad1)" stroke-width="1.8" stroke-dasharray="4,4" opacity="0.6"/>
+          <path class="maritime-lane" d="M512.4,104.5 Q380,120 280,145" fill="none" stroke="url(#routeGrad1)" stroke-width="1.8" stroke-dasharray="4,4" opacity="0.6"/>
 
           <!-- Port Nodes (Interactive Pins) -->
           <!-- Rotterdam -->
@@ -7084,6 +7084,52 @@
     }
 
   })();
+  </script>
+  <script src="vendor/anime.umd.min.js"></script>
+  <script>
+    (function initAnimeOrchestration() {
+      if (!window.anime) return;
+      const { animate, stagger, svg } = window.anime;
+
+      // 1. Staggered Spring Entrances on Solutions, Terminal Nodes & Certifications
+      const staggerGroups = [
+        { container: '#solutions', targets: '#solutions .solution-card' },
+        { container: '#terminals', targets: '#terminals .terminal-node-card' },
+        { container: '#certifications', targets: '#certifications .cert-item' }
+      ];
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const grp = staggerGroups.find(g => entry.target.matches(g.container));
+          if (grp) {
+            animate(grp.targets, {
+              translateY: [28, 0],
+              opacity: [0, 1],
+              duration: 720,
+              ease: 'out(4)',
+              delay: stagger(75)
+            });
+          }
+          if (entry.target.classList.contains('port-map-section') && svg && svg.createDrawable) {
+            animate(svg.createDrawable('.maritime-lane'), {
+              draw: ['0 0', '0 1'],
+              duration: 1400,
+              ease: 'inOut(3)',
+              delay: stagger(180)
+            });
+          }
+          io.unobserve(entry.target);
+        });
+      }, { threshold: 0.15 });
+
+      staggerGroups.forEach(g => {
+        const el = document.querySelector(g.container);
+        if (el) io.observe(el);
+      });
+      const mapSec = document.querySelector('.port-map-section');
+      if (mapSec) io.observe(mapSec);
+    })();
   </script>
 </body>
 </html>

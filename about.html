@@ -501,6 +501,52 @@
     .hub-name { font-size: 20px; font-weight: 700; margin: 0 0 8px; color: #FFFFFF; }
     .hub-desc { font-size: 14px; line-height: 1.6; color: var(--muted); margin: 0; }
 
+    /* ANIME.JS V4 JAFZA CONTAINER YARD STAGGER MATRIX */
+    .yard-matrix-wrap {
+      margin-top: 48px;
+      padding: 32px;
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+    .yard-matrix-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .yard-readout {
+      font-family: var(--font-code);
+      font-size: 11.5px;
+      color: var(--cobalt);
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .yard-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 8px;
+    }
+    .yard-slot {
+      aspect-ratio: 1.6;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      cursor: pointer;
+      will-change: transform, background-color;
+      transition: border-color 0.2s ease;
+    }
+    .yard-slot.is-reefer { background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.28); }
+    .yard-slot.is-active { background: var(--cobalt); border-color: #FFFFFF; }
+    @media (max-width: 768px) {
+      .yard-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+
     /* CTA BANNER */
     .cta-banner {
       margin: 88px 0 0;
@@ -952,6 +998,18 @@
           <h3 class="hub-name">Mina Rashid Chartering Desk</h3>
           <p class="hub-desc">Our founding 1998 maritime desk overseeing GCC coastal feeder loops, out-of-gauge project cargo, Ro-Ro vessel chartering, and Mirsal-2 customs brokerage.</p>
         </div>
+      </div>
+
+      <!-- Anime.js v4 Interactive JAFZA Container Yard Slot Matrix -->
+      <div class="yard-matrix-wrap">
+        <div class="yard-matrix-head">
+          <div>
+            <div class="section-kicker" style="margin-bottom: 4px;">INTERACTIVE JAFZA TERMINAL T3 SLOT MATRIX</div>
+            <div style="font-size: 16px; font-weight: 700; color: #FFFFFF;">Click any container bay to dispatch an Anime.js v4 kinetic wave inspection</div>
+          </div>
+          <div class="yard-readout" id="yard-readout">BAY 04 · ROW 02 · TIER 03 · 40' HC REEFER (-20.0°C)</div>
+        </div>
+        <div class="yard-grid" id="yard-grid" aria-label="Interactive Container Yard Slot Matrix"></div>
       </div>
 
       <div class="cta-banner">
@@ -1420,6 +1478,72 @@
       });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+  <script src="vendor/anime.umd.min.js"></script>
+  <script>
+    (function initAboutAnimeV4() {
+      if (!window.anime) return;
+      const { animate, stagger, splitText } = window.anime;
+
+      // 1. Split-Text Hero Headline Kinetic Entrance
+      if (splitText) {
+        const split = splitText('.hero-headline', { words: true });
+        if (split && split.words) {
+          animate(split.words, {
+            translateY: [32, 0],
+            opacity: [0, 1],
+            duration: 780,
+            ease: 'out(4)',
+            delay: stagger(45)
+          });
+        }
+      }
+
+      // 2. JAFZA Container Yard Slot Matrix (Adapted from anime/examples/advanced-grid-staggering)
+      const yardGrid = document.getElementById('yard-grid');
+      const yardReadout = document.getElementById('yard-readout');
+      if (yardGrid) {
+        const cols = 12, rows = 5, total = cols * rows;
+        const specs = ["40' HC DRY", "40' HC REEFER (-20.0°C)", "45' PALLET-WIDE", "20' ISO TANK", "40' OOG FLAT-RACK"];
+        for (let i = 0; i < total; i++) {
+          const slot = document.createElement('button');
+          slot.type = 'button';
+          slot.className = 'yard-slot' + (i % 5 === 1 ? ' is-reefer' : '');
+          slot.setAttribute('aria-label', `Container Slot ${i + 1}`);
+          slot.addEventListener('click', () => {
+            yardGrid.querySelectorAll('.yard-slot').forEach(s => s.classList.remove('is-active'));
+            slot.classList.add('is-active');
+            const bay = String(Math.floor(i / cols) + 1).padStart(2, '0');
+            const row = String((i % cols) + 1).padStart(2, '0');
+            const tier = String((i % 4) + 1).padStart(2, '0');
+            if (yardReadout) {
+              yardReadout.textContent = `BAY ${bay} · ROW ${row} · TIER ${tier} · ${specs[i % specs.length]}`;
+            }
+            animate('.yard-slot', {
+              scale: [
+                { to: 1.25, duration: 160, ease: 'out(3)' },
+                { to: 1, duration: 420, ease: 'out(4)' }
+              ],
+              delay: stagger(32, { grid: [cols, rows], from: i })
+            });
+          });
+          yardGrid.appendChild(slot);
+        }
+      }
+
+      // 3. Era Stage Stagger on Timeline Switch
+      document.querySelectorAll('.era-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          animate('#era-stage > *, #era-stage .era-stage-stats > div', {
+            translateY: [12, 0],
+            opacity: [0.25, 1],
+            duration: 420,
+            ease: 'out(3)',
+            delay: stagger(40)
+          });
+        });
+      });
+    })();
   </script>
 </body>
 </html>
