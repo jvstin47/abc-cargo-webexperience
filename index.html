@@ -613,9 +613,8 @@
     }
     .service-card {
       width: min(calc(275 * var(--u)), 290px);
-      height: min(calc(340 * var(--u)), calc((100vh - var(--edge-px, 50vh)) - 82px));
-      max-height: 360px;
-      min-height: 270px;
+      height: auto;
+      min-height: max(275px, min(calc(320 * var(--u)), calc((100vh - var(--edge-px, 50vh)) - 74px)));
       background: #171717;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: calc(16 * var(--u));
@@ -667,9 +666,9 @@
     .service-title {
       font-family: var(--font-heading);
       font-weight: var(--dev-heading-weight, 600);
-      font-size: calc(18.5 * var(--u) * var(--dev-heading-scale, 1.08));
+      font-size: calc(17.5 * var(--u) * var(--dev-heading-scale, 1.08));
       letter-spacing: var(--dev-tracking, 0.015em);
-      line-height: 1.25;
+      line-height: 1.22;
       text-transform: var(--dev-heading-transform, uppercase);
       color: #FFFFFF;
       margin: 0 0 calc(8 * var(--u)) 0;
@@ -677,16 +676,16 @@
     .service-info {
       font-family: var(--font-body);
       padding-right: calc(26 * var(--u));
-      font-size: calc(13.5 * var(--u) * var(--dev-body-scale, 1));
-      line-height: var(--dev-leading, 1.6);
+      font-size: calc(12.8 * var(--u) * var(--dev-body-scale, 1));
+      line-height: 1.5;
       letter-spacing: 0.005em;
       color: #94A3B8;
       margin: 0;
     }
     .service-arrow {
       position: absolute;
-      bottom: calc(26 * var(--u));
-      right: calc(26 * var(--u));
+      bottom: calc(20 * var(--u));
+      right: calc(20 * var(--u));
       font-size: calc(20 * var(--u));
       color: var(--cobalt);
       transition: transform 0.3s ease;
