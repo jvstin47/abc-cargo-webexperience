@@ -3283,7 +3283,7 @@
       right: calc(24 * var(--u));
       z-index: 400;
       opacity: 0.55;
-      display: inline-flex;
+      display: none;
       align-items: center;
       gap: 8px;
       background: rgba(14, 20, 27, 0.92);
@@ -6541,12 +6541,17 @@
     const devTriggerPill = document.getElementById('dev-trigger-pill');
     const devStudioPanel = document.getElementById('dev-studio-panel');
     const devCloseBtn = document.getElementById('dev-close-btn');
+    const isLocalDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.search.includes('dev=1');
+
+    if (devTriggerPill && isLocalDev) {
+      devTriggerPill.style.display = 'inline-flex';
+    }
 
     function toggleDevStudio(open) {
       const willOpen = open !== undefined ? open : !devStudioPanel.classList.contains('is-open');
       devStudioPanel.classList.toggle('is-open', willOpen);
       if (willOpen) devTriggerPill.style.display = 'none';
-      else devTriggerPill.style.display = 'inline-flex';
+      else if (isLocalDev) devTriggerPill.style.display = 'inline-flex';
     }
     window.toggleDevStudio = toggleDevStudio;
 
